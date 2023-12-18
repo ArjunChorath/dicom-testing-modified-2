@@ -1,0 +1,32 @@
+.list-items{
+    height: 5rem;
+    width: 7rem;
+    background-color:  #041c4a;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: white;
+    
+
+}
+.list1{
+    height: 3rem;
+    width: 6rem;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content:flex-start;
+    flex-direction: row;
+    color: white;
+    font-size: 15px;
+}
+.list1:hover{
+    height: 3rem;
+    width: 6.5rem;
+    background-color:#5B0888;
+    font-size: 17px;
+    cursor: pointer;
+    padding-left: 7px;
+}
