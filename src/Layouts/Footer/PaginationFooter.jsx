@@ -1,11 +1,18 @@
+// src/PaginationFooter.js
+import React, { useState, useEffect } from "react";
 import { Box, Button, Typography } from "@mui/material";
-import React, { useState } from "react";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
-function PaginationFooter() {
+const PaginationFooter = () => {
   const [select, setSelect] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [data, setData] = useState([]);
+  const [totalRecords, setTotalRecords] = useState(0);
+
+  const itemsPerPageOptions = [10, 25, 50];
+
   const MenuProps = {
     PaperProps: {
       style: {
@@ -19,6 +26,40 @@ function PaginationFooter() {
       },
     },
   };
+
+  const handleSelectChange = (event) => {
+    setSelect(event.target.value);
+    setCurrentPage(1); 
+  };
+
+  const handlePageChange = (newPage) => {
+   const validPage=Math.max(newPage,1)
+   setCurrentPage(validPage)
+  };
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch(
+        `http://10.30.2.208:8193/GET/qido/studies?skip=0&&limit=2
+`
+      );
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const result = await response.json();
+      setData(result);
+      console.log(result);
+      setTotalRecords(parseInt(response.headers.get("X-Total-Count"), 10));
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  
+  const totalPages = Math.ceil(totalRecords / parseInt(select, 10));
+
   return (
     <Box
       sx={{
@@ -36,7 +77,6 @@ function PaginationFooter() {
           justifyContent: "space-between",
           width: "65vw",
           maxHeight: "10vw",
-         
         }}
       >
         <Box
@@ -50,9 +90,7 @@ function PaginationFooter() {
           <FormControl sx={{ m: 1, minWidth: 120 }}>
             <Select
               value={select}
-              onChange={(event) => {
-                setSelect(event.target.value);
-              }}
+              onChange={handleSelectChange}
               displayEmpty
               sx={{
                 bgcolor: "#E0F4FF",
@@ -68,9 +106,11 @@ function PaginationFooter() {
               >
                 Select..
               </MenuItem>
-              <MenuItem value={10}>10</MenuItem>
-              <MenuItem value={20}>25</MenuItem>
-              <MenuItem value={30}>50</MenuItem>
+              {itemsPerPageOptions.map((option) => (
+                <MenuItem key={option} value={option} onClick={fetchData}>
+                  {option}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
           <Typography>Results per Page</Typography>
@@ -84,7 +124,7 @@ function PaginationFooter() {
             gap: ".5rem",
           }}
         >
-          <Typography>page 1</Typography>
+          <Typography>Page {currentPage}</Typography>
           <Box
             sx={{
               display: "flex",
@@ -95,18 +135,34 @@ function PaginationFooter() {
               borderRadius: "5px",
             }}
           >
-            <Button size="small" sx={{ borderRight: "1px solid black" }}>
+            <Button
+              size="small"
+              sx={{ borderRight: "1px solid black" }}
+              disabled={currentPage === 1}
+              onClick={() => handlePageChange(currentPage - 1)}
+            >
               {"<<"}
             </Button>
-            <Button size="small" sx={{ borderRight: "1px solid black" }}>
+            <Button
+              size="small"
+              sx={{ borderRight: "1px solid black" }}
+              disabled={currentPage === 1}
+              onClick={() => handlePageChange(currentPage - 1)}
+            >
               {"<Back"}
             </Button>
-            <Button size="small">{"Next>"}</Button>
+            <Button
+              size="small"
+              disabled={currentPage === totalPages}
+              onClick={() => handlePageChange(currentPage + 1)}
+            >
+              {"Next>"}
+            </Button>
           </Box>
         </Box>
       </Box>
     </Box>
   );
-}
+};
 
 export default PaginationFooter;

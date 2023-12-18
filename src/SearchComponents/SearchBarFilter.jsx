@@ -273,38 +273,53 @@ const SearchBarFilter = () => {
             }}
           >
             <Box sx={{}}>
-              <Box sx={{ display: "flex", flexDirection: "column" }}>
-                <Box
-                  sx={{
-                    color: "white",
-                    height: "1px",
-                   
-                  }}
-                >
-                  Study Date
-                </Box>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                  justifyContent: "center",
+                  gap:'3px'
+                }}
+              >
                 <Box
                   sx={{
                     display: "flex",
+                    flexDirection: "row",
                     alignItems: "center",
                     justifyContent: "center",
-                    flexDirection: "column",
                   }}
                 >
-                  <KeyboardArrowUp
-                    fontSize="xs"
-                    sx={{ color: "#427D9D", paddingLeft: "69px" }}
-                  ></KeyboardArrowUp>
-                  <KeyboardArrowDown
-                    fontSize="xs"
-                    onClick={downClickedStudyDate}
+                  <Box
                     sx={{
-                      mt: "-8px",
-                      mb: "2px",
-                      color: downArrowFillOfStudyList,
-                      paddingLeft: "69px",
+                      color: "white",
+                      height: "23px",
                     }}
-                  ></KeyboardArrowDown>
+                  >
+                    Study Date
+                  </Box>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      flexDirection: "column",
+                    }}
+                  >
+                    <KeyboardArrowUp
+                      fontSize="xs"
+                      sx={{ color: "#427D9D" }}
+                    ></KeyboardArrowUp>
+                    <KeyboardArrowDown
+                      fontSize="xs"
+                      onClick={downClickedStudyDate}
+                      sx={{
+                        mt: "-8px",
+                        mb: "2px",
+                        color: downArrowFillOfStudyList,
+                      }}
+                    ></KeyboardArrowDown>
+                  </Box>
                 </Box>
                 <Input
                   className="inputdate"
@@ -315,13 +330,12 @@ const SearchBarFilter = () => {
                     placeholder: "Start date",
                     style: {
                       color: "black",
-                      marginLeft: "10px",
                     },
                   }}
                   sx={{
                     backgroundColor: "#E0F4FF",
                     color: "black",
-                    width: "160px",
+                    width: "150px",
                     height: "32.5px",
                     outline: "none",
                     border: "1px solid black",
@@ -377,17 +391,17 @@ const SearchBarFilter = () => {
                     }}
                   ></KeyboardArrowDown>
                 </Box>
-                <input
+                <Input
                   style={{
                     backgroundColor: "#E0F4FF",
                     color: "black",
                     width: "150px",
-                    height: "28px",
+                    height: "32.5px",
                     borderRadius: "5px",
                     outline: "none",
                     border: `1px solid`,
                   }}
-                ></input>
+                ></Input>
               </Box>
             </Box>
           </Box>
@@ -481,17 +495,17 @@ const SearchBarFilter = () => {
                 ></KeyboardArrowDown>
               </Box>
 
-              <input
+              <Input
                 style={{
                   backgroundColor: "#E0F4FF",
                   color: "black",
                   width: "150px",
-                  height: "27px",
+                  height: "32.5px",
                   borderRadius: "5px",
                   outline: "none",
                   border: `1px solid`,
                 }}
-              ></input>
+              ></Input>
             </Box>
           </Box>
           {/* <Accession /> */}
