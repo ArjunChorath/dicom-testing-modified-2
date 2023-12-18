@@ -1,0 +1,12 @@
+.main_div {
+  width: "99.9vw";
+  height: "20vh";
+  background-color: "#427D9D";
+  display: "flex";
+  align-items: "center";
+  justify-content: "center";
+  flex-direction: "column";
+  border-radius: "5px";
+  margin-top: "1px";
+  border: "3px solid black";
+}

@@ -1,10 +1,10 @@
 import { Box } from "@mui/material";
 import React from "react";
 import Header from "../../Layouts/Header/Header";
-import PersonList from "../../Layouts/Main/PersonList";
+// import PersonList from "../../Layouts/Main/PersonList";
 import './Dashboard.css'
 import SearchBarFilter from "../../SearchComponents/SearchBarFilter";
-import PaginationFooter from "../../Layouts/Footer/PaginationFooter";
+// import PaginationFooter from "../../Layouts/Footer/PaginationFooter";
 
 
 function Dashboard() {
