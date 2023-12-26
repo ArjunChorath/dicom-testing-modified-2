@@ -1,0 +1,32 @@
+.form-element {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-direction: column;
+  width: 10rem;
+  height: 4rem;
+}
+.form_children {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  width: 8rem;
+  gap: 0.5rem;
+}
+.arrow_keys {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.input_elements {
+  background-color: #e0f4ff;
+  color: "black";
+  width: 150px;
+  height: 30px;
+  border-radius: 5px;
+  outline: none;
+  border: 1px solid black;
+  padding: 10px;
+}

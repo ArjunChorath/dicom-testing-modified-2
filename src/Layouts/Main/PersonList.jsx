@@ -10,9 +10,13 @@ function PersonList() {
   const dispatch = useDispatch();
   const personList = useSelector((state) => state.data.personDetails);
 
-  useEffect(() => {
-    dispatch(getDetails());
-  }, [dispatch],personList);
+  useEffect(
+    () => {
+      dispatch(getDetails());
+    },
+    [dispatch],
+    personList
+  );
   return (
     <Box
       sx={{
@@ -32,13 +36,13 @@ function PersonList() {
           maxWidth: "60vw",
           display: "flex",
           alignItems: "start",
-          justifyContent:"center",
+          justifyContent: "center",
         }}
       >
         <Table size="small">
-          <TableBody sx={{ bgcolor: "#090c29",overflow:"scroll" }}>
+          <TableBody sx={{ bgcolor: "#090c29", overflow: "scroll" }}>
             {personList.map((value) => (
-              <NestedTable key={value.name} value={value} />
+              <NestedTable key={value} value={value} />
             ))}
           </TableBody>
         </Table>

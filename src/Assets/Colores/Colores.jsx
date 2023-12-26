@@ -1,7 +1,7 @@
 const usedColors={
-    header:"#164863",
-    body:" #DDF2FD",
-    main:"#427D9D"
+    header:"rgb(104, 192, 230)",
+    main:"rgb(104, 192, 230)",
+    body:"#ffffff",
 }
 
 export default usedColors;

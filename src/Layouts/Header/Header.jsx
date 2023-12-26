@@ -19,8 +19,9 @@ function Header() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          bgcolor:usedColors.header,
+          bgcolor: usedColors.header,
           position: "relative",
+          overflow: "hidden",
         }}
       >
         <Box
@@ -33,7 +34,7 @@ function Header() {
             justifyContent: "space-between",
             flexDirection: "row",
             gap: "1rem",
-
+            overflow: "hidden",
           }}
         >
           <Box
@@ -42,9 +43,10 @@ function Header() {
               alignItems: "center",
               justifyContent: "center",
               marginLeft: "10px",
-              flexDirection:"row",
-              fontSize:"20px",
-              gap:"10px",
+              flexDirection: "row",
+              fontSize: "20px",
+              gap: "10px",
+              color: "black",
             }}
           >
             <AppLogo />
@@ -70,7 +72,9 @@ function Header() {
                 justifyContent: "center",
               }}
             >
-              <Typography>INVESTIGATIONAL USE ONLY</Typography>
+              <Typography sx={{ color: "black" }}>
+                INVESTIGATIONAL USE ONLY
+              </Typography>
             </Box>
             <Box
               sx={{
@@ -80,10 +84,11 @@ function Header() {
                 alignItems: "center",
                 justifyContent: "center",
                 marginRight: "10px",
+                color: "black",
               }}
               onClick={() => setDropDown(!dropDown)}
             >
-              <Settings />
+              <Settings fill="black" />
               <Arrow />
             </Box>
           </Box>

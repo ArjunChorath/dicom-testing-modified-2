@@ -1,18 +1,18 @@
 import { Box } from "@mui/material";
 import React from "react";
 import Header from "../../Layouts/Header/Header";
-
 import PersonList from "../../Layouts/Main/PersonList";
 import './Dashboard.css'
-import SearchBarFilter from "../../SearchComponents/SearchBarFilter";
+import SearchBarFilter from "../../Components/SearchComponents/SearchBarFilter";
 import PaginationFooter from "../../Layouts/Footer/PaginationFooter";
+import usedColors from "../../Assets/Colores/Colores";
 
 
 function Dashboard() {
   return (
-    <Box className="dashboard">
+    <Box className="dashboard" sx={{bgcolor:usedColors.body}}>
       <Header />
-      <SearchBarFilter/>
+      <SearchBarFilter/>   
       <PersonList/>
       <PaginationFooter/>
     </Box>

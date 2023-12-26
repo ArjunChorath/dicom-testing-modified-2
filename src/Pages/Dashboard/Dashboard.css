@@ -9,7 +9,6 @@ body::-webkit-scrollbar {
     align-items: center;
     justify-content: flex-start;
     flex-direction: column;
-    background-color: #DDF2FD;
 }
 ::-webkit-scrollbar {
     width:10px;

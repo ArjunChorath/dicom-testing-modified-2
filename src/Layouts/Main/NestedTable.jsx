@@ -38,7 +38,7 @@ function NestedTable({ value }) {
           alignItems: "center",
           justifyContent: "flex-start",
           flexDirection: "row",
-          minWidth: "65vw",
+          maxWidth: "65vw",
           maxHeight: "10vh",
           bgcolor: "#427D9D",
         }}
@@ -52,14 +52,14 @@ function NestedTable({ value }) {
             )}
           </IconButton>
         </TableCell>
+        <TableCell sx={{ color: "white", minWidth: "8rem", border: "none" }}>
+          {value.patientName}
+        </TableCell>
         <TableCell sx={{ color: "white", minWidth: "9rem", border: "none" }}>
-          {value.name}
+          {value.patientMrn}
         </TableCell>
         <TableCell sx={{ color: "white", minWidth: "10rem", border: "none" }}>
-          {value.mrn}
-        </TableCell>
-        <TableCell sx={{ color: "white", minWidth: "10rem", border: "none" }}>
-          {value.studyDate}
+          {value.endDate}
         </TableCell>
         {/* <TableCell sx={{ color: "white", minWidth: "10rem", border: "none" }}>
           {value.studyDate}
@@ -67,17 +67,17 @@ function NestedTable({ value }) {
         <TableCell sx={{ color: "white", minWidth: "10rem", border: "none" }}>
           {value.description}
         </TableCell>
-        <TableCell sx={{ color: "white", minWidth: "9rem", border: "none" }}>
+        <TableCell sx={{ color: "white", minWidth: "10rem", border: "none" }}>
           {value.modality}
         </TableCell>
-        <TableCell sx={{ color: "white", minWidth: "9rem", border: "none" }}>
+        <TableCell sx={{ color: "white", minWidth: "10rem", border: "none" }}>
           {value.accession}
         </TableCell>
         <TableCell
           align="right"
           sx={{
             color: "white",
-            minWidth: "5rem",
+            minWidth: "4rem",
             border: "none",
             display: "flex",
             alignItems: "center",
@@ -182,7 +182,7 @@ function NestedTable({ value }) {
                         borderRight: "1px solid #DDF2FD",
                       }}
                     >
-                      {value.desc.description}
+                      {value.description}
                     </TableCell>
                     <TableCell
                       sx={{
@@ -192,7 +192,7 @@ function NestedTable({ value }) {
                         borderRight: "1px solid #DDF2FD",
                       }}
                     >
-                      {value.desc.series}
+                      {value.series}
                     </TableCell>
                     <TableCell
                       sx={{
@@ -202,7 +202,7 @@ function NestedTable({ value }) {
                         borderRight: "1px solid #DDF2FD",
                       }}
                     >
-                      {value.desc.modality}
+                      {value.modality}
                     </TableCell>
                     <TableCell
                       sx={{
@@ -213,7 +213,7 @@ function NestedTable({ value }) {
                         borderLeft: "none",
                       }}
                     >
-                      {value.desc.instances}
+                      {value.instances}
                     </TableCell>
                     <TableCell
                       sx={{
@@ -236,7 +236,7 @@ function NestedTable({ value }) {
                 <Box
                   sx={{
                     minHeight: "15vh",
-                    width: "58vw",
+                    width: "60vw",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "flex-start",
@@ -247,28 +247,27 @@ function NestedTable({ value }) {
                     border: "1px solid #164863",
                   }}
                 >
-                  <Box sx={{  marginLeft: "10px" }}>
+                  <Box sx={{ marginLeft: "10px" }}>
                     <img
                       src="https://img.freepik.com/premium-photo/x-ray-human-skull-black-background_521740-1000.jpg"
                       alt="error"
                       className="imagesize"
                     />
                   </Box>
-                  <Box >
+                  <Box>
                     <img
                       src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWNMwtwkOe0sgcSUl2Yg9cOCl7i0kO3CKg2B0ObWWQeg&s"
                       alt="error"
                       className="imagesize"
                     />
                   </Box>
-                  <Box >
+                  <Box>
                     <img
                       src="https://qph.cf2.quoracdn.net/main-qimg-977ae1c33cd1b2993f9933ed1b87f261-lq"
                       alt="error"
                       className="imagesize"
                     />
                   </Box>
-                  
                 </Box>
               ) : (
                 ""

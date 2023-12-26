@@ -1,6 +1,6 @@
 const apiEndPoints={
 
-    dicomApi:"http://10.30.2.209:8080/search/allStudies",
+    dicomApi:"http://10.30.2.208:8193/GET/qido/studies",
     keycloakApi:"http://10.30.2.208:8080/",
 }
 

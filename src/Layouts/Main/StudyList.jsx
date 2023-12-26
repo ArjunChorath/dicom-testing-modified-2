@@ -1,15 +1,10 @@
 import { Box } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import Button from "@mui/material/Button";
-import ClearIcon from "@mui/icons-material/Clear";
-import { useSelector } from "react-redux";
+import AdvanceSearch from "../../Components/AdvanceSearch/AdvanceSearch";
 
 function StudyList() {
-  const clear = useSelector((state) => state.data.clear);
-  const numberOfStudies = useSelector((state) => state.data.personDetails.length);
-  console.log(numberOfStudies)
- 
-  
+  const [advaceSearch, setAdvanceSearch] = useState(false);
   return (
     <Box
       sx={{
@@ -20,6 +15,8 @@ function StudyList() {
         justifyContent: "center",
         flexDirection: "column",
         marginTop: "5px",
+        position: "relative",
+        overflow:'hidden'
       }}
     >
       <Box
@@ -41,67 +38,41 @@ function StudyList() {
             fontSize: "35px",
             justifyContent: "flex-start",
             color: "white",
-            fontWeight:"bold"
+            fontWeight: "bold",
           }}
         >
           Study List
         </Box>
+      </Box>
+      <Box sx={{ position: "absolute", top: "1rem", right: "1.5rem" }}>
+        <Button
+          sx={{
+            bgcolor: "white",
+            color: "black",
+            "&:hover": {
+              backgroundColor: "#164863",
+              color: "white",
+            },
+          }}
+          onClick={() => setAdvanceSearch(!advaceSearch)}
+        >
+          Advance Search
+        </Button>
+      </Box>
+      {advaceSearch ? (
         <Box
           sx={{
-            width: "16vw",
-            height: "4rem",
-            display: "flex",
-            alignItems: "center",
-            flexDirection: "row",
-            justifyContent: "flex-end",
-            gap: ".5rem",
+            position: "absolute",
+            top: "3.5rem",
+            right: "1rem",
+            zIndex: "999",
           }}
         >
-          {clear===true ? (
-            <Box >
-              <Button
-                variant="outlined"
-                startIcon={<ClearIcon />}
-                sx={{ width: "10rem", height: "3rem", borderRadius: "25px",color:"white",borderColor:"white"}}
-                onClick={() => {
-                  window.location.reload();
-                }}
-              >
-                Clear Filter
-              </Button>
-            </Box>
-          ) : (
-            <Box/>
-          )}
-          <Box
-            sx={{
-              width: "2.5vw",
-              height: "4rem",
-              fontSize: "35px",
-              color: "white",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              fontWeight:"bold"
-            }}
-          >
-            {numberOfStudies}
-          </Box>
-          <Box
-            sx={{
-              width: "4vw",
-              height: "4rem",
-              fontSize: "25px",
-              color: "grey",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            Studies
-          </Box>
+          <AdvanceSearch />
         </Box>
-      </Box>
+      ) : (
+        ""
+      )}
     </Box>
   );
 }
