@@ -1,22 +1,16 @@
 import React, { useEffect } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
-import { useDispatch, useSelector } from "react-redux";
-import { getDetails } from "../../Store/ApiDataSlice";
+import { useSelector } from "react-redux";
 import NestedTable from "./NestedTable";
 import { Box } from "@mui/material";
 
 function PersonList() {
-  const dispatch = useDispatch();
   const personList = useSelector((state) => state.data.personDetails);
+  useEffect(()=>{
 
-  useEffect(
-    () => {
-      dispatch(getDetails());
-    },
-    [dispatch],
-    personList
-  );
+  },[personList])
+
   return (
     <Box
       sx={{
@@ -42,7 +36,7 @@ function PersonList() {
         <Table size="small">
           <TableBody sx={{ bgcolor: "#090c29", overflow: "scroll" }}>
             {personList.map((value) => (
-              <NestedTable key={value} value={value} />
+              <NestedTable key={value.studyId} value={value} />
             ))}
           </TableBody>
         </Table>

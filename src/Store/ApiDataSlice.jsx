@@ -10,8 +10,11 @@ const initialState = {
   error: null,
 };
 
-export const getDetails = createAsyncThunk("getDeatails", async () => {
-  const response = await fetch(`${apiEndPoints.dicomApi}`)
+
+
+
+export const getDetails = createAsyncThunk("getDeatails", async (value) => {
+  const response = await fetch(`${apiEndPoints.dicomApi}?skip=${value.skip}&limit=${value.limit}`)
     .then((data) => data.json())
     .then((results) => results)
     .catch((error) => {
@@ -20,7 +23,7 @@ export const getDetails = createAsyncThunk("getDeatails", async () => {
   return response;
 });
 export const getModality = createAsyncThunk("getModality", async () => {
-  const response = await fetch("http://10.30.2.208:8080/api/getAll")
+  const response = await fetch("http://10.30.2.208:8080/api/getAllModalities")
     .then((data) => data.json())
     .then((results) => results[0].value)
     .catch((error) => {
@@ -33,8 +36,20 @@ export const searchData = createAsyncThunk("searchData", async (value) => {
   if (value.patientName !== "") {
     searchQuery += `patientName=${value.patientName}&`;
   }
-  if (value.mrn !== "") {
-    searchQuery += `patientMrn=${value.mrn}&`;
+  if (value.patientMrn !== "") {
+    searchQuery += `patientMrn=${value.patientMrn}&`;
+  }
+  if (value.studyDate !== "") {
+    searchQuery += `studyDate=${value.studyDate}&`;
+  }
+  if (value.description !== "") {
+    searchQuery += `description=${value.description}&`;
+  }
+  if (value.modality !== "") {
+    searchQuery += `modality=${value.modality}&`;
+  }
+  if (value.instance !== "") {
+    searchQuery += `instance=${value.instance}&`;
   }
 
   const response = await fetch(
@@ -48,7 +63,7 @@ export const searchData = createAsyncThunk("searchData", async (value) => {
   return response;
 });
 export const savedQueryDatas = createAsyncThunk("savedQueryDatas", async () => {
-  const response = await fetch("http://10.30.2.208:8193/GET/qido/studies/all")
+  const response = await fetch("http://10.30.2.208:8193/api/query/getAll")
     .then((data) => data.json())
     .then((results) => results)
     .catch((error) => {
@@ -61,7 +76,7 @@ export const saveQueryData = createAsyncThunk(
   async (queryData) => {
     console.log(queryData);
     const response = await axios
-      .post("http://10.30.2.208:8193/POST/stow/studies", queryData)
+      .post("http://10.30.2.208:8193/api/query/save", queryData)
       .then((results) => results.data)
       .catch((error) => {
         return error;
@@ -73,7 +88,7 @@ export const saveQueryData = createAsyncThunk(
 export const deleteQuery = createAsyncThunk("deleteQuery", async (value) => {
   console.log(value);
   const response = await axios
-    .delete(`http://10.30.2.208:8193/delete/${value}`)
+    .delete(`http://10.30.2.208:8193/api/query/delete/${value}`)
     .then((results) => results.data)
     .catch((error) => {
       return error;
@@ -87,12 +102,12 @@ const apiData = createSlice({
   reducers: {
     sortingAscending: (state, action) => {
       state.personDetails = state.personDetails.sort((a, b) =>
-        a[action.payload].localeCompare(b[action.payload])
+        a.studies[action.payload].localeCompare(b.studies[action.payload])
       );
     },
     sortingDescending: (state, action) => {
       state.personDetails = state.personDetails.sort((a, b) =>
-        b[action.payload].localeCompare(a[action.payload])
+        b.studies[action.payload].localeCompare(a.studies[action.payload])
       );
     },
   },

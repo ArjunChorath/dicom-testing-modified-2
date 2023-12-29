@@ -15,7 +15,6 @@ import "./NestedTable.css";
 function NestedTable({ value }) {
   const [open, setOpen] = useState(false);
   const [viewer, setViewer] = useState(false);
-
   return (
     <Box
       sx={{
@@ -53,25 +52,25 @@ function NestedTable({ value }) {
           </IconButton>
         </TableCell>
         <TableCell sx={{ color: "white", minWidth: "8rem", border: "none" }}>
-          {value.patientName}
+          {value.studies.patientName}
         </TableCell>
         <TableCell sx={{ color: "white", minWidth: "9rem", border: "none" }}>
-          {value.patientMrn}
+          {value.studies.patientMrn}
         </TableCell>
         <TableCell sx={{ color: "white", minWidth: "10rem", border: "none" }}>
-          {value.endDate}
+          {value.studies.studyDate}
         </TableCell>
         {/* <TableCell sx={{ color: "white", minWidth: "10rem", border: "none" }}>
-          {value.studyDate}
+          {value.studies.studyDate}
         </TableCell> */}
         <TableCell sx={{ color: "white", minWidth: "10rem", border: "none" }}>
-          {value.description}
+          {value.studies.description}
         </TableCell>
         <TableCell sx={{ color: "white", minWidth: "10rem", border: "none" }}>
-          {value.modality}
+          {value.studies.modality}
         </TableCell>
         <TableCell sx={{ color: "white", minWidth: "10rem", border: "none" }}>
-          {value.accession}
+          {value.studies.accession}
         </TableCell>
         <TableCell
           align="right"
@@ -88,7 +87,7 @@ function NestedTable({ value }) {
           <IconButton size="small" sx={{ color: "#9BBEC8" }}>
             <ContentCopyIcon />
           </IconButton>
-          {value.instances}
+          {value.studies.instance}
         </TableCell>
       </TableRow>
       <Box
@@ -172,65 +171,67 @@ function NestedTable({ value }) {
                     </TableCell>
                   </TableRow>
                 </TableHead>
-                <TableBody>
-                  <TableRow>
-                    <TableCell
-                      sx={{
-                        color: "white",
-                        width: "10vw",
-                        border: "none",
-                        borderRight: "1px solid #DDF2FD",
-                      }}
-                    >
-                      {value.description}
-                    </TableCell>
-                    <TableCell
-                      sx={{
-                        color: "white",
-                        width: "10vw",
-                        border: "none",
-                        borderRight: "1px solid #DDF2FD",
-                      }}
-                    >
-                      {value.series}
-                    </TableCell>
-                    <TableCell
-                      sx={{
-                        color: "white",
-                        width: "10vw",
-                        border: "none",
-                        borderRight: "1px solid #DDF2FD",
-                      }}
-                    >
-                      {value.modality}
-                    </TableCell>
-                    <TableCell
-                      sx={{
-                        color: "white",
-                        width: "9vw",
-                        border: "none",
-                        borderRight: "1px solid #DDF2FD",
-                        borderLeft: "none",
-                      }}
-                    >
-                      {value.instances}
-                    </TableCell>
-                    <TableCell
-                      sx={{
-                        border: "none",
-                      }}
-                      onClick={() => {
-                        setViewer(!viewer);
-                      }}
-                    >
-                      <Button
-                        sx={{ color: "white", width: "9vw", border: "none" }}
+                {value.studies.series.map((items) => (
+                  <TableBody>
+                    <TableRow>
+                      <TableCell
+                        sx={{
+                          color: "white",
+                          width: "10vw",
+                          border: "none",
+                          borderRight: "1px solid #DDF2FD",
+                        }}
                       >
-                        image
-                      </Button>
-                    </TableCell>
-                  </TableRow>
-                </TableBody>
+                        {items.description}
+                      </TableCell>
+                      <TableCell
+                        sx={{
+                          color: "white",
+                          width: "10vw",
+                          border: "none",
+                          borderRight: "1px solid #DDF2FD",
+                        }}
+                      >
+                        {items.series}
+                      </TableCell>
+                      <TableCell
+                        sx={{
+                          color: "white",
+                          width: "10vw",
+                          border: "none",
+                          borderRight: "1px solid #DDF2FD",
+                        }}
+                      >
+                        {items.modality}
+                      </TableCell>
+                      <TableCell
+                        sx={{
+                          color: "white",
+                          width: "9vw",
+                          border: "none",
+                          borderRight: "1px solid #DDF2FD",
+                          borderLeft: "none",
+                        }}
+                      >
+                        {items.instance}
+                      </TableCell>
+                      <TableCell
+                        sx={{
+                          border: "none",
+                        }}
+                        onClick={() => {
+                          setViewer(!viewer);
+                        }}
+                      >
+                        <Button
+                          sx={{ color: "white", width: "9vw", border: "none" }}
+                        >
+                          image
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                  </TableBody>
+                ))}
               </Table>
               {viewer ? (
                 <Box

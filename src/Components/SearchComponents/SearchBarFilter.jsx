@@ -4,9 +4,10 @@ import StudyList from "../../Layouts/Main/StudyList";
 import SavedQuery from "../SavedQuery/SavedQuery";
 import BasicSearch from "../BasicSearch/BasicSearch";
 import usedColors from "../../Assets/Colores/Colores";
+import AdvanceSearch from "../AdvanceSearch/AdvanceSearch";
 
 const SearchBarFilter = () => {
-  // const [savedQuery, setSavedQuary] = useState(false);
+ 
 
   return (
     <Box sx={{ position: "relative" }}>
@@ -71,8 +72,20 @@ const SearchBarFilter = () => {
         >
           Saved Querys
         </Button> */}
+
+        <Box
+          sx={{
+            position: "absolute",
+            top: "1rem",
+            right: "10px",
+            zIndex: "999",
+          }}
+        >
+          <AdvanceSearch />
+        </Box>
       </Box>
     </Box>
   );
 };
+
 export default SearchBarFilter;

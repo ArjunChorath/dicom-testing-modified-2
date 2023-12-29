@@ -6,53 +6,50 @@ import ClearIcon from "@mui/icons-material/Clear";
 import "./BasicSearch.css";
 import { useDispatch } from "react-redux";
 import {
-  getDetails,
   searchData,
   sortingAscending,
   sortingDescending,
 } from "../../Store/ApiDataSlice";
+
+const ary = [
+  {
+    patientName: "black",
+    patientMrn: "black",
+    studyDate: "black",
+    description: "black",
+    modality: "black",
+    accession: "black",
+  },
+];
 
 function BasicSearch() {
   const dispatch = useDispatch();
   const [clear, setClear] = useState(false);
   const [basicForm, setBasicForm] = useState({
     patientName: "",
-    mrn: "",
-    startDate: "",
-    endDate: "",
-    discription: "",
+    patientMrn: "",
+    studyDate: "",
+    description: "",
     modality: "",
     accession: "",
+    instance: "",
   });
-  const [arrowUpKey, setArrowUpKey] = useState({
-    patientName: "black",
-    mrn: "black",
-    startDate: "black",
-    discription: "black",
-    modality: "black",
-    accession: "black",
-  });
-  const [arrowDownKey, setArrowDownKey] = useState({
-    patientName: "black",
-    mrn: "black",
-    startDate: "black",
-    discription: "black",
-    modality: "black",
-    accession: "black",
-  });
+  const [arrowUpKey, setArrowUpKey] = useState(ary);
+  const [arrowDownKey, setArrowDownKey] = useState(ary);
   const handleForm = (event) => {
     setClear(true);
     setBasicForm((prevValue) => ({
       ...prevValue,
       [event.target.name]: event.target.value,
     }));
+    console.log(basicForm.patientName);
   };
   const clearForm = () => {
     setBasicForm({
       patientName: "",
-      mrn: "",
-      startDate: "",
-      discription: "",
+      patientMrn: "",
+      studyDate: "",
+      description: "",
       modality: "",
       accession: "",
     });
@@ -91,7 +88,7 @@ function BasicSearch() {
                 setArrowDownKey({
                   patientName: "black",
                 });
-                dispatch(sortingAscending("name"));
+                dispatch(sortingAscending("patientName"));
               }}
             ></KeyboardArrowUp>
             <KeyboardArrowDown
@@ -107,7 +104,7 @@ function BasicSearch() {
                 setArrowDownKey({
                   patientName: "cyan",
                 });
-                dispatch(sortingDescending("name"));
+                dispatch(sortingDescending("patientName"));
               }}
             ></KeyboardArrowDown>
           </Box>
@@ -130,42 +127,42 @@ function BasicSearch() {
           <Box className="arrow_keys">
             <KeyboardArrowUp
               fontSize="xs"
-              sx={{ color: arrowUpKey.mrn }}
+              sx={{ color: arrowUpKey.patientMrn }}
               onClick={() => {
                 setArrowUpKey({
-                  mrn: "cyan",
+                  patientMrn: "cyan",
                 });
                 setArrowDownKey({
-                  mrn: "black",
+                  patientMrn: "black",
                 });
-                dispatch(sortingAscending("mrn"));
+                dispatch(sortingAscending("patientMrn"));
               }}
             ></KeyboardArrowUp>
             <KeyboardArrowDown
               fontSize="xs"
               sx={{
                 mt: "-7px",
-                color: arrowDownKey.mrn,
+                color: arrowDownKey.patientMrn,
               }}
               onClick={() => {
                 setArrowUpKey({
-                  mrn: "black",
+                  patientMrn: "black",
                 });
                 setArrowDownKey({
-                  mrn: "cyan",
+                  patientMrn: "cyan",
                 });
-                dispatch(sortingDescending("mrn"));
+                dispatch(sortingDescending("patientMrn"));
               }}
             ></KeyboardArrowDown>
           </Box>
         </Box>
         <Box>
           <Input
-            name="mrn"
+            name="patientMrn"
             type="text"
             className="input_elements"
             disableUnderline={true}
-            value={basicForm.mrn}
+            value={basicForm.patientMrn}
             onChange={handleForm}
           ></Input>
         </Box>
@@ -186,11 +183,11 @@ function BasicSearch() {
         </Box>
         <Box>
           <Input
-            name="startDate"
+            name="studyDate"
             type="date"
             className="input_elements"
             disableUnderline={true}
-            value={basicForm.startDate}
+            value={basicForm.studyDate}
             onChange={handleForm}
           ></Input>
         </Box>
@@ -202,13 +199,13 @@ function BasicSearch() {
           <Box className="arrow_keys">
             <KeyboardArrowUp
               fontSize="xs"
-              sx={{ color: arrowUpKey.discription }}
+              sx={{ color: arrowUpKey.description }}
               onClick={() => {
                 setArrowUpKey({
-                  discription: "cyan",
+                  description: "cyan",
                 });
                 setArrowDownKey({
-                  discription: "black",
+                  description: "black",
                 });
                 dispatch(sortingAscending("description"));
               }}
@@ -217,14 +214,14 @@ function BasicSearch() {
               fontSize="xs"
               sx={{
                 mt: "-7px",
-                color: arrowDownKey.discription,
+                color: arrowDownKey.description,
               }}
               onClick={() => {
                 setArrowUpKey({
-                  discription: "black",
+                  description: "black",
                 });
                 setArrowDownKey({
-                  discription: "cyan",
+                  description: "cyan",
                 });
                 dispatch(sortingDescending("description"));
               }}
@@ -233,11 +230,11 @@ function BasicSearch() {
         </Box>
         <Box>
           <Input
-            name="discription"
+            name="description"
             type="text"
             className="input_elements"
             disableUnderline={true}
-            value={basicForm.discription}
+            value={basicForm.description}
             onChange={handleForm}
           ></Input>
         </Box>
@@ -351,12 +348,11 @@ function BasicSearch() {
               width: "10rem",
               height: "3rem",
               borderRadius: "25px",
-              color: "white",
-              borderColor: "white",
+              color: "black",
+              borderColor: "black",
             }}
             onClick={() => {
               clearForm();
-              dispatch(getDetails());
               setClear(false);
             }}
           >

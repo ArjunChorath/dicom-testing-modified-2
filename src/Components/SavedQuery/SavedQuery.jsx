@@ -7,7 +7,6 @@ import { deleteQuery, savedQueryDatas } from "../../Store/ApiDataSlice";
 
 function SavedQuery() {
   const savedQuery = useSelector((state) => state.data.savedQuarys);
-  console.log(savedQuery);
   const dispatch = useDispatch();
   useEffect(
     () => {
@@ -17,47 +16,14 @@ function SavedQuery() {
     savedQuery
   );
   return (
-    <Box
-      sx={{
-        minWidth: "15vw",
-        maxHeight: "30vh",
-        display: "flex",
-        alignItems: "flex-start",
-        flexDirection: "column",
-        justifyContent: "center",
-        gap: "1.2rem",
-      }}
-    >
+    <Box className="main-div">
       <Typography sx={{ pl: "5px", fontWeight: "bold", fontSize: "15px" }}>
         Saved Query's
       </Typography>
-      <Box
-        sx={{
-          maxWidth: "14vw",
-          height: "20vh",
-          display: "flex",
-          alignItems: "center",
-          flexDirection: "column",
-          justifyContent: "flex-start",
-          gap: "1.5rem",
-        }}
-      >
+      <Box className="child-div">
         {savedQuery.map((value) => {
           return (
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                flexDirection: "row",
-                justifyContent: "space-between",
-                minWidth: "14vw",
-                height: "4.5vh",
-                border: "1px solid white",
-                borderRadius: "7px",
-                boxShadow: "5",
-              }}
-              className="query"
-            >
+            <Box className="query">
               <Typography
                 sx={{
                   pl: "5px",

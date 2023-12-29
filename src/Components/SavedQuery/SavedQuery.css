@@ -5,3 +5,41 @@
   width: 14.2vw;
   height: 4.6vh;
 }
+.main-div {
+  min-width: 15vw;
+  max-height: 30vh;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.2rem;
+}
+.child-div {
+  max-width: 14vw;
+  height: 20vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 1.5rem;
+}
+.query {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  min-width: 14vw;
+  height: 4.5vh;
+  border: 1px solid white;
+  border-radius: 7px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.query-child {
+  padding-right: 10px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  max-width: 5vw;
+  height: 5vh;
+}
