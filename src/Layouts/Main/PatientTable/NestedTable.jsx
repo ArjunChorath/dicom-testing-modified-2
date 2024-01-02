@@ -11,6 +11,7 @@ import TableHead from "@mui/material/TableHead";
 import Collapse from "@mui/material/Collapse";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import "./NestedTable.css";
+import usedColors from "../../../Assets/Colores/Colores";
 
 function NestedTable({ value }) {
   const [open, setOpen] = useState(false);
@@ -39,7 +40,7 @@ function NestedTable({ value }) {
           flexDirection: "row",
           maxWidth: "65vw",
           maxHeight: "10vh",
-          bgcolor: "#427D9D",
+          bgcolor: usedColors.table,
         }}
       >
         <TableCell sx={{ border: "none", width: "1rem" }}>
@@ -172,7 +173,7 @@ function NestedTable({ value }) {
                   </TableRow>
                 </TableHead>
                 {value.studies.series.map((items) => (
-                  <TableBody>
+                  <TableBody key={items}>
                     <TableRow>
                       <TableCell
                         sx={{
@@ -207,7 +208,7 @@ function NestedTable({ value }) {
                       <TableCell
                         sx={{
                           color: "white",
-                          width: "9vw",
+                          width: "10vw",
                           border: "none",
                           borderRight: "1px solid #DDF2FD",
                           borderLeft: "none",

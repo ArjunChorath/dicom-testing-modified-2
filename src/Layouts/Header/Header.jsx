@@ -1,7 +1,5 @@
-import { Box, List, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { useState } from "react";
-import InfoIcon from "@mui/icons-material/Info";
-import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import { ReactComponent as Settings } from "../../Assets/Images/newsvg.svg";
 import { ReactComponent as Arrow } from "../../Assets/Images/arrow.svg";
 import { ReactComponent as AppLogo } from "../../Assets/Images/appLogo.svg";
@@ -89,36 +87,6 @@ function Header() {
             <Arrow />
           </Box>
         </Box>
-        {dropDown === true ? (
-          <Box
-            sx={{
-              height: "3.5rem",
-              width: "5rem",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              flexDirection: "column",
-              position: "absolute",
-              top: "4.3rem",
-              right: "1.6em",
-              zIndex: "999",
-              color: "black",
-            }}
-          >
-            <Box className="list-items">
-              <List className="list1">
-                <InfoIcon fontSize="small" />
-                About
-              </List>
-              <List className="list1">
-                <SettingsOutlinedIcon fontSize="small" />
-                Preference
-              </List>
-            </Box>
-          </Box>
-        ) : (
-          ""
-        )}
       </Box>
     </Box>
   );

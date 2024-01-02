@@ -1,5 +1,5 @@
 .personlist:hover{
-    background-color: #164863;   
+    background-color: #2376a3;   
 } 
 .imagesize{
 
@@ -10,4 +10,10 @@
 .imagesize:hover{
     height: 100px;
     width: 100px;
+}
+.nested-cell{
+    color: white;
+    width: 10vw;
+    border: none;
+    border-right: 1px solid #DDF2FD;
 }

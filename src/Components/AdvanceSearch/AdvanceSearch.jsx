@@ -1,7 +1,6 @@
 import { Box, Button, Input, Typography } from "@mui/material";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
 import ListItemText from "@mui/material/ListItemText";
 import Select from "@mui/material/Select";
 import Checkbox from "@mui/material/Checkbox";
@@ -15,8 +14,8 @@ import {
 
 function AdvanceSearch() {
   const name = useSelector((state) => state.data.modalityData);
+  const paginationValues = useSelector((state) => state.data.skipAndLimit);
   const dispatch = useDispatch();
-  const advanceSearchRef = useRef();
 
   const [advaceSearch, setAdvanceSearch] = useState(false);
   const [query, setQuery] = useState(false);
@@ -39,6 +38,8 @@ function AdvanceSearch() {
     setFormDetails((prevValue) => ({
       ...prevValue,
       [event.target.name]: event.target.value,
+      skip: paginationValues.skip,
+      limit: paginationValues.limit,
     }));
   };
   const handleChange = (event) => {
@@ -49,16 +50,11 @@ function AdvanceSearch() {
     setFormDetails((prevValue) => ({
       ...prevValue,
       modality: event.target.value,
+      skip: paginationValues.skip,
+      limit: paginationValues.limit,
     }));
   };
-  const handleClick = (event) => {
-    if (
-      advanceSearchRef.current &&
-      !advanceSearchRef.current.contains(event.target)
-    ) {
-      setAdvanceSearch(false);
-    }
-  };
+
   const clearForm = () => {
     setFormDetails({
       patientName: "",
@@ -70,8 +66,9 @@ function AdvanceSearch() {
       description: "",
       modality: "",
       accession: "",
-      startInstance: "",
-      endInstance: "",
+      instance: "",
+      skip: "",
+      limit: "",
     });
   };
   const ITEM_HEIGHT = 50;
@@ -103,23 +100,19 @@ function AdvanceSearch() {
   };
   useEffect(() => {
     dispatch(getModality());
-    document.addEventListener("click", handleClick);
-    return () => {
-      document.removeEventListener("click", handleClick);
-    };
-  }, [dispatch, name]);
+    console.log("pagValues", paginationValues);
+  }, [paginationValues, dispatch]);
   return (
     <Box
       sx={{
         width: "20vw",
-        minHeight: "72vh",
+        maxHeight: "72vh",
         display: "flex",
         alignItems: "center",
         justifyContent: "flex-start",
         flexDirection: "column",
         gap: "1rem",
       }}
-      ref={advanceSearchRef}
     >
       <Box
         sx={{
@@ -140,12 +133,13 @@ function AdvanceSearch() {
           }}
           onClick={() => {
             setAdvanceSearch(!advaceSearch);
+            clearForm();
           }}
         >
           Advance Search
         </Button>
       </Box>
-      {advaceSearch ===true ? (
+      {advaceSearch === true ? (
         <Box
           sx={{
             width: "20vw",
@@ -271,32 +265,31 @@ function AdvanceSearch() {
 
           <Box className="form_elements">
             <Typography>Modality:</Typography>
-            <FormControl>
-              <Select
-                className="input_element"
-                sx={{
-                  "& .MuiSvgIcon-root": {
-                    color: "grey",
-                  },
-                }}
-                name="modality"
-                multiple
-                value={modalityType}
-                onChange={handleChange}
-                renderValue={(selected) => selected.join(", ")}
-                MenuProps={MenuProps}
-              >
-                {name.map((names) => (
-                  <MenuItem key={names} value={names}>
-                    <Checkbox
-                      checked={modalityType.indexOf(names) > -1}
-                      sx={{ color: "#9BBEC8" }}
-                    />
-                    <ListItemText primary={names} />
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
+
+            <Select
+              className="input_element"
+              sx={{
+                "& .MuiSvgIcon-root": {
+                  color: "grey",
+                },
+              }}
+              name="modality"
+              multiple
+              value={modalityType}
+              onChange={handleChange}
+              renderValue={(selected) => selected.join(", ")}
+              MenuProps={MenuProps}
+            >
+              {name.map((names) => (
+                <MenuItem key={names} value={names}>
+                  <Checkbox
+                    checked={modalityType.indexOf(names) > -1}
+                    sx={{ color: "#9BBEC8" }}
+                  />
+                  <ListItemText primary={names} />
+                </MenuItem>
+              ))}
+            </Select>
           </Box>
 
           <Box className="form_elements">
@@ -322,16 +315,9 @@ function AdvanceSearch() {
               MenuProps={MenuProp}
               disableUnderline={true}
             >
-              <MenuItem
-                value=""
-                disabled
-                sx={{ height: ".1px", color: "#164863", position: "absolute" }}
-              >
-                Select...
-              </MenuItem>
               <MenuItem value="0-50">0-50</MenuItem>
               <MenuItem value="51-100">51-100</MenuItem>
-              <MenuItem value="100+">100+</MenuItem>
+              <MenuItem value="100">100+</MenuItem>
             </Select>
           </Box>
           <Box className="form_elements">
@@ -339,14 +325,20 @@ function AdvanceSearch() {
               <Button variant="contained" type="reset" onClick={clearForm}>
                 reset
               </Button>
-              <Button
-                variant="contained"
-                onClick={() => {
-                  setQuery(true);
-                }}
-              >
-                save
-              </Button>
+              {formDetails.patientName||formDetails.patientMrn ? (
+                <Button
+                  variant="contained"
+                  onClick={() => {
+                    setQuery(true);
+                  }}
+                >
+                  save
+                </Button>
+              ) : (
+                <Button variant="contained" disabled={true}>
+                  save
+                </Button>
+              )}
             </Box>
             <Button
               variant="contained"
@@ -357,7 +349,7 @@ function AdvanceSearch() {
               search
             </Button>
           </Box>
-          {query === true ? (
+          {(formDetails.patientName||formDetails.patientMrn)&&query === true ? (
             <Box className="form_elements" sx={{ height: "5rem" }}>
               <Typography>Query Name:</Typography>
               <Input

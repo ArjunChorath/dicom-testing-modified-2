@@ -2,15 +2,30 @@ import { Box, Button, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
-import { getDetails } from "../../Store/ApiDataSlice";
-import { useDispatch } from "react-redux";
+import {
+  getDetails,
+  getLength,
+  pagiantionValues,
+} from "../../Store/ApiDataSlice";
+import { useDispatch, useSelector } from "react-redux";
+
+const calculateTotalPages = (totalItems, limit) => {
+  return Math.ceil(totalItems / limit);
+};
 
 function PaginationFooter() {
   const dispatch = useDispatch();
+  const aryLength = useSelector(
+    (state) => state.data.personDetailsLength.length
+  );
+
   const [select, setSelect] = useState({
     skip: 0,
-    limit: 10,
+    limit: 5,
   });
+
+  const [totalPages, setTotalPages] = useState(1);
+
   const MenuProps = {
     PaperProps: {
       style: {
@@ -24,23 +39,46 @@ function PaginationFooter() {
       },
     },
   };
+
   useEffect(() => {
+    dispatch(getLength());
     dispatch(getDetails(select));
-  
-  }, [dispatch, select]);
+    dispatch(pagiantionValues(select));
+
+   
+    const newTotalPages = calculateTotalPages(aryLength, select.limit);
+    setTotalPages(newTotalPages);
+  }, [dispatch, select, aryLength]);
 
   const handleNext = () => {
-    setSelect((prevValue) => ({
-      ...prevValue,
-      skip: select.skip + select.limit,
-    }));
+    const nextSkip = select.skip + select.limit;
+    const totalItems = aryLength;
+
+    if (nextSkip < totalItems) {
+      setSelect((prevValue) => ({
+        ...prevValue,
+        skip: nextSkip,
+      }));
+    }
   };
+
   const handleBack = () => {
+    const prevSkip = select.skip - select.limit;
+
+    if (prevSkip >= 0) {
+      setSelect((prevValue) => ({
+        ...prevValue,
+        skip: prevSkip,
+      }));
+    }
+  };
+  const handleFirstPage=()=>{
     setSelect((prevValue) => ({
       ...prevValue,
-      skip: select.skip - select.limit,
+      skip: 0,
     }));
-  };
+  }
+
   return (
     <Box
       sx={{
@@ -49,7 +87,6 @@ function PaginationFooter() {
         justifyContent: "center",
         width: "100vw",
         height: "5vw",
-        
       }}
     >
       <Box
@@ -76,7 +113,6 @@ function PaginationFooter() {
                 ...prevValue,
                 limit: event.target.value,
               }));
-              
             }}
             sx={{
               bgcolor: "#E0F4FF",
@@ -86,6 +122,9 @@ function PaginationFooter() {
             }}
             MenuProps={MenuProps}
           >
+            <MenuItem value={5} selected>
+              5
+            </MenuItem>
             <MenuItem value={10}>10</MenuItem>
             <MenuItem value={25}>25</MenuItem>
             <MenuItem value={50}>50</MenuItem>
@@ -102,7 +141,9 @@ function PaginationFooter() {
             gap: ".5rem",
           }}
         >
-          <Typography>page 1/2</Typography>
+          <Typography>{`Page ${
+            select.skip / select.limit + 1
+          }/${totalPages}`}</Typography>
           <Box
             sx={{
               display: "flex",
@@ -113,7 +154,7 @@ function PaginationFooter() {
               borderRadius: "5px",
             }}
           >
-            <Button size="small" sx={{ borderRight: "1px solid black" }}>
+            <Button size="small" onClick={handleFirstPage} sx={{ borderRight: "1px solid black" }}>
               {"<<"}
             </Button>
             <Button

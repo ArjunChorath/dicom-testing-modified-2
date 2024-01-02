@@ -4,6 +4,7 @@ import TableBody from "@mui/material/TableBody";
 import { useSelector } from "react-redux";
 import NestedTable from "./NestedTable";
 import { Box } from "@mui/material";
+import usedColors from '../../../Assets/Colores/Colores'
 
 function PersonList() {
   const personList = useSelector((state) => state.data.personDetails);
@@ -27,14 +28,15 @@ function PersonList() {
       <Box
         sx={{
           maxHeight: "100vh",
-          maxWidth: "60vw",
+          minWidth: "60vw",
           display: "flex",
           alignItems: "start",
           justifyContent: "center",
+          overflow: "scroll"
         }}
       >
         <Table size="small">
-          <TableBody sx={{ bgcolor: "#090c29", overflow: "scroll" }}>
+          <TableBody sx={{ bgcolor: usedColors.table,  }}>
             {personList.map((value) => (
               <NestedTable key={value.studyId} value={value} />
             ))}

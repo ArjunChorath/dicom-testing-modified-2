@@ -19,7 +19,7 @@ function StudyList() {
     >
       <Box
         sx={{
-          width: "55vw",
+          width: "65vw",
           height: "5rem",
           display: "flex",
           alignItems: "center",

@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import "./SavedQuery.css";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteQuery, savedQueryDatas } from "../../Store/ApiDataSlice";
+import { deleteQuery, savedQueryDatas, searchData } from "../../Store/ApiDataSlice";
 
 function SavedQuery() {
   const savedQuery = useSelector((state) => state.data.savedQuarys);
@@ -12,8 +12,8 @@ function SavedQuery() {
     () => {
       dispatch(savedQueryDatas());
     },
-    [dispatch],
-    savedQuery
+    [dispatch]
+    
   );
   return (
     <Box className="main-div">
@@ -23,7 +23,7 @@ function SavedQuery() {
       <Box className="child-div">
         {savedQuery.map((value) => {
           return (
-            <Box className="query">
+            <Box className="query" key={value.id}>
               <Typography
                 sx={{
                   pl: "5px",
@@ -34,6 +34,7 @@ function SavedQuery() {
                   textOverflow: "ellipsis",
                   height: "1.5rem",
                 }}
+                onClick={()=>{dispatch(searchData(value))}}
               >
                 {value.queryName}
               </Typography>

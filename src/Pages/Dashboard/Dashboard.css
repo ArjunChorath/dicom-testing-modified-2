@@ -19,6 +19,6 @@ body::-webkit-scrollbar {
     /* background:white; */
 }
 ::-webkit-scrollbar-thumb {
-    background:#DDF2FD;
+    background:#a9b5bb;
     border-radius: 5px;
 }

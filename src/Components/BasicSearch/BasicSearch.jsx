@@ -1,17 +1,17 @@
 import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
 import { Box, Input, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import ClearIcon from "@mui/icons-material/Clear";
 import "./BasicSearch.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   searchData,
   sortingAscending,
   sortingDescending,
 } from "../../Store/ApiDataSlice";
 
-const ary = [
+const arrowArray = [
   {
     patientName: "black",
     patientMrn: "black",
@@ -24,6 +24,8 @@ const ary = [
 
 function BasicSearch() {
   const dispatch = useDispatch();
+  const paginationValues=useSelector((state)=>state.data.skipAndLimit)
+  console.log(paginationValues)
   const [clear, setClear] = useState(false);
   const [basicForm, setBasicForm] = useState({
     patientName: "",
@@ -33,14 +35,18 @@ function BasicSearch() {
     modality: "",
     accession: "",
     instance: "",
+    skip:0,
+    limit:5,
   });
-  const [arrowUpKey, setArrowUpKey] = useState(ary);
-  const [arrowDownKey, setArrowDownKey] = useState(ary);
+  const [arrowUpKey, setArrowUpKey] = useState(arrowArray);
+  const [arrowDownKey, setArrowDownKey] = useState(arrowArray);
   const handleForm = (event) => {
     setClear(true);
     setBasicForm((prevValue) => ({
       ...prevValue,
       [event.target.name]: event.target.value,
+      skip:paginationValues.skip,
+      limit:paginationValues.limit,
     }));
     console.log(basicForm.patientName);
   };
@@ -52,8 +58,12 @@ function BasicSearch() {
       description: "",
       modality: "",
       accession: "",
+      instance: "",
     });
   };
+  useEffect(()=>{
+    console.log("aSedasd",paginationValues)
+  },[paginationValues])
   return (
     <Box
       sx={{

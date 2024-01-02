@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import React from "react";
 import Header from "../../Layouts/Header/Header";
-import PersonList from "../../Layouts/Main/PersonList";
+import PersonList from "../../Layouts/Main/PatientTable/PersonList";
 import "./Dashboard.css";
 import SearchBarFilter from "../../Components/SearchComponents/SearchBarFilter";
 import PaginationFooter from "../../Layouts/Footer/PaginationFooter";
