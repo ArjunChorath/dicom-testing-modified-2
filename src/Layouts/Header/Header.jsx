@@ -6,6 +6,9 @@ import usedColors from "../../Assets/Colores/Colores";
 import "./Header.css";
 
 function Header() {
+  /**
+   * Header for providing user interface for header section of react page
+   */
   return (
     <Box
       sx={{

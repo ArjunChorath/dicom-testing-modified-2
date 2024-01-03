@@ -7,7 +7,9 @@ import usedColors from "../../Assets/Colores/Colores";
 import AdvanceSearch from "../AdvanceSearch/AdvanceSearch";
 
 const SearchBarFilter = () => {
- 
+  /**
+   * SearchBarFilter for serve as a container for various search related components
+   */
 
   return (
     <Box sx={{ position: "relative" }}>
