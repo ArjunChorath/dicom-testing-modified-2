@@ -15,7 +15,7 @@ const calculateTotalPages = (totalItems, limit) => {
 
 function PaginationFooter() {
   const dispatch = useDispatch();
-  const aryLength = useSelector(
+  const LengthOfArray = useSelector(
     (state) => state.data.personDetailsLength.length
   );
 
@@ -44,17 +44,14 @@ function PaginationFooter() {
     dispatch(getLength());
     dispatch(getDetails(select));
     dispatch(pagiantionValues(select));
-
-   
-    const newTotalPages = calculateTotalPages(aryLength, select.limit);
+    const newTotalPages = calculateTotalPages(LengthOfArray, select.limit);
     setTotalPages(newTotalPages);
-  }, [dispatch, select, aryLength]);
+  }, [dispatch, select, LengthOfArray]);
 
   const handleNext = () => {
     const nextSkip = select.skip + select.limit;
-    const totalItems = aryLength;
 
-    if (nextSkip < totalItems) {
+    if (nextSkip < LengthOfArray) {
       setSelect((prevValue) => ({
         ...prevValue,
         skip: nextSkip,
@@ -78,7 +75,6 @@ function PaginationFooter() {
       skip: 0,
     }));
   }
-
   return (
     <Box
       sx={{
@@ -141,8 +137,8 @@ function PaginationFooter() {
             gap: ".5rem",
           }}
         >
-          <Typography>{`Page ${
-            select.skip / select.limit + 1
+          <Typography>{`Page ${Math.ceil(
+            select.skip / select.limit + 1)
           }/${totalPages}`}</Typography>
           <Box
             sx={{
@@ -154,7 +150,7 @@ function PaginationFooter() {
               borderRadius: "5px",
             }}
           >
-            <Button size="small" onClick={handleFirstPage} sx={{ borderRight: "1px solid black" }}>
+            <Button size="small" sx={{ borderRight: "1px solid black" }} onClick={handleFirstPage}>
               {"<<"}
             </Button>
             <Button

@@ -162,7 +162,7 @@ function AdvanceSearch() {
               type="text"
               value={formDetails.patientName}
               className="input_element"
-              disableUnderline={true}
+               disableUnderline={true}
               onChange={handleForm}
             ></Input>
           </Box>
@@ -173,7 +173,7 @@ function AdvanceSearch() {
               name="patientMrn"
               type="text"
               className="input_element"
-              disableUnderline={true}
+               disableUnderline={true}
               onChange={handleForm}
               value={formDetails.patientMrn}
             ></Input>
@@ -188,7 +188,7 @@ function AdvanceSearch() {
               className="input_element"
               onFocus={(e) => (e.target.type = "date")}
               onBlur={(e) => (e.target.type = "text")}
-              disableUnderline={true}
+               disableUnderline={true}
               onChange={handleForm}
               value={formDetails.studyDate}
             ></Input>
@@ -209,7 +209,7 @@ function AdvanceSearch() {
               className="input_element"
               onFocus={(e) => (e.target.type = "date")}
               onBlur={(e) => (e.target.type = "text")}
-              disableUnderline={true}
+               disableUnderline={true}
               onChange={handleForm}
               value={formDetails.endDate}
             ></Input>
@@ -222,7 +222,7 @@ function AdvanceSearch() {
               type="text"
               placeholder="Start Time"
               className="input_element"
-              disableUnderline={true}
+               disableUnderline={true}
               onFocus={(e) => (e.target.type = "time")}
               onBlur={(e) => (e.target.type = "text")}
               onChange={handleForm}
@@ -243,7 +243,7 @@ function AdvanceSearch() {
               placeholder="End Time"
               type="text"
               className="input_element"
-              disableUnderline={true}
+               disableUnderline={true}
               onFocus={(e) => (e.target.type = "time")}
               onBlur={(e) => (e.target.type = "text")}
               onChange={handleForm}
@@ -257,7 +257,7 @@ function AdvanceSearch() {
               name="description"
               type="text"
               className="input_element"
-              disableUnderline={true}
+               disableUnderline={true}
               onChange={handleForm}
               value={formDetails.description}
             ></Input>
@@ -298,7 +298,7 @@ function AdvanceSearch() {
               name="accession"
               type="text"
               className="input_element"
-              disableUnderline={true}
+               disableUnderline={true}
               onChange={handleForm}
               value={formDetails.accession}
             ></Input>
@@ -313,7 +313,7 @@ function AdvanceSearch() {
               displayEmpty
               className="input_element"
               MenuProps={MenuProp}
-              disableUnderline={true}
+               disableUnderline={true}
             >
               <MenuItem value="0-50">0-50</MenuItem>
               <MenuItem value="51-100">51-100</MenuItem>
@@ -357,7 +357,7 @@ function AdvanceSearch() {
                 type="text"
                 value={formDetails.queryName}
                 className="input_element"
-                disableUnderline={true}
+                 disableUnderline={true}
                 onChange={handleForm}
                 required={true}
               ></Input>

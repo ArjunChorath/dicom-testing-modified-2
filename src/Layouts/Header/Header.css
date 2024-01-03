@@ -1,32 +1,43 @@
-.list-items{
-    height: 5rem;
-    width: 7rem;
-    background-color:  #041c4a;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    color: white;
-    
-
+.header-main {
+  height: 3.5rem;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
-.list1{
-    height: 3rem;
-    width: 6rem;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    justify-content:flex-start;
-    flex-direction: row;
-    color: white;
-    font-size: 15px;
+.header-sub {
+  height: 3rem;
+  width: 100vw;
+  color: white;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
 }
-.list1:hover{
-    height: 3rem;
-    width: 6.5rem;
-    background-color:#5B0888;
-    font-size: 17px;
-    cursor: pointer;
-    padding-left: 7px;
+.first-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+  flex-direction: row;
+  gap: 10px;
+  color: black;
+}
+.second-box {
+  height: 3rem;
+  width: 50vw;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+  flex-direction: row;
+  color: lightblue;
+}
+.logos {
+  height: 3rem;
+  width: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+  color: blac;
 }

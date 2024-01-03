@@ -12,8 +12,8 @@ function Dashboard() {
     <Box className="dashboard" sx={{ bgcolor: usedColors.body }}>
       <Header />
       <SearchBarFilter />
-      <PersonList />
-      <PaginationFooter />
+      {/* <PersonList />
+      <PaginationFooter /> */}
     </Box>
   );
 }

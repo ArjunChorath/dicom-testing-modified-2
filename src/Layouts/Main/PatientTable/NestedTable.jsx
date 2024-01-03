@@ -1,4 +1,4 @@
-import { Box, Button } from "@mui/material";
+import { Box, Button, styled } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowRight";
@@ -16,8 +16,20 @@ import usedColors from "../../../Assets/Colores/Colores";
 function NestedTable({ value }) {
   const [open, setOpen] = useState(false);
   const [viewer, setViewer] = useState(false);
+  const StyledCollapseCell = styled(TableCell)({
+    color: "white",
+    width: "10vw",
+    fontWeight: "bold",
+    border: "none",
+  });
+  const CollapseNestedCell = styled(TableCell)({
+    color: "white",
+    width: "10vw",
+    border: "none",
+    borderRight: "1px solid #DDF2FD",
+  });
   return (
-    <Box
+    <TableBody
       sx={{
         border: open === true ? "1px solid #5acce6" : "none",
         minHeight: "4vh",
@@ -91,17 +103,15 @@ function NestedTable({ value }) {
           {value.studies.instance}
         </TableCell>
       </TableRow>
-      <Box
-        sx={{
+     
+        <TableRow sx={{
           // height: "10vh",
           // minWidth: "60vw",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
           flexDirection: "column",
-        }}
-      >
-        <TableRow>
+        }}>
           <TableCell
             sx={{ paddingBottom: 0, paddingTop: 0, border: "none" }}
             colSpan={6}
@@ -120,102 +130,28 @@ function NestedTable({ value }) {
                       borderBottom: ".5px solid #DDF2FD",
                     }}
                   >
-                    <TableCell
-                      sx={{
-                        color: "white",
-                        width: "10vw",
-                        fontWeight: "bold",
-                        border: "none",
-                      }}
-                    >
-                      Description
-                    </TableCell>
-                    <TableCell
-                      sx={{
-                        color: "white",
-                        width: "10vw",
-                        fontWeight: "bold",
-                        border: "none",
-                      }}
-                    >
-                      Series
-                    </TableCell>
-                    <TableCell
-                      sx={{
-                        color: "white",
-                        width: "10vw",
-                        fontWeight: "bold",
-                        border: "none",
-                      }}
-                    >
-                      Modality
-                    </TableCell>
-                    <TableCell
-                      sx={{
-                        color: "white",
-                        width: "10vw",
-                        fontWeight: "bold",
-                        border: "none",
-                      }}
-                    >
-                      Instances
-                    </TableCell>
-                    <TableCell
-                      sx={{
-                        color: "white",
-                        width: "10vw",
-                        fontWeight: "bold",
-                        border: "none",
-                      }}
-                    >
-                      Viewer
-                    </TableCell>
+                    <StyledCollapseCell>Description</StyledCollapseCell>
+                    <StyledCollapseCell>Series</StyledCollapseCell>
+                    <StyledCollapseCell>Modality</StyledCollapseCell>
+                    <StyledCollapseCell>Instances</StyledCollapseCell>
+                    <StyledCollapseCell>Viewer</StyledCollapseCell>
                   </TableRow>
                 </TableHead>
                 {value.studies.series.map((items) => (
                   <TableBody key={items}>
                     <TableRow>
-                      <TableCell
-                        sx={{
-                          color: "white",
-                          width: "10vw",
-                          border: "none",
-                          borderRight: "1px solid #DDF2FD",
-                        }}
-                      >
+                      <CollapseNestedCell>
                         {items.description}
-                      </TableCell>
-                      <TableCell
+                      </CollapseNestedCell>
+                      <CollapseNestedCell>{items.series}</CollapseNestedCell>
+                      <CollapseNestedCell>{items.modality}</CollapseNestedCell>
+                      <CollapseNestedCell
                         sx={{
-                          color: "white",
-                          width: "10vw",
-                          border: "none",
-                          borderRight: "1px solid #DDF2FD",
-                        }}
-                      >
-                        {items.series}
-                      </TableCell>
-                      <TableCell
-                        sx={{
-                          color: "white",
-                          width: "10vw",
-                          border: "none",
-                          borderRight: "1px solid #DDF2FD",
-                        }}
-                      >
-                        {items.modality}
-                      </TableCell>
-                      <TableCell
-                        sx={{
-                          color: "white",
-                          width: "10vw",
-                          border: "none",
-                          borderRight: "1px solid #DDF2FD",
                           borderLeft: "none",
                         }}
                       >
                         {items.instance}
-                      </TableCell>
+                      </CollapseNestedCell>
                       <TableCell
                         sx={{
                           border: "none",
@@ -277,8 +213,8 @@ function NestedTable({ value }) {
             </Collapse>
           </TableCell>
         </TableRow>
-      </Box>
-    </Box>
+      </TableBody>
+   
   );
 }
 
