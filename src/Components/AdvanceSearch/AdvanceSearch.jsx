@@ -13,8 +13,12 @@ import {
 } from "../../Store/ApiDataSlice";
 
 function AdvanceSearch() {
-  const name = useSelector((state) => state.data.modalityData);
-  const paginationValues = useSelector((state) => state.data.skipAndLimit);
+  /**
+   * AdvanceSearch is used for complex searches
+   */
+  //Defined variables - start
+  const name = useSelector((state) => state.data.modalityData); //used to select moadality data from redux store
+  const paginationValues = useSelector((state) => state.data.skipAndLimit); //used to select skip and limit values from redux store
   const dispatch = useDispatch();
 
   const [advaceSearch, setAdvanceSearch] = useState(false);
@@ -33,44 +37,6 @@ function AdvanceSearch() {
     accession: "",
     instance: "",
   });
-
-  const handleForm = (event) => {
-    setFormDetails((prevValue) => ({
-      ...prevValue,
-      [event.target.name]: event.target.value,
-      skip: paginationValues.skip,
-      limit: paginationValues.limit,
-    }));
-  };
-  const handleChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setModalityType(typeof value === "string" ? value.split(",") : value);
-    setFormDetails((prevValue) => ({
-      ...prevValue,
-      modality: event.target.value,
-      skip: paginationValues.skip,
-      limit: paginationValues.limit,
-    }));
-  };
-
-  const clearForm = () => {
-    setFormDetails({
-      patientName: "",
-      patientMrn: "",
-      studyDate: "",
-      endDate: "",
-      startTime: "",
-      endTime: "",
-      description: "",
-      modality: "",
-      accession: "",
-      instance: "",
-      skip: "",
-      limit: "",
-    });
-  };
   const ITEM_HEIGHT = 50;
   const ITEM_PADDING_TOP = 8;
   const MenuProps = {
@@ -98,6 +64,62 @@ function AdvanceSearch() {
       },
     },
   };
+  //Defined variables - end
+
+  /**
+   *handleForm is a function that takes @param event as parameter
+   *it updates state of form using 'setFormDetails' function
+   *also it sets 'skip' and limit in the form state using values from a variable called 'paginationVales'
+   */
+  const handleForm = (event) => {
+    setFormDetails((prevValue) => ({
+      ...prevValue,
+      [event.target.name]: event.target.value,
+      skip: paginationValues.skip,
+      limit: paginationValues.limit,
+    }));
+  };
+  /**
+   *updates the state of 'modalityType'and the 'formDetails.modality when the selected modality value change'
+   *@param event is used to get the value selected by the user
+   *it handles both single and multiple modality selection
+   */
+  const handleChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setModalityType(typeof value === "string" ? value.split(",") : value);
+    setFormDetails((prevValue) => ({
+      ...prevValue,
+      modality: event.target.value,
+      skip: paginationValues.skip,
+      limit: paginationValues.limit,
+    }));
+  };
+  /**
+   *reset the state of the form to its initial values
+   *clearing the input fields
+   */
+  const clearForm = () => {
+    setFormDetails({
+      patientName: "",
+      patientMrn: "",
+      studyDate: "",
+      endDate: "",
+      startTime: "",
+      endTime: "",
+      description: "",
+      modality: "",
+      accession: "",
+      instance: "",
+      skip: "",
+      limit: "",
+    });
+  };
+  /**
+   *this useEffect hook is triggered when the component mounts
+   *it dispatches the 'getModality' action,which fetches modality data and update redux store
+   */
   useEffect(() => {
     dispatch(getModality());
     console.log("pagValues", paginationValues);
@@ -132,6 +154,7 @@ function AdvanceSearch() {
             },
           }}
           onClick={() => {
+            //used to toggle the visibility of advanced search option and clears the form
             setAdvanceSearch(!advaceSearch);
             clearForm();
           }}
@@ -162,7 +185,7 @@ function AdvanceSearch() {
               type="text"
               value={formDetails.patientName}
               className="input_element"
-               disableUnderline={true}
+              disableUnderline={true}
               onChange={handleForm}
             ></Input>
           </Box>
@@ -173,7 +196,7 @@ function AdvanceSearch() {
               name="patientMrn"
               type="text"
               className="input_element"
-               disableUnderline={true}
+              disableUnderline={true}
               onChange={handleForm}
               value={formDetails.patientMrn}
             ></Input>
@@ -188,7 +211,7 @@ function AdvanceSearch() {
               className="input_element"
               onFocus={(e) => (e.target.type = "date")}
               onBlur={(e) => (e.target.type = "text")}
-               disableUnderline={true}
+              disableUnderline={true}
               onChange={handleForm}
               value={formDetails.studyDate}
             ></Input>
@@ -209,7 +232,7 @@ function AdvanceSearch() {
               className="input_element"
               onFocus={(e) => (e.target.type = "date")}
               onBlur={(e) => (e.target.type = "text")}
-               disableUnderline={true}
+              disableUnderline={true}
               onChange={handleForm}
               value={formDetails.endDate}
             ></Input>
@@ -222,7 +245,7 @@ function AdvanceSearch() {
               type="text"
               placeholder="Start Time"
               className="input_element"
-               disableUnderline={true}
+              disableUnderline={true}
               onFocus={(e) => (e.target.type = "time")}
               onBlur={(e) => (e.target.type = "text")}
               onChange={handleForm}
@@ -243,7 +266,7 @@ function AdvanceSearch() {
               placeholder="End Time"
               type="text"
               className="input_element"
-               disableUnderline={true}
+              disableUnderline={true}
               onFocus={(e) => (e.target.type = "time")}
               onBlur={(e) => (e.target.type = "text")}
               onChange={handleForm}
@@ -257,7 +280,7 @@ function AdvanceSearch() {
               name="description"
               type="text"
               className="input_element"
-               disableUnderline={true}
+              disableUnderline={true}
               onChange={handleForm}
               value={formDetails.description}
             ></Input>
@@ -298,7 +321,7 @@ function AdvanceSearch() {
               name="accession"
               type="text"
               className="input_element"
-               disableUnderline={true}
+              disableUnderline={true}
               onChange={handleForm}
               value={formDetails.accession}
             ></Input>
@@ -313,7 +336,7 @@ function AdvanceSearch() {
               displayEmpty
               className="input_element"
               MenuProps={MenuProp}
-               disableUnderline={true}
+              disableUnderline={true}
             >
               <MenuItem value="0-50">0-50</MenuItem>
               <MenuItem value="51-100">51-100</MenuItem>
@@ -322,14 +345,15 @@ function AdvanceSearch() {
           </Box>
           <Box className="form_elements">
             <Box sx={{ display: "flex", gap: "1rem" }}>
-              <Button variant="contained" type="reset" onClick={clearForm}>
+              <Button variant="contained" type="reset" onClick={clearForm}//reset the form to its initial state
+              > 
                 reset
               </Button>
-              {formDetails.patientName||formDetails.patientMrn ? (
+              {formDetails.patientName || formDetails.patientMrn ? (
                 <Button
                   variant="contained"
                   onClick={() => {
-                    setQuery(true);
+                    setQuery(true);//when save button clicked it indicates that user wants to save the query
                   }}
                 >
                   save
@@ -343,13 +367,14 @@ function AdvanceSearch() {
             <Button
               variant="contained"
               onClick={() => {
-                dispatch(searchData(formDetails));
+                dispatch(searchData(formDetails));//it triggers the 'searchData'action, passing the current form details as parameters to initialize search
               }}
             >
               search
             </Button>
           </Box>
-          {(formDetails.patientName||formDetails.patientMrn)&&query === true ? (
+          {(formDetails.patientName || formDetails.patientMrn) &&
+          query === true ? (
             <Box className="form_elements" sx={{ height: "5rem" }}>
               <Typography>Query Name:</Typography>
               <Input
@@ -357,12 +382,12 @@ function AdvanceSearch() {
                 type="text"
                 value={formDetails.queryName}
                 className="input_element"
-                 disableUnderline={true}
+                disableUnderline={true}
                 onChange={handleForm}
                 required={true}
               ></Input>
               <Button
-                onClick={() => {
+                onClick={() => { //set the state variable 'query' to 'false', cancel the save operation and clear the form
                   setQuery(false);
                   clearForm();
                 }}
@@ -371,7 +396,7 @@ function AdvanceSearch() {
                 cancel
               </Button>
               <Button
-                onClick={() => {
+                onClick={() => {//after entering the query name,the 'save' button dispatches 'savequeryData'sets query to 'false' and clears the form
                   setQuery(false);
                   dispatch(saveQueryData(formDetails));
                   clearForm();

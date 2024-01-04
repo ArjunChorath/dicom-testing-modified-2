@@ -9,7 +9,7 @@ import usedColors from "../../Assets/Colores/Colores";
 
 function Dashboard() {
   return (
-    <Box className="dashboard" sx={{ bgcolor: usedColors.body }}>
+    <Box className="dashboard" overflow="hidden"sx={{ bgcolor: usedColors.body }}>
       <Header />
       <SearchBarFilter />
       {/* <PersonList />

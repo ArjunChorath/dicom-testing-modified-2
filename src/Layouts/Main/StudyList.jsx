@@ -3,7 +3,9 @@ import React from "react";
 
 
 function StudyList() {
-
+  /**
+   * StudyList for render a section in react application for displaying title 'Study List'
+   */
   return (
     <Box
       sx={{
@@ -42,7 +44,6 @@ function StudyList() {
           Study List
         </Box>
       </Box>
-    
     </Box>
   );
 }

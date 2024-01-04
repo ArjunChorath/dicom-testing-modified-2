@@ -14,6 +14,10 @@ import "./NestedTable.css";
 import usedColors from "../../../Assets/Colores/Colores";
 
 function NestedTable({ value }) {
+  /**
+   * NestedTable used to rendering a table row that provides details about a person's study
+   */
+  //Defined variables - start
   const [open, setOpen] = useState(false);
   const [viewer, setViewer] = useState(false);
   const StyledCollapseCell = styled(TableCell)({
@@ -28,6 +32,8 @@ function NestedTable({ value }) {
     border: "none",
     borderRight: "1px solid #DDF2FD",
   });
+  //Defined variables - end
+
   return (
     <TableBody
       sx={{
@@ -42,7 +48,7 @@ function NestedTable({ value }) {
       }}
     >
       <TableRow
-        onClick={() => setOpen(!open)}
+        onClick={() => setOpen(!open)}//this onClick toggle the visibility of nested content when the main table row is clicked
         className="personlist"
         sx={{
           borderBottom: ".5px solid #DDF2FD",
@@ -103,118 +109,118 @@ function NestedTable({ value }) {
           {value.studies.instance}
         </TableCell>
       </TableRow>
-     
-        <TableRow sx={{
+
+      <TableRow
+        sx={{
           // height: "10vh",
           // minWidth: "60vw",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
           flexDirection: "column",
-        }}>
-          <TableCell
-            sx={{ paddingBottom: 0, paddingTop: 0, border: "none" }}
-            colSpan={6}
+        }}
+      >
+        <TableCell
+          sx={{ paddingBottom: 0, paddingTop: 0, border: "none" }}
+          colSpan={6}
+        >
+          <Collapse
+            in={open}
+            timeout="auto"
+            unmountOnExit
+            sx={{ marginTop: "10px", marginBottom: "10px" }}
           >
-            <Collapse
-              in={open}
-              timeout="auto"
-              unmountOnExit
-              sx={{ marginTop: "10px", marginBottom: "10px" }}
-            >
-              <Table size="small">
-                <TableHead>
-                  <TableRow
-                    sx={{
-                      bgcolor: "#427D9D",
-                      borderBottom: ".5px solid #DDF2FD",
-                    }}
-                  >
-                    <StyledCollapseCell>Description</StyledCollapseCell>
-                    <StyledCollapseCell>Series</StyledCollapseCell>
-                    <StyledCollapseCell>Modality</StyledCollapseCell>
-                    <StyledCollapseCell>Instances</StyledCollapseCell>
-                    <StyledCollapseCell>Viewer</StyledCollapseCell>
-                  </TableRow>
-                </TableHead>
-                {value.studies.series.map((items) => (
-                  <TableBody key={items}>
-                    <TableRow>
-                      <CollapseNestedCell>
-                        {items.description}
-                      </CollapseNestedCell>
-                      <CollapseNestedCell>{items.series}</CollapseNestedCell>
-                      <CollapseNestedCell>{items.modality}</CollapseNestedCell>
-                      <CollapseNestedCell
-                        sx={{
-                          borderLeft: "none",
-                        }}
-                      >
-                        {items.instance}
-                      </CollapseNestedCell>
-                      <TableCell
-                        sx={{
-                          border: "none",
-                        }}
-                        onClick={() => {
-                          setViewer(!viewer);
-                        }}
-                      >
-                        <Button
-                          sx={{ color: "white", width: "9vw", border: "none" }}
-                        >
-                          image
-                        </Button>
-                      </TableCell>
-                    </TableRow>
-                  </TableBody>
-                ))}
-              </Table>
-              {viewer ? (
-                <Box
+            <Table size="small">
+              <TableHead>
+                <TableRow
                   sx={{
-                    minHeight: "15vh",
-                    width: "60vw",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "flex-start",
-                    gap: "3rem",
-                    flexDirection: "row",
-                    overflowX: "scroll",
-                    overflowY: "hidden",
-                    border: "1px solid #164863",
+                    bgcolor: "#427D9D",
+                    borderBottom: ".5px solid #DDF2FD",
                   }}
                 >
-                  <Box sx={{ marginLeft: "10px" }}>
-                    <img
-                      src="https://img.freepik.com/premium-photo/x-ray-human-skull-black-background_521740-1000.jpg"
-                      alt="error"
-                      className="imagesize"
-                    />
-                  </Box>
-                  <Box>
-                    <img
-                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWNMwtwkOe0sgcSUl2Yg9cOCl7i0kO3CKg2B0ObWWQeg&s"
-                      alt="error"
-                      className="imagesize"
-                    />
-                  </Box>
-                  <Box>
-                    <img
-                      src="https://qph.cf2.quoracdn.net/main-qimg-977ae1c33cd1b2993f9933ed1b87f261-lq"
-                      alt="error"
-                      className="imagesize"
-                    />
-                  </Box>
+                  <StyledCollapseCell>Description</StyledCollapseCell>
+                  <StyledCollapseCell>Series</StyledCollapseCell>
+                  <StyledCollapseCell>Modality</StyledCollapseCell>
+                  <StyledCollapseCell>Instances</StyledCollapseCell>
+                  <StyledCollapseCell>Viewer</StyledCollapseCell>
+                </TableRow>
+              </TableHead>
+              {value.studies.series.map((items) => (
+                <TableBody key={items}>
+                  <TableRow>
+                    <CollapseNestedCell>{items.description}</CollapseNestedCell>
+                    <CollapseNestedCell>{items.series}</CollapseNestedCell>
+                    <CollapseNestedCell>{items.modality}</CollapseNestedCell>
+                    <CollapseNestedCell
+                      sx={{
+                        borderLeft: "none",
+                      }}
+                    >
+                      {items.instance}
+                    </CollapseNestedCell>
+                    <TableCell
+                      sx={{
+                        border: "none",
+                      }}
+                      onClick={() => {
+                        //this onClick toggle the viewer state when the image button in the nested table is clicked
+                        setViewer(!viewer);
+                      }}
+                    >
+                      <Button
+                        sx={{ color: "white", width: "9vw", border: "none" }}
+                      >
+                        image
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              ))}
+            </Table>
+            {viewer ? (
+              <Box
+                sx={{
+                  minHeight: "15vh",
+                  width: "60vw",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "flex-start",
+                  gap: "3rem",
+                  flexDirection: "row",
+                  overflowX: "scroll",
+                  overflowY: "hidden",
+                  border: "1px solid #164863",
+                }}
+              >
+                <Box sx={{ marginLeft: "10px" }}>
+                  <img
+                    src="https://img.freepik.com/premium-photo/x-ray-human-skull-black-background_521740-1000.jpg"
+                    alt="error"
+                    className="imagesize"
+                  />
                 </Box>
-              ) : (
-                ""
-              )}
-            </Collapse>
-          </TableCell>
-        </TableRow>
-      </TableBody>
-   
+                <Box>
+                  <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWNMwtwkOe0sgcSUl2Yg9cOCl7i0kO3CKg2B0ObWWQeg&s"
+                    alt="error"
+                    className="imagesize"
+                  />
+                </Box>
+                <Box>
+                  <img
+                    src="https://qph.cf2.quoracdn.net/main-qimg-977ae1c33cd1b2993f9933ed1b87f261-lq"
+                    alt="error"
+                    className="imagesize"
+                  />
+                </Box>
+              </Box>
+            ) : (
+              ""
+            )}
+          </Collapse>
+        </TableCell>
+      </TableRow>
+    </TableBody>
   );
 }
 

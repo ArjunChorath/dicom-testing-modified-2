@@ -6,8 +6,10 @@ import { Box } from "@mui/material";
 
 
 function PersonList() {
-  const personList = useSelector((state) => state.data.personDetails);
-  useEffect(() => {}, [personList]);
+  //Defined variables - start
+  const personList = useSelector((state) => state.data.personDetails);//uses the useEffect hook to retrieve the 'personDetails' from the redux store
+  useEffect(() => {}, [personList]); //this useEffect used rerender the component whenever the value of 'personList' changes
+  //Defined variables - end
 
   return (
     <Box
