@@ -353,7 +353,8 @@ function AdvanceSearch() {
                 <Button
                   variant="contained"
                   onClick={() => {
-                    setQuery(true);//when save button clicked it indicates that user wants to save the query
+                    //when save button clicked it indicates that user wants to save the query
+                    setQuery(true);
                   }}
                 >
                   save
@@ -367,7 +368,8 @@ function AdvanceSearch() {
             <Button
               variant="contained"
               onClick={() => {
-                dispatch(searchData(formDetails));//it triggers the 'searchData'action, passing the current form details as parameters to initialize search
+                //it triggers the 'searchData'action, passing the current form details as parameters to initialize search
+                dispatch(searchData(formDetails));
               }}
             >
               search
