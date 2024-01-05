@@ -7,6 +7,9 @@ import "./Header.css";
 import { useState } from "react";
 
 function Header() {
+  /**
+   * Header for providing user interface for header section of react page
+   */
   const [menu, setMenu] = useState(false);
   return (
     <Box

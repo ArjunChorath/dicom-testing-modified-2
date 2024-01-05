@@ -8,6 +8,9 @@ import AdvanceSearch from "../AdvanceSearch/AdvanceSearch";
 import SideMenu from "../../Layouts/Main/SideMenu/SideMenu";
 
 const SearchBarFilter = () => {
+  /**
+   * SearchBarFilter for serve as a container for various search related components
+   */
   const [advaceSearch, setAdvanceSearch] = useState(false);
   return (
     <Box>
@@ -23,7 +26,7 @@ const SearchBarFilter = () => {
           position: "absolute",
           height: "100vh",
           width: "30vw",
-          left:"0"
+          left: "0",
         }}
       >
         <SideMenu />
@@ -44,16 +47,16 @@ const SearchBarFilter = () => {
         }}
       >
         <Box
-        sx={{
-          maxWidth: "15vw",
-          height: "30vh",
-          position: "absolute",
-          top: "13rem",
-          left: "1rem",
-        }}
-      >
-        <SavedQuery />
-      </Box>
+          sx={{
+            maxWidth: "15vw",
+            height: "30vh",
+            position: "absolute",
+            top: "13rem",
+            left: "1rem",
+          }}
+        >
+          <SavedQuery />
+        </Box>
 
         <Box
           sx={{
@@ -89,7 +92,7 @@ const SearchBarFilter = () => {
                 },
               }}
               onClick={() => {
-                setAdvanceSearch(!advaceSearch);
+                setAdvanceSearch(!advaceSearch); //used to toggle the visibility of advanced search option and clears the form
               }}
             >
               Advance Search

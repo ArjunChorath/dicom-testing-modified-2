@@ -14,6 +14,10 @@ import "./NestedTable.css";
 import usedColors from "../../../Assets/Colores/Colores";
 
 function NestedTable({ value }) {
+  /**
+   * NestedTable used to rendering a table row that provides details about a person's study
+   */
+  //Defined variables - start
   const [open, setOpen] = useState(false);
   const [viewer, setViewer] = useState(false);
   const StyledCollapseCell = styled(TableCell)({
@@ -28,6 +32,7 @@ function NestedTable({ value }) {
     border: "none",
     borderRight: "1px solid #DDF2FD",
   });
+  //Defined variables - end
   return (
     <TableBody
       sx={{
@@ -42,7 +47,7 @@ function NestedTable({ value }) {
       }}
     >
       <TableRow
-        onClick={() => setOpen(!open)}
+        onClick={() => setOpen(!open)} //this onClick toggle the visibility of nested content when the main table row is clicked
         className="personlist"
         sx={{
           borderBottom: ".5px solid #DDF2FD",
@@ -158,6 +163,7 @@ function NestedTable({ value }) {
                         border: "none",
                       }}
                       onClick={() => {
+                        //this onClick toggle the viewer state when the image button in the nested table is clicked
                         setViewer(!viewer);
                       }}
                     >

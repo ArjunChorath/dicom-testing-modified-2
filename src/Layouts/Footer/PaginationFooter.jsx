@@ -10,14 +10,19 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 
 const calculateTotalPages = (totalItems, limit) => {
-  return Math.ceil(totalItems / limit);
+  return Math.ceil(totalItems / limit);//function to calculate total number of pages
 };
 
 function PaginationFooter() {
+  /**
+   * PaginationFooter for pagination purpous
+   * *used for rendering particular number of elements in the display
+   */
+  //Defined variables - start
   const dispatch = useDispatch();
   const LengthOfArray = useSelector(
     (state) => state.data.personDetailsLength.length
-  );
+  ); //selecting the length of 'personDetails' array from the redux store
 
   const [select, setSelect] = useState({
     skip: 0,
@@ -39,7 +44,12 @@ function PaginationFooter() {
       },
     },
   };
-
+  //Defined variables - end
+  /**
+   *this useEffect responsible for fetching length of data from redux store
+   *dispatches an action 'getDetails' to fetch data based on 'select' object from redux store
+   *dispatches an action to update pagination related values in redux store
+   */
   useEffect(() => {
     dispatch(getLength());
     dispatch(getDetails(select));
@@ -47,7 +57,9 @@ function PaginationFooter() {
     const newTotalPages = calculateTotalPages(LengthOfArray, select.limit);
     setTotalPages(newTotalPages);
   }, [dispatch, select, LengthOfArray]);
-
+  /**
+   * handleNext function is an event handler responsible for advancing to the next page of data
+   */
   const handleNext = () => {
     const nextSkip = select.skip + select.limit;
 
@@ -58,7 +70,9 @@ function PaginationFooter() {
       }));
     }
   };
-
+  /**
+   * handleBack function is an event handler responsible for navigating to the previous page of data
+   */
   const handleBack = () => {
     const prevSkip = select.skip - select.limit;
 
@@ -69,12 +83,15 @@ function PaginationFooter() {
       }));
     }
   };
-  const handleFirstPage=()=>{
+  /**
+   * handleBack function is an event handler responsible for navigating to the First page of data
+   */
+  const handleFirstPage = () => {
     setSelect((prevValue) => ({
       ...prevValue,
       skip: 0,
     }));
-  }
+  };
   return (
     <Box
       sx={{
@@ -126,7 +143,7 @@ function PaginationFooter() {
             <MenuItem value={50}>50</MenuItem>
           </Select>
 
-          <Typography sx={{ml:"10px"}}>Results per Page</Typography>
+          <Typography sx={{ ml: "10px" }}>Results per Page</Typography>
         </Box>
         <Box
           sx={{
@@ -138,8 +155,8 @@ function PaginationFooter() {
           }}
         >
           <Typography>{`Page ${Math.ceil(
-            select.skip / select.limit + 1)
-          }/${totalPages}`}</Typography>
+            select.skip / select.limit + 1
+          )}/${totalPages}`}</Typography>
           <Box
             sx={{
               display: "flex",
@@ -150,7 +167,11 @@ function PaginationFooter() {
               borderRadius: "5px",
             }}
           >
-            <Button size="small" sx={{ borderRight: "1px solid black" }} onClick={handleFirstPage}>
+            <Button
+              size="small"
+              sx={{ borderRight: "1px solid black" }}
+              onClick={handleFirstPage}
+            >
               {"<<"}
             </Button>
             <Button
