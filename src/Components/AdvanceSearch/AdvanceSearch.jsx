@@ -17,7 +17,7 @@ function AdvanceSearch() {
    * AdvanceSearch is used for complex searches
    */
   //Defined variables - start
-  const name = useSelector((state) => state.data.modalityData); //used to select moadality data from redux store
+  const name = useSelector((state) => state.data.modalityData); //used to select modalityl data from redux store
   const paginationValues = useSelector((state) => state.data.skipAndLimit); //used to select skip and limit values from redux store
   const dispatch = useDispatch();
 
