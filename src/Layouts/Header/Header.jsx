@@ -1,14 +1,13 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Drawer } from "@mui/material";
 import { ReactComponent as Settings } from "../../Assets/Images/newsvg.svg";
 import { ReactComponent as Arrow } from "../../Assets/Images/arrow.svg";
 import { ReactComponent as AppLogo } from "../../Assets/Images/appLogo.svg";
 import usedColors from "../../Assets/Colores/Colores";
 import "./Header.css";
+import { useState } from "react";
 
 function Header() {
-  /**
-   * Header for providing user interface for header section of react page
-   */
+  const [menu, setMenu] = useState(false);
   return (
     <Box
       sx={{
@@ -18,26 +17,31 @@ function Header() {
     >
       <Box
         sx={{
-          justifyContent: { xs: "center", sm: "space-between" },
+          justifyContent: {
+            xs: "center",
+            sm: "center",
+            md: "center",
+            lg: "space-between",
+          },
         }}
         className="header-sub"
       >
         <Box className="first-box">
-          <Box sx={{ display: { xs: "none", sm: "flex" } }}>
+          <Box
+            sx={{ display: { xs: "none", sm: "none", md: "none", lg: "flex" } }}
+          >
             <AppLogo />
           </Box>
-          <Typography sx={{ color: "black" }}>Dicom Image Viewer</Typography>
+          <Box sx={{ color: "black" }}>Dicom Image Viewer</Box>
         </Box>
         <Box
           sx={{
-            display: { xs: "none", sm: "flex" },
+            display: { xs: "none", sm: "none", md: "none", lg: "flex" },
           }}
           className="second-box"
         >
           <Box>
-            <Typography sx={{ color: "black" }}>
-              INVESTIGATIONAL USE ONLY
-            </Typography>
+            <Box sx={{ color: "black" }}>INVESTIGATIONAL USE ONLY</Box>
           </Box>
           <Box className="logos">
             <Settings fill="black" />
@@ -45,6 +49,40 @@ function Header() {
           </Box>
         </Box>
       </Box>
+      <Drawer
+        anchor="left"
+        open={menu}
+        onClose={() => {
+          setMenu(false);
+        }}
+        sx={{ border: "2px solid red", position: "relative" }}
+      >
+        <Box
+          sx={{
+            width: "12rem",
+            height: "100vh",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Box
+            sx={{
+              width: "10rem",
+              height: "90vh",
+              display: "flex",
+              alignItems: "flex-start",
+              justifyContent: "flex-start",
+              flexDirection: "column",
+              gap: "3rem",
+            }}
+          >
+            <Box>Basic Search</Box>
+            <Box>Advance Search</Box>
+            <Box>Saved Qury</Box>
+          </Box>
+        </Box>
+      </Drawer>
     </Box>
   );
 }

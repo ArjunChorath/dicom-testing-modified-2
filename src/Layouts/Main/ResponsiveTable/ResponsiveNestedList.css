@@ -1,0 +1,9 @@
+.first-child{
+    display: flex;
+    flex-direction: row;
+}
+.text-box{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
