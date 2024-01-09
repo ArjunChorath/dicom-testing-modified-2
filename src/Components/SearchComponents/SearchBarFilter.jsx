@@ -8,6 +8,9 @@ import AdvanceSearch from "../AdvanceSearch/AdvanceSearch";
 import SideMenu from "../../Layouts/Main/SideMenu/SideMenu";
 
 const SearchBarFilter = () => {
+  /**
+   * SearchBarFilter for serve as a container for various search related components
+   */
   const [advaceSearch, setAdvanceSearch] = useState(false);
   return (
     <Box>
@@ -23,7 +26,7 @@ const SearchBarFilter = () => {
           position: "absolute",
           height: "100vh",
           width: "30vw",
-          left:"0"
+          left: "0",
         }}
       >
         <SideMenu />
@@ -43,17 +46,17 @@ const SearchBarFilter = () => {
           width: "100vw",
         }}
       >
-        <Box
-        sx={{
-          maxWidth: "15vw",
-          height: "30vh",
-          position: "absolute",
-          top: "13rem",
-          left: "1rem",
-        }}
-      >
-        <SavedQuery />
-      </Box>
+        {/* <Box
+          sx={{
+            maxWidth: "15vw",
+            height: "30vh",
+            position: "absolute",
+            top: "13rem",
+            left: "1rem",
+          }}
+        >
+          <SavedQuery />
+        </Box> */}
 
         <Box
           sx={{
@@ -100,7 +103,8 @@ const SearchBarFilter = () => {
               sx={{
                 position: "absolute",
                 top: "5rem",
-                right: "12px",
+                right: "2rem",
+                zIndex: "999",
               }}
             >
               <AdvanceSearch />

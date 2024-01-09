@@ -3,7 +3,7 @@
   width: 100vw;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   position: relative;
 }
 .header-sub {
@@ -17,15 +17,16 @@
 .first-box {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   margin-left: 10px;
+  width: 45vw;
   flex-direction: row;
   gap: 10px;
   color: black;
 }
 .second-box {
   height: 3rem;
-  width: 50vw;
+  width: 55vw;
   align-items: center;
   justify-content: flex-end;
   gap: 1rem;

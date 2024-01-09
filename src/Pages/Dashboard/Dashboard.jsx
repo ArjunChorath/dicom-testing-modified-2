@@ -7,6 +7,7 @@ import SearchBarFilter from "../../Components/SearchComponents/SearchBarFilter";
 import PaginationFooter from "../../Layouts/Footer/PaginationFooter";
 import usedColors from "../../Assets/Colores/Colores";
 import ResponsivePersonList from "../../Layouts/Main/ResponsiveTable/ResponsivePersonList";
+import ResponsivePagination from "../../Layouts/Footer/ResponsivePagination";
 
 function Dashboard() {
   return (
@@ -14,17 +15,13 @@ function Dashboard() {
       <Header />
       <SearchBarFilter />
       <PersonList />
-      <Box sx={{width:"99vw",height:"3rem",display:"flex",alignItems:"center",justifyContent:"center"}}>
-        <PaginationFooter />
-      </Box>
+      <PaginationFooter />
+      <ResponsivePagination />
       <Box
         sx={{
           display: {
             xs: "flex",
-            sm: "flex",
-            md: "flex",
             lg: "none",
-            xl: "none",
           },
         }}
       >

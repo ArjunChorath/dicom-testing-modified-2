@@ -15,7 +15,8 @@ import { StrictMode } from "react";
 
 // keycloak.init({
 //   onLoad: "login-required",
-//   checkLoginIframe: true,
+//   //checkLoginIframe: true,
+//   flow:"standard"
 // }).then(
 //   (auth) => {
 //     if (!auth) {

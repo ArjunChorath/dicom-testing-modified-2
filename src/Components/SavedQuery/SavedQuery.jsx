@@ -10,13 +10,23 @@ import {
 } from "../../Store/ApiDataSlice";
 
 function SavedQuery() {
+  /**
+   *SavedQuery used for managing the display od saved queries
+   */
+  //Defined variables - start
   const savedQuery = useSelector((state) => state.data.savedQuarys);
   const dispatch = useDispatch();
+  //Defined variables - end
+
+  /**
+   *this useEffect hook is triggered when the component mounts
+   *it dispatch the 'savedQueryDatas' action,which fetches saved queries datas and update redux store
+   */
   useEffect(() => {
     dispatch(savedQueryDatas());
   }, [dispatch]);
   return (
-    <Box className="main-div" >
+    <Box className="main-div">
       <Typography
         sx={{ pl: "5px", fontWeight: "bold", fontSize: "15px", mt: "10px" }}
       >
@@ -25,7 +35,7 @@ function SavedQuery() {
       <Box className="child-div">
         {savedQuery.map((value) => {
           return (
-            <Box className="query" key={value.id}  >
+            <Box className="query" key={value.id}>
               <Typography
                 sx={{
                   pl: "5px",
@@ -37,6 +47,7 @@ function SavedQuery() {
                   height: "1.5rem",
                 }}
                 onClick={() => {
+                  //when this onclick function is triggered it dispatch the 'searchData' action,passing corresponding query data as an arguement
                   dispatch(searchData(value));
                 }}
               >
@@ -58,6 +69,7 @@ function SavedQuery() {
                     className="clear"
                     fontSize="medium"
                     onClick={() => {
+                      //when this onclick function is triggered it dispatch the 'deleteQuery' action,passing corresponding query ID as an arguement
                       dispatch(deleteQuery(value.id));
                     }}
                   />

@@ -1,6 +1,5 @@
 import { Box, Typography } from "@mui/material";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import ManageSearchOutlinedIcon from "@mui/icons-material/ManageSearchOutlined";
 import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
 import React, { useState } from "react";
@@ -8,8 +7,14 @@ import AdvanceSearch from "../../../Components/AdvanceSearch/AdvanceSearch";
 import SavedQuery from "../../../Components/SavedQuery/SavedQuery";
 
 function SideMenu() {
+  /**
+   * SideMenu component is for user interface element for side navigation menu
+   * it proviedes a convenient navigation menufor useres to access diffrent functionalities
+   */
+  //Defined variables - start
   const [advanceSearch, setAdvanceSearch] = useState(false);
   const [savedQuery, setSavedQuery] = useState(false);
+  //Defined variables - end
   return (
     <Box
       sx={{
@@ -17,10 +22,11 @@ function SideMenu() {
         width: "13vw",
         display: "flex",
         alignItems: "center",
-        justifyItems: "center",
+        justifyContent: "center",
         boxShadow:
           "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
         position: "relative",
+        bgcolor: "white",
       }}
     >
       <Box
@@ -50,6 +56,10 @@ function SideMenu() {
           <HomeOutlinedIcon
             sx={{ fontSize: { xs: "25px", sm: "30px", md: "35px" } }}
             varient="outlined"
+            onClick={() => {
+              //reload the page when home icon is clicked
+              window.location.reload();
+            }}
           />
           <Box
             sx={{
@@ -82,43 +92,8 @@ function SideMenu() {
               bgcolor: "#F5F7F8",
             },
           }}
-        >
-          <SearchOutlinedIcon
-            sx={{ fontSize: { xs: "25px", sm: "30px", md: "35px" } }}
-            varient="outlined"
-          />
-          <Box
-            sx={{
-              width: "12vw",
-              height: "1rem",
-              textOverflow: "ellipsis",
-              overflow: "hidden",
-              whiteSpace: "nowrap",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <Typography
-              sx={{ fontSize: { xs: "8px", sm: "12px", md: "15px" } }}
-            >
-              Search
-            </Typography>
-          </Box>
-        </Box>
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            flexDirection: "column",
-            height: "10vh",
-            width: "13vw",
-            "&:hover": {
-              bgcolor: "#F5F7F8",
-            },
-          }}
           onClick={() => {
+            //toggle the visibility of 'advanceSearch' component
             setAdvanceSearch(!advanceSearch);
             setSavedQuery(false);
           }}
@@ -174,7 +149,7 @@ function SideMenu() {
               alignItems: "center",
               justifyContent: "center",
             }}
-            onClick={() => {
+            onClick={() => {//toggles the visibility of the 'savedQuery' component
               setSavedQuery(!savedQuery);
               setAdvanceSearch(false);
             }}
@@ -191,9 +166,9 @@ function SideMenu() {
         <Box
           sx={{
             position: "absolute",
-            top: "5rem",
+            top: "4rem",
             left: { xs: "5rem", sm: "8rem", md: "12rem" },
-            zIndex:"999"
+            zIndex: "999",
           }}
         >
           <AdvanceSearch />
@@ -205,9 +180,9 @@ function SideMenu() {
         <Box
           sx={{
             position: "absolute",
-            top: "17rem",
+            top: "10rem",
             left: { xs: "5rem", sm: "8rem", md: "12rem" },
-            zIndex:"999"
+            zIndex: "999",
           }}
         >
           <SavedQuery />

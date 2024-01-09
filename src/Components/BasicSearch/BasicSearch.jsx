@@ -24,6 +24,10 @@ const arrowArray = [
 ];
 
 function BasicSearch() {
+  /**
+   * BasicSearch is used for basic searches
+   */
+  //Defined variables - start
   const dispatch = useDispatch();
   const paginationValues = useSelector((state) => state.data.skipAndLimit);
   console.log(paginationValues);
@@ -41,6 +45,12 @@ function BasicSearch() {
   });
   const [arrowUpKey, setArrowUpKey] = useState(arrowArray);
   const [arrowDownKey, setArrowDownKey] = useState(arrowArray);
+  //Defined variables - end
+  /**
+   *handleForm is a function that takes @param event as parameter
+   *it updates state of form using 'setBasicForm' function
+   *also it sets 'skip' and limit in the form state using values from a variable called 'paginationVales'
+   */
   const handleForm = (event) => {
     setClear(true);
     setBasicForm((prevValue) => ({
@@ -62,6 +72,9 @@ function BasicSearch() {
       instance: "",
     });
   };
+  /**
+   the useEffect will rerender every time whenever the value of 'paginationValues' changes
+   */
   useEffect(() => {
     console.log("aSedasd", paginationValues);
   }, [paginationValues]);
@@ -94,6 +107,7 @@ function BasicSearch() {
             <Typography
               sx={{ color: "white" }}
               onClick={() => {
+                //reset arrow colors for Patient Name sorting on lebel click
                 setArrowUpKey({ patientName: "black" });
                 setArrowDownKey({ patientName: "black" });
               }}
@@ -105,13 +119,14 @@ function BasicSearch() {
                 fontSize="xs"
                 sx={{ color: arrowUpKey.patientName }}
                 onClick={() => {
+                  //handle ascending sorting for Patient Name on up arrow click
                   setArrowUpKey({
                     patientName: "cyan",
                   });
                   setArrowDownKey({
                     patientName: "black",
                   });
-                  dispatch(sortingAscending("patientName"));
+                  dispatch(sortingAscending("givenName"));
                 }}
               ></KeyboardArrowUp>
               <KeyboardArrowDown
@@ -120,7 +135,7 @@ function BasicSearch() {
                   mt: "-7px",
                   color: arrowDownKey.patientName,
                 }}
-                onClick={() => {
+                onClick={() => {//handle descending sorting for Patient Name on down arrow click
                   setArrowUpKey({
                     patientName: "black",
                   });
@@ -168,6 +183,7 @@ function BasicSearch() {
                   color: arrowDownKey.patientMrn,
                 }}
                 onClick={() => {
+                  //handle ascending sorting for MRN on up arrow click
                   setArrowUpKey({
                     patientMrn: "black",
                   });
@@ -218,12 +234,13 @@ function BasicSearch() {
 
         <Box className="form-element">
           <Box className="form_children">
-            <Typography sx={{ color: "white" }}>Discription</Typography>
+            <Typography sx={{ color: "white" }}>Description</Typography>
             <Box className="arrow_keys">
               <KeyboardArrowUp
                 fontSize="xs"
                 sx={{ color: arrowUpKey.description }}
                 onClick={() => {
+                  //handle ascending sorting for Description on up arrow click
                   setArrowUpKey({
                     description: "cyan",
                   });
@@ -240,6 +257,7 @@ function BasicSearch() {
                   color: arrowDownKey.description,
                 }}
                 onClick={() => {
+                  //handle descending sorting for Description on down arrow click
                   setArrowUpKey({
                     description: "black",
                   });
@@ -271,6 +289,7 @@ function BasicSearch() {
                 fontSize="xs"
                 sx={{ color: arrowUpKey.modality }}
                 onClick={() => {
+                  //handle ascending sorting for Modality on up arrow click
                   setArrowUpKey({
                     modality: "cyan",
                   });
@@ -287,6 +306,7 @@ function BasicSearch() {
                   color: arrowDownKey.modality,
                 }}
                 onClick={() => {
+                  //handle descending sorting for Modality on down arrow click
                   setArrowUpKey({
                     modality: "black",
                   });
@@ -318,6 +338,7 @@ function BasicSearch() {
                 fontSize="xs"
                 sx={{ color: arrowUpKey.accession }}
                 onClick={() => {
+                  //handle ascending sorting for Accession on up arrow click
                   setArrowUpKey({
                     accession: "cyan",
                   });
@@ -334,6 +355,7 @@ function BasicSearch() {
                   color: arrowDownKey.accession,
                 }}
                 onClick={() => {
+                  //handle descending sorting for Accession on down arrow click
                   setArrowUpKey({
                     accession: "black",
                   });
@@ -376,6 +398,7 @@ function BasicSearch() {
               borderColor: "black",
             }}
             onClick={() => {
+              //clear form and reset filter state on clear filter button click
               clearForm();
               setClear(false);
             }}
@@ -396,7 +419,7 @@ function BasicSearch() {
         <Button
           variant="contained"
           sx={{
-            bgcolor: "#E0F4FF",
+            bgcolor: "white",
             color: "black",
             "&:hover": {
               backgroundColor: "#164863",
@@ -404,6 +427,7 @@ function BasicSearch() {
             },
           }}
           onClick={() => {
+            //this onClick trigger a search with the current form data on search button click
             dispatch(searchData(basicForm));
           }}
         >

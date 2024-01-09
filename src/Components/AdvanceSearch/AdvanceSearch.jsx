@@ -13,8 +13,12 @@ import {
 } from "../../Store/ApiDataSlice";
 
 function AdvanceSearch() {
-  // const name = useSelector((state) => state.data.modalityData);
-  const name = ["sdf", "sdf"];
+  /**
+   * AdvanceSearch is used for complex searches
+   */
+  //Defined variables - start
+  const name = useSelector((state) => state.data.modalityData);
+
   const paginationValues = useSelector((state) => state.data.skipAndLimit);
   const dispatch = useDispatch();
   const [query, setQuery] = useState(false);
@@ -32,6 +36,13 @@ function AdvanceSearch() {
     accession: "",
     instance: "",
   });
+  //Defined variables - end
+
+  /**
+   *handleForm is a function that takes @param event as parameter
+   *it updates state of form using 'setFormDetails' function
+   *also it sets 'skip' and limit in the form state using values from a variable called 'paginationVales'
+   */
 
   const handleForm = (event) => {
     setFormDetails((prevValue) => ({
@@ -41,6 +52,11 @@ function AdvanceSearch() {
       limit: paginationValues.limit,
     }));
   };
+  /**
+   *updates the state of 'modalityType'and the 'formDetails.modality when the selected modality value change'
+   *@param event is used to get the value selected by the user
+   *it handles both single and multiple modality selection
+   */
   const handleChange = (event) => {
     const {
       target: { value },
@@ -53,7 +69,10 @@ function AdvanceSearch() {
       limit: paginationValues.limit,
     }));
   };
-
+  /**
+   *reset the state of the form to its initial values
+   *clearing the input fields
+   */
   const clearForm = () => {
     setFormDetails({
       patientName: "",
@@ -97,6 +116,10 @@ function AdvanceSearch() {
       },
     },
   };
+  /**
+   *this useEffect hook is triggered when the component mounts
+   *it dispatches the 'getModality' action,which fetches modality data and update redux store
+   */
   useEffect(() => {
     dispatch(getModality());
     console.log("pagValues", paginationValues);
@@ -126,9 +149,10 @@ function AdvanceSearch() {
           borderRadius: "5px",
           boxShadow: "5",
           gap: "1rem",
+          p: "10px",
         }}
       >
-        <Box className="form_elements" sx={{ mt: "10px" }}>
+        <Box className="form_elements">
           <Typography>Patient Name:</Typography>
           <Input
             name="patientName"
@@ -303,6 +327,7 @@ function AdvanceSearch() {
               <Button
                 variant="contained"
                 onClick={() => {
+                  //when save button clicked it indicates that user wants to save the query
                   setQuery(true);
                 }}
               >
@@ -317,6 +342,7 @@ function AdvanceSearch() {
           <Button
             variant="contained"
             onClick={() => {
+              //it triggers the 'searchData'action, passing the current form details as parameters to initialize search
               dispatch(searchData(formDetails));
             }}
           >
@@ -338,6 +364,7 @@ function AdvanceSearch() {
             ></Input>
             <Button
               onClick={() => {
+                //set the state variable 'query' to 'false', cancel the save operation and clear the form
                 setQuery(false);
                 clearForm();
               }}
@@ -347,6 +374,7 @@ function AdvanceSearch() {
             </Button>
             <Button
               onClick={() => {
+                //after entering the query name,the 'save' button dispatches 'savequeryData'sets query to 'false' and clears the form
                 setQuery(false);
                 dispatch(saveQueryData(formDetails));
                 clearForm();

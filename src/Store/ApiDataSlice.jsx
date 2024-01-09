@@ -11,7 +11,7 @@ const initialState = {
     limit: 5,
   },
   advanceSearchData: [],
-  personDetailsLength:[],
+  personDetailsLength: [],
   loading: false,
   error: null,
 };
@@ -30,7 +30,6 @@ export const getDetails = createAsyncThunk("getDeatails", async (value) => {
   return response;
 });
 export const getLength = createAsyncThunk("getLength", async () => {
-
   const response = await fetch(`${apiEndPoints.dicomApi}`)
     .then((data) => data.json())
     .then((results) => results)
@@ -127,12 +126,14 @@ const apiData = createSlice({
   reducers: {
     sortingAscending: (state, action) => {
       state.personDetails = state.personDetails.sort((a, b) =>
-        a.studies[action.payload].localeCompare(b.studies[action.payload])
+        a.patientName[action.payload].localeCompare(
+          b.patientName[action.payload]
+        )
       );
     },
     sortingDescending: (state, action) => {
       state.personDetails = state.personDetails.sort((a, b) =>
-        b.studies[action.payload].localeCompare(a.studies[action.payload])
+        b.study[action.payload].localeCompare(a.study[action.payload])
       );
     },
     pagiantionValues: (state, action) => {
