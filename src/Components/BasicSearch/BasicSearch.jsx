@@ -111,7 +111,7 @@ function BasicSearch() {
                   setArrowDownKey({
                     patientName: "black",
                   });
-                  dispatch(sortingAscending("patientName"));
+                  dispatch(sortingAscending("givenName"));
                 }}
               ></KeyboardArrowUp>
               <KeyboardArrowDown
@@ -218,7 +218,7 @@ function BasicSearch() {
 
         <Box className="form-element">
           <Box className="form_children">
-            <Typography sx={{ color: "white" }}>Discription</Typography>
+            <Typography sx={{ color: "white" }}>Description</Typography>
             <Box className="arrow_keys">
               <KeyboardArrowUp
                 fontSize="xs"

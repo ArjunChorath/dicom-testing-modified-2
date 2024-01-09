@@ -1,7 +1,7 @@
 const usedColors={
     header:"rgb(104, 192, 230)",
     main:"rgb(104, 192, 230)",
-    table:"#0080b6",
+    table:"rgb(0, 128, 182)",
     body:"#ffffff",
 }
 

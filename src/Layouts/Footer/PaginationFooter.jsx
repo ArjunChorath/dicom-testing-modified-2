@@ -2,12 +2,14 @@ import { Box, Button, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import {
   getDetails,
   getLength,
   pagiantionValues,
 } from "../../Store/ApiDataSlice";
 import { useDispatch, useSelector } from "react-redux";
+import "./PaginationFooter.css";
 
 const calculateTotalPages = (totalItems, limit) => {
   return Math.ceil(totalItems / limit);
@@ -31,7 +33,7 @@ function PaginationFooter() {
       style: {
         backgroundColor: "#164863",
         color: "white",
-        maxHeight: "9rem",
+        height: "9rem",
         minWidth: 120,
         fontSize: 10,
         marginTop: "2px",
@@ -69,31 +71,23 @@ function PaginationFooter() {
       }));
     }
   };
-  const handleFirstPage=()=>{
+  const handleFirstPage = () => {
     setSelect((prevValue) => ({
       ...prevValue,
       skip: 0,
     }));
-  }
+  };
   return (
     <Box
       sx={{
-        display: "flex",
+        display: { xs: "none", lg: "flex" },
         alignItems: "center",
         justifyContent: "center",
         width: "100vw",
         height: "5vw",
       }}
     >
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          width: "65vw",
-          maxHeight: "10vw",
-        }}
-      >
+      <Box className="child-box">
         <Box
           sx={{
             display: "flex",
@@ -125,8 +119,7 @@ function PaginationFooter() {
             <MenuItem value={25}>25</MenuItem>
             <MenuItem value={50}>50</MenuItem>
           </Select>
-
-          <Typography sx={{ml:"10px"}}>Results per Page</Typography>
+          <Typography sx={{ ml: "10px" }}>Results per Page</Typography>
         </Box>
         <Box
           sx={{
@@ -138,8 +131,8 @@ function PaginationFooter() {
           }}
         >
           <Typography>{`Page ${Math.ceil(
-            select.skip / select.limit + 1)
-          }/${totalPages}`}</Typography>
+            select.skip / select.limit + 1
+          )}/${totalPages}`}</Typography>
           <Box
             sx={{
               display: "flex",
@@ -150,8 +143,11 @@ function PaginationFooter() {
               borderRadius: "5px",
             }}
           >
-            <Button size="small" sx={{ borderRight: "1px solid black" }} onClick={handleFirstPage}>
-              {"<<"}
+            <Button
+              sx={{ borderRight: "1px solid black", fontSize: "10px" }}
+              onClick={handleFirstPage}
+            >
+              <HomeOutlinedIcon />
             </Button>
             <Button
               size="small"

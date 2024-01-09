@@ -8,13 +8,10 @@ import { useSelector } from "react-redux";
 function ResponsivePersonList() {
   const personList = useSelector((state) => state.data.personDetails);
   return (
-    <Box sx={{width:"100vw",height:"100vh",overflow:"auto"}}>
-    
-      <Grid
-        container
-        spacing={2}
-       sx={{width:"87vw",ml:"12vw"}}
-      >
+    <Box
+      sx={{ width: "100vw", maxHeight: "90vh", overflow: "auto", mt: "10px" }}
+    >
+      <Grid container spacing={2} sx={{ width: "85vw", ml: "12vw" }}>
         {personList.map((value) => (
           <ResponsiveNestedLlist key={value.id} value={value} />
         ))}

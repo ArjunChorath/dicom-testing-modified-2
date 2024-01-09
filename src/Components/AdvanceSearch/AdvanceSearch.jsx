@@ -13,8 +13,8 @@ import {
 } from "../../Store/ApiDataSlice";
 
 function AdvanceSearch() {
-  // const name = useSelector((state) => state.data.modalityData);
-  const name = ["sdf", "sdf"];
+  const name = useSelector((state) => state.data.modalityData);
+  // const name = ["sdf", "sdf"];
   const paginationValues = useSelector((state) => state.data.skipAndLimit);
   const dispatch = useDispatch();
   const [query, setQuery] = useState(false);
@@ -126,9 +126,10 @@ function AdvanceSearch() {
           borderRadius: "5px",
           boxShadow: "5",
           gap: "1rem",
+          p:"10px"
         }}
       >
-        <Box className="form_elements" sx={{ mt: "10px" }}>
+        <Box className="form_elements" >
           <Typography>Patient Name:</Typography>
           <Input
             name="patientName"

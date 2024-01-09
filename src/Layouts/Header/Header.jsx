@@ -5,9 +5,11 @@ import { ReactComponent as AppLogo } from "../../Assets/Images/appLogo.svg";
 import usedColors from "../../Assets/Colores/Colores";
 import "./Header.css";
 import { useState } from "react";
+import Keycloak from "keycloak-js";
 
 function Header() {
   const [menu, setMenu] = useState(false);
+  // console.log(Keycloak.token)
   return (
     <Box
       sx={{
