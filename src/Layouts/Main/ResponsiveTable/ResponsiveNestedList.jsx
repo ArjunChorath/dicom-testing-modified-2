@@ -6,19 +6,26 @@ import React, { useState } from "react";
 import "./ResponsiveNestedList.css";
 import usedColors from "../../../Assets/Colores/Colores";
 
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: usedColors.table,
-  color: "white",
-}));
-const StyledText = styled(Box)({
-  display: "flex",
-  flexDirection: "row",
-  justifyContent: "flex-start",
-  alignItems: "center",
-});
+
 function ResponsiveNestedLlist({ value }) {
+  /**
+   * ResponsiveNestedLlist used to rendering a table row that provides details about a person's study in responsive nestedlist
+   */
+  //Defined variables - start
   const [nestedBox, setNestedBox] = useState(false);
+
   const [viewer, setViewer] = useState(false);
+  const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: usedColors.table,
+    color: "white",
+  }));
+  const StyledText = styled(Box)({
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "center",
+  });
+  //Defined variables - end
   return (
     <Grid item xs={12} sm={6} md={4} sx={{}}>
       <Item
@@ -102,7 +109,7 @@ function ResponsiveNestedLlist({ value }) {
                 textDecoration: "underline",
                 color: "black",
               }}
-              onClick={() => {
+              onClick={() => {//toggle visibility of nested content
                 setNestedBox(!nestedBox);
               }}
             >
@@ -191,7 +198,7 @@ function ResponsiveNestedLlist({ value }) {
                         textDecoration: "underline",
                         color: "skyblue",
                       }}
-                      onClick={() => {
+                      onClick={() => {//used to toggle images in the viewer
                         setViewer(!viewer);
                       }}
                     >

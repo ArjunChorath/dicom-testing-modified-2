@@ -10,12 +10,19 @@ import {
 } from "../../Store/ApiDataSlice";
 
 const calculateTotalPages = (totalItems, limit) => {
+  //function to calculate total number of pages
   return Math.ceil(totalItems / limit);
 };
 
 function ResponsivePagination() {
+  /**
+   * ResponsivePagination for Responsive Pagination purpous
+   * *used for rendering particular number of elements in the display
+   */
+  //Defined variables - start
   const dispatch = useDispatch();
   const LengthOfArray = useSelector(
+    //selecting the length of 'personDetails' array from the redux store
     (state) => state.data.personDetailsLength.length
   );
   const [select, setSelect] = useState({
@@ -23,7 +30,12 @@ function ResponsivePagination() {
     limit: 5,
   });
   const [totalPages, setTotalPages] = useState(1);
-
+  //Defined variables - end
+  /**
+   *this useEffect responsible for fetching length of data from redux store
+   *dispatches an action 'getDetails' to fetch data based on 'select' object from redux store
+   *dispatches an action to update pagination related values in redux store
+   */
   useEffect(() => {
     dispatch(getLength());
     dispatch(getDetails(select));
@@ -31,7 +43,9 @@ function ResponsivePagination() {
     const newTotalPages = calculateTotalPages(LengthOfArray, select.limit);
     setTotalPages(newTotalPages);
   }, [dispatch, select, LengthOfArray]);
-
+  /**
+   * handleNext function is an event handler responsible for advancing to the next page of data
+   */
   const handleNext = () => {
     const nextSkip = select.skip + select.limit;
 
@@ -42,7 +56,9 @@ function ResponsivePagination() {
       }));
     }
   };
-
+  /**
+   * handleBack function is an event handler responsible for navigating to the previous page of data
+   */
   const handleBack = () => {
     const prevSkip = select.skip - select.limit;
 
@@ -53,6 +69,9 @@ function ResponsivePagination() {
       }));
     }
   };
+  /**
+   * handleBack function is an event handler responsible for navigating to the First page of data
+   */
   const handleFirstPage = () => {
     setSelect((prevValue) => ({
       ...prevValue,
@@ -68,7 +87,6 @@ function ResponsivePagination() {
           justifyContent: "center",
           alignItems: "center",
           bgcolor: "white",
-          
         }}
       >
         <Box className="header">

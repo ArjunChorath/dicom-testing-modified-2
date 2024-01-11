@@ -5,6 +5,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { searchData } from "../../Store/ApiDataSlice";
 
 function ResponsiveSearch() {
+  /**
+   *ResponsiveSearch used for handling responsive search input and button functionalities
+   */
+  //Defined variables - start
   const dispatch = useDispatch();
   const paginationValues = useSelector((state) => state.data.skipAndLimit);
   const [basicForm, setBasicForm] = useState({
@@ -18,6 +22,12 @@ function ResponsiveSearch() {
     skip: 0,
     limit: 5,
   });
+  //Defined variables - end
+  /**
+   *handleForm is a function that takes @param event as parameter
+   *it updates state of form using 'setBasicForm' function
+   *also it sets 'skip' and limit in the form state using values from a variable called 'paginationVales'
+   */
   const handleForm = (event) => {
     setBasicForm((prevValue) => ({
       ...prevValue,
@@ -27,6 +37,9 @@ function ResponsiveSearch() {
     }));
     console.log(basicForm.patientName);
   };
+  /**
+   the useEffect will rerender every time whenever the value of 'paginationValues' changes
+   */
   useEffect(() => {
     console.log("aSedasd", paginationValues);
   }, [paginationValues]);
@@ -93,6 +106,7 @@ function ResponsiveSearch() {
               "linear-gradient(90deg, rgba(1,180,228,1) 0%, rgba(144,206,161,1) 100%)",
           }}
           onClick={() => {
+            //this onClick trigger a search with the current form data on search button click
             dispatch(searchData(basicForm));
           }}
         >

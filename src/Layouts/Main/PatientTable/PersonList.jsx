@@ -6,18 +6,24 @@ import { Box } from "@mui/material";
 
 
 function PersonList() {
-  const personList = useSelector((state) => state.data.personDetails);
-  useEffect(() => {}, [personList]);
+  /**
+  *PersonList Component used for rendering table of person's details
+   */
+
+  //Defined variables - start
+  const personList = useSelector((state) => state.data.personDetails); //uses the useEffect hook to retrieve the 'personDetails' from the redux store
+  useEffect(() => {}, [personList]); //this useEffect used rerender the component whenever the value of 'personList' changes
+  //Defined variables - end
   return (
     <Box
       sx={{
         height: "50vh",
         width: "100vw",
-        display: {xs:"none",sm:"none",md:"none",lg:"flex",xl:"flex"},
+        display: { xs: "none", sm: "none", md: "none", lg: "flex", xl: "flex" },
         alignItems: "center",
         flexDirection: "column",
         mt: "5px",
-        overflow:"auto"
+        overflow: "auto",
       }}
     >
       <Box
@@ -27,8 +33,7 @@ function PersonList() {
           display: "flex",
           alignItems: "start",
           justifyContent: "center",
-          bgcolor:"blue",
-          
+          bgcolor: "blue",
         }}
       >
         <Table size="small">
