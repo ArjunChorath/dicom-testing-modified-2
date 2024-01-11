@@ -18,7 +18,8 @@ const initialState = {
 
 export const getDetails = createAsyncThunk("getDeatails", async (value) => {
   console.log(value);
-
+ try {
+    console.log(value);
   const response = await fetch(
     `${apiEndPoints.dicomApi}?skip=${value.skip}&limit=${value.limit}`
   )
@@ -28,97 +29,131 @@ export const getDetails = createAsyncThunk("getDeatails", async (value) => {
       return error;
     });
   return response;
+   } catch (error) {
+    console.error("Error in getDetails:", error);
+    throw error;
+   }
 });
 export const getLength = createAsyncThunk("getLength", async () => {
-  const response = await fetch(`${apiEndPoints.dicomApi}`)
-    .then((data) => data.json())
-    .then((results) => results)
-    .catch((error) => {
-      return error;
-    });
-  return response;
+   try {
+     const response = await fetch(`${apiEndPoints.dicomApi}`)
+       .then((data) => data.json())
+       .then((results) => results)
+       .catch((error) => {
+         return error;
+       });
+     return response;
+   } catch (error) {
+     console.error("Error in getLength:", error);
+     throw error;
+   }
 });
 export const getModality = createAsyncThunk("getModality", async () => {
-  const response = await fetch("http://10.30.2.208:8193/api/v1/modality")
-    .then((data) => data.json())
-    .then((results) => results[0].value)
-    .catch((error) => {
-      return error;
-    });
-  return response;
-});
-export const searchData = createAsyncThunk("searchData", async (value) => {
-  let searchQuery = "";
-  console.log(value);
-  if (value.patientName !== "") {
-    searchQuery += `patientName=${value.patientName}&`;
-  }
-  if (value.patientMrn !== "") {
-    searchQuery += `patientMrn=${value.patientMrn}&`;
-  }
-  if (value.studyDate !== "") {
-    searchQuery += `studyDate=${value.studyDate}&`;
-  }
-  if (value.description !== "") {
-    searchQuery += `description=${value.description}&`;
-  }
-  if (value.modality !== "") {
-    searchQuery += `modality=${value.modality}&`;
-  }
-  if (value.accession !== "") {
-    searchQuery += `accession=${value.accession}&`;
-  }
-  if (value.instance !== "") {
-    searchQuery += `instance=${value.instance}&`;
-  }
-  if (value.skip) {
-    searchQuery += `skip=${value.skip}&`;
-  }
-  if (value.limit) {
-    searchQuery += `limit=${value.limit}&`;
-  }
-
-  const response = await fetch(
-    `http://10.30.2.208:8193/qido/studies?${searchQuery}`
-  )
-    .then((data) => data.json())
-    .then((results) => results)
-    .catch((error) => {
-      return error;
-    });
-  return response;
-});
-export const savedQueryDatas = createAsyncThunk("savedQueryDatas", async () => {
-  const response = await fetch("http://10.30.2.208:8193/api/v1/query")
-    .then((data) => data.json())
-    .then((results) => results)
-    .catch((error) => {
-      return error;
-    });
-  return response;
-});
-export const saveQueryData = createAsyncThunk(
-  "saveQueryData",
-  async (queryData) => {
-    const response = await axios
-      .post("http://10.30.2.208:8193/api/v1/query", queryData)
-      .then((results) => results.data)
+  try {
+    const response = await fetch("http://10.30.2.208:8193/api/v1/modality")
+      .then((data) => data.json())
+      .then((results) => results[0].value)
       .catch((error) => {
         return error;
       });
     return response;
+  } catch (error) {
+    console.error("Error in getModality:", error);
+    throw error;
+  }
+});
+export const searchData = createAsyncThunk("searchData", async (value) => {
+  try {
+    let searchQuery = "";
+    console.log(value);
+    if (value.patientName !== "") {
+      searchQuery += `patientName=${value.patientName}&`;
+    }
+    if (value.patientMrn !== "") {
+      searchQuery += `patientMrn=${value.patientMrn}&`;
+    }
+    if (value.studyDate !== "") {
+      searchQuery += `studyDate=${value.studyDate}&`;
+    }
+    if (value.description !== "") {
+      searchQuery += `description=${value.description}&`;
+    }
+    if (value.modality !== "") {
+      searchQuery += `modality=${value.modality}&`;
+    }
+    if (value.accession !== "") {
+      searchQuery += `accession=${value.accession}&`;
+    }
+    if (value.instance !== "") {
+      searchQuery += `instance=${value.instance}&`;
+    }
+    if (value.skip) {
+      searchQuery += `skip=${value.skip}&`;
+    }
+    if (value.limit) {
+      searchQuery += `limit=${value.limit}&`;
+    }
+
+    const response = await fetch(
+      `http://10.30.2.208:8193/qido/studies?${searchQuery}`
+    )
+      .then((data) => data.json())
+      .then((results) => results)
+      .catch((error) => {
+        return error;
+      });
+    return response;
+  } catch (error) {
+    console.error("Error in searchData:", error);
+    throw error;
+  }
+});
+export const savedQueryDatas = createAsyncThunk("savedQueryDatas", async () => {
+   try {
+     const response = await fetch("http://10.30.2.208:8193/api/v1/query")
+       .then((data) => data.json())
+       .then((results) => results)
+       .catch((error) => {
+         return error;
+       });
+     return response;
+   } catch (error) {
+     console.error("Error in savedQueryDatas:", error);
+     throw error;
+   }
+});
+export const saveQueryData = createAsyncThunk(
+  "saveQueryData",
+  async (queryData) => {
+      try {
+        const response = await axios
+          .post("http://10.30.2.208:8193/api/v1/query", queryData)
+          .then((results) => results.data)
+          .catch((error) => {
+            return error;
+          });
+        return response;
+      } catch (error) {
+        console.error("Error in saveQueryData:", error);
+        throw error;
+      }
   }
 );
 export const deleteQuery = createAsyncThunk("deleteQuery", async (value) => {
-  console.log(value);
-  const response = await axios
-    .delete(`http://10.30.2.208:8193/api/v1/query/${value}`)
-    .then((results) => results.data)
-    .catch((error) => {
-      return error;
-    });
-  console.log(response);
-  return response;
+   try {
+     console.log(value);
+     const response = await axios
+       .delete(`http://10.30.2.208:8193/api/v1/query/${value}`)
+       .then((results) => results.data)
+       .catch((error) => {
+         return error;
+       });
+     console.log(response);
+     return response;
+   } catch (error) {
+     console.error("Error in deleteQuery:", error);
+     throw error;
+   }
 });
 const apiData = createSlice({
   name: "dicom",
