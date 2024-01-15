@@ -1,8 +1,16 @@
+.table-body{
+    min-height: 4vh;
+    min-width: 65vw;
+    display: flex;
+    align-items: center;
+    background-color: black;
+    justify-content: center;
+    flex-direction: column;
+}
 .personlist:hover{
     background-color: #2376a3;   
 } 
 .imagesize{
-
     height: 96px;
     width: 96px;
     border: 1px solid white;

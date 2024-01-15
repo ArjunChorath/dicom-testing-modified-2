@@ -1,0 +1,10 @@
+.maindiv {
+  width: 100vw;
+  height: 20vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  border-radius: 5px;
+  margin-top: 1px;
+}

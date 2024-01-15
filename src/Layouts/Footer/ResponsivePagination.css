@@ -1,0 +1,28 @@
+.header {
+  display: none;
+}
+
+.rightSide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 30vw;
+}
+
+
+@media only screen and (max-width: 1199px) {
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgb(146, 215, 245);
+    width: 75vw;
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-top: 15px;
+    font-weight: bold;
+    font-size: small;
+    margin-left: 10vw;
+  }
+}

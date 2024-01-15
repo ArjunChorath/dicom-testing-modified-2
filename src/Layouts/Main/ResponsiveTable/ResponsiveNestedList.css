@@ -1,0 +1,10 @@
+.first-child {
+  display: flex;
+  flex-direction: row;
+}
+.textbox {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: whitesmoke;
+}

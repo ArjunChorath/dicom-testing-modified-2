@@ -1,19 +1,23 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import apiEndPoints from "../Services/ApiEndPoints/ApiEndPoints";
 import axios from "axios";
+
 const initialState = {
   personDetails: [],
   modalityData: [],
   savedQuarys: [],
-  skipAndLimit: { skip: 0, limit: 5 },
+  skipAndLimit: {
+    skip: 0,
+    limit: 5,
+  },
   advanceSearchData: [],
   personDetailsLength: [],
   loading: false,
   error: null,
 };
-export const getDetails = createAsyncThunk("getDetails", async (value) => {
+
+export const getDetails = createAsyncThunk("getDeatails", async (value) => {
   try {
-    console.log(value);
     const response = await fetch(
       `${apiEndPoints.dicomApi}?skip=${value.skip}&limit=${value.limit}`
     )
@@ -59,7 +63,6 @@ export const getModality = createAsyncThunk("getModality", async () => {
 export const searchData = createAsyncThunk("searchData", async (value) => {
   try {
     let searchQuery = "";
-    console.log(value);
     if (value.patientName !== "") {
       searchQuery += `patientName=${value.patientName}&`;
     }
@@ -87,8 +90,9 @@ export const searchData = createAsyncThunk("searchData", async (value) => {
     if (value.limit) {
       searchQuery += `limit=${value.limit}&`;
     }
+
     const response = await fetch(
-      `http://10.30.2.208:8193/GET/qido/studies?${searchQuery}`
+      `http://10.30.2.208:8193/qido/studies?${searchQuery}`
     )
       .then((data) => data.json())
       .then((results) => results)
@@ -134,14 +138,12 @@ export const saveQueryData = createAsyncThunk(
 );
 export const deleteQuery = createAsyncThunk("deleteQuery", async (value) => {
   try {
-    console.log(value);
     const response = await axios
       .delete(`http://10.30.2.208:8193/api/v1/query/${value}`)
       .then((results) => results.data)
       .catch((error) => {
         return error;
       });
-    console.log(response);
     return response;
   } catch (error) {
     console.error("Error in deleteQuery:", error);
@@ -153,14 +155,38 @@ const apiData = createSlice({
   initialState,
   reducers: {
     sortingAscending: (state, action) => {
-      state.personDetails = state.personDetails.sort((a, b) =>
-        a.studies[action.payload].localeCompare(b.studies[action.payload])
-      );
+      if (action.payload === "givenName") {
+        state.personDetails = state.personDetails.sort((a, b) =>
+          a.patientName[action.payload].localeCompare(
+            b.patientName[action.payload]
+          )
+        );
+      } else if (action.payload === "patientMrn") {
+        state.personDetails = state.personDetails.sort((a, b) =>
+          a[action.payload].localeCompare(b[action.payload])
+        );
+      } else {
+        state.personDetails = state.personDetails.sort((a, b) =>
+          a.study[action.payload].localeCompare(b.study[action.payload])
+        );
+      }
     },
     sortingDescending: (state, action) => {
-      state.personDetails = state.personDetails.sort((a, b) =>
-        b.studies[action.payload].localeCompare(a.studies[action.payload])
-      );
+      if (action.payload === "givenName") {
+        state.personDetails = state.personDetails.sort((a, b) =>
+          b.patientName[action.payload].localeCompare(
+            a.patientName[action.payload]
+          )
+        );
+      } else if (action.payload === "patientMrn") {
+        state.personDetails = state.personDetails.sort((a, b) =>
+          b[action.payload].localeCompare(a[action.payload])
+        );
+      } else {
+        state.personDetails = state.personDetails.sort((a, b) =>
+          b.study[action.payload].localeCompare(a.study[action.payload])
+        );
+      }
     },
     pagiantionValues: (state, action) => {
       state.skipAndLimit.skip = action.payload.skip;
@@ -177,18 +203,6 @@ const apiData = createSlice({
     });
     builder.addCase(getDetails.rejected, (state, action) => {
       state.error = action.payload;
-      console.error("getDetails rejected:", action.payload);
-    });
-    builder.addCase(getLength.pending, (state) => {
-      state.loading = true;
-    });
-    builder.addCase(getLength.fulfilled, (state, action) => {
-      state.personDetailsLength = action.payload;
-      state.loading = false;
-    });
-    builder.addCase(getLength.rejected, (state, action) => {
-      state.error = action.payload;
-      console.error("getLength rejected:", action.payload);
     });
     builder.addCase(getModality.pending, (state) => {
       state.loading = true;
@@ -199,7 +213,6 @@ const apiData = createSlice({
     });
     builder.addCase(getModality.rejected, (state, action) => {
       state.error = action.payload;
-      console.error("getModality rejected:", action.payload);
     });
     builder.addCase(searchData.pending, (state) => {
       state.loading = true;
@@ -210,7 +223,6 @@ const apiData = createSlice({
     });
     builder.addCase(searchData.rejected, (state, action) => {
       state.error = action.payload;
-      console.error("searchData rejected:", action.payload);
     });
     builder.addCase(savedQueryDatas.pending, (state) => {
       state.loading = true;
@@ -221,7 +233,6 @@ const apiData = createSlice({
     });
     builder.addCase(savedQueryDatas.rejected, (state, action) => {
       state.error = action.payload;
-      console.error("savedQueryDatas rejected:", action.payload);
     });
     builder.addCase(saveQueryData.pending, (state) => {
       state.loading = true;
@@ -232,7 +243,6 @@ const apiData = createSlice({
     });
     builder.addCase(saveQueryData.rejected, (state, action) => {
       state.error = action.payload;
-      console.error("saveQueryData rejected:", action.payload);
     });
     builder.addCase(deleteQuery.pending, (state) => {
       state.loading = true;
@@ -243,10 +253,20 @@ const apiData = createSlice({
     });
     builder.addCase(deleteQuery.rejected, (state, action) => {
       state.error = action.payload;
-      console.error("deleteQuery rejected:", action.payload);
+    });
+    builder.addCase(getLength.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(getLength.fulfilled, (state, action) => {
+      state.personDetailsLength = action.payload;
+      state.loading = false;
+    });
+    builder.addCase(getLength.rejected, (state, action) => {
+      state.error = action.payload;
     });
   },
 });
+
 export const { sortingAscending, sortingDescending, pagiantionValues } =
   apiData.actions;
 export default apiData.reducer;

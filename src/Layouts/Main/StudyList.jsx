@@ -1,7 +1,6 @@
 import { Box } from "@mui/material";
 import React from "react";
 
-
 function StudyList() {
   /**
    * StudyList for render a section in react application for displaying title 'Study List'
@@ -9,40 +8,27 @@ function StudyList() {
   return (
     <Box
       sx={{
-        width: "100vw",
-        height: "8vh",
+        width: "65vw",
+        height: "4rem",
         display: "flex",
         alignItems: "center",
-        justifyContent: "center",
-        flexDirection: "column",
-        marginTop: "5px",
-        position: "relative",
+        justifyContent: "space-between",
+        flexDirection: "row",
       }}
     >
       <Box
         sx={{
-          width: "65vw",
+          width: "30vw",
           height: "5rem",
           display: "flex",
           alignItems: "center",
-          justifyContent: "space-between",
-          flexDirection: "row",
+          fontSize: "30px",
+          justifyContent: "flex-start",
+          color: "white",
+          fontWeight: "bold",
         }}
       >
-        <Box
-          sx={{
-            width: "30vw",
-            height: "5rem",
-            display: "flex",
-            alignItems: "center",
-            fontSize: "35px",
-            justifyContent: "flex-start",
-            color: "white",
-            fontWeight: "bold",
-          }}
-        >
-          Study List
-        </Box>
+        Study List
       </Box>
     </Box>
   );

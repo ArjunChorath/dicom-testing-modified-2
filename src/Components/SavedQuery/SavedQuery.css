@@ -2,21 +2,24 @@
   color: rgb(180, 17, 17);
 }
 .query:hover {
-  width: 14.2vw;
+  width: 11.2rem;
   height: 4.6vh;
 }
 .main-div {
-  min-width: 15vw;
-  max-height: 30vh;
+  width: 12rem;
+  max-height: 40vh;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   flex-direction: column;
   justify-content: center;
   gap: 1.2rem;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .child-div {
-  max-width: 14vw;
-  height: 20vh;
+  width: 12rem;
+  height: 35vh;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -28,11 +31,10 @@
   align-items: center;
   flex-direction: row;
   justify-content: space-between;
-  min-width: 14vw;
+  width: 11rem;
   height: 4.5vh;
-  border: 1px solid white;
-  border-radius: 7px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 10px;
+  border: 1px solid skyblue;
 }
 .query-child {
   padding-right: 10px;
@@ -42,4 +44,24 @@
   justify-content: space-between;
   max-width: 5vw;
   height: 5vh;
+}
+.icondiv {
+  padding-right: 10p;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  max-width: 5vw;
+  height: 5vh;
+}
+
+@media only screen and (min-width: 1200px) {
+  .main-div {
+    box-shadow: none;
+  }
+  .query {
+    border: none;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    width: 12rem;
+  }
 }

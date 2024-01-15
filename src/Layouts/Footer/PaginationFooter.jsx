@@ -2,14 +2,18 @@ import { Box, Button, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import {
   getDetails,
   getLength,
   pagiantionValues,
 } from "../../Store/ApiDataSlice";
 import { useDispatch, useSelector } from "react-redux";
+import "./PaginationFooter.css";
 
-
+const calculateTotalPages = (totalItems, limit) => {
+  return Math.ceil(totalItems / limit); //function to calculate total number of pages
+};
 
 function PaginationFooter() {
   /**
@@ -29,18 +33,15 @@ function PaginationFooter() {
 
   const [totalPages, setTotalPages] = useState(1);
 
-  const calculateTotalPages = (totalItems, limit) => {
-    return Math.ceil(totalItems / limit); //function to calculate total number of pages
-  };
   const MenuProps = {
     PaperProps: {
       style: {
         backgroundColor: "#164863",
         color: "white",
-        maxHeight: "9rem",
+        height: "9rem",
         minWidth: 120,
         fontSize: 10,
-        marginTop: "2px",
+        marginTop: "8px",
         border: "1px solid black",
       },
     },
@@ -53,12 +54,11 @@ function PaginationFooter() {
    */
   useEffect(() => {
     dispatch(getLength());
-    dispatch(getDetails(select));
     dispatch(pagiantionValues(select));
+    dispatch(getDetails(select));
     const newTotalPages = calculateTotalPages(LengthOfArray, select.limit);
     setTotalPages(newTotalPages);
   }, [dispatch, select, LengthOfArray]);
-
   /**
    * handleNext function is an event handler responsible for advancing to the next page of data
    */
@@ -97,30 +97,15 @@ function PaginationFooter() {
   return (
     <Box
       sx={{
-        display: "flex",
+        display: { xs: "none", lg: "flex" },
         alignItems: "center",
         justifyContent: "center",
         width: "100vw",
         height: "5vw",
       }}
     >
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          width: "65vw",
-          maxHeight: "10vw",
-        }}
-      >
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            flexDirection: "row",
-          }}
-        >
+      <Box className="child-box">
+        <Box className="selectbox">
           <Select
             value={select.limit}
             onChange={(event) => {
@@ -144,37 +129,18 @@ function PaginationFooter() {
             <MenuItem value={25}>25</MenuItem>
             <MenuItem value={50}>50</MenuItem>
           </Select>
-
-          <Typography>Results per Page</Typography>
+          <Typography sx={{ ml: "10px" }}>Results per Page</Typography>
         </Box>
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            flexDirection: "row",
-            gap: ".5rem",
-          }}
-        >
+        <Box className="rightside">
           <Typography>{`Page ${Math.ceil(
             select.skip / select.limit + 1
           )}/${totalPages}`}</Typography>
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              flexDirection: "row",
-              border: "1px solid black",
-              borderRadius: "5px",
-            }}
-          >
+          <Box className="rightSidechild">
             <Button
-              size="small"
-              sx={{ borderRight: "1px solid black" }}
+              sx={{ borderRight: "1px solid black", fontSize: "10px" }}
               onClick={handleFirstPage}
             >
-              {"<<"}
+              <HomeOutlinedIcon />
             </Button>
             <Button
               size="small"

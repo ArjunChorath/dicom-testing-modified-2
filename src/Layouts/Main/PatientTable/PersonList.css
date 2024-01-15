@@ -1,0 +1,16 @@
+.outer-box{
+    height: 50vh;
+    width: 100vw;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 5px;
+    overflow: auto;
+}
+.inner-box{
+     max-height: 100vh;
+          min-width: 60vw;
+          display: flex;
+          align-items: flex-start;
+          justify-content:center;
+          background-color: blue;
+}

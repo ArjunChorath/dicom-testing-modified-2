@@ -3,40 +3,24 @@ import Table from "@mui/material/Table";
 import { useSelector } from "react-redux";
 import NestedTable from "./NestedTable";
 import { Box } from "@mui/material";
-
-
+import './PersonList.css'
 function PersonList() {
+  /**
+  *PersonList Component used for rendering table of person's details
+   */
   //Defined variables - start
-  const personList = useSelector((state) => state.data.personDetails);//uses the useEffect hook to retrieve the 'personDetails' from the redux store
+  const personList = useSelector((state) => state.data.personDetails); //uses the useEffect hook to retrieve the 'personDetails' from the redux store
   useEffect(() => {}, [personList]); //this useEffect used rerender the component whenever the value of 'personList' changes
   //Defined variables - end
-
   return (
-    <Box
-      sx={{
-        height: "50vh",
-        width: "100vw",
-        overflowX: "hidden",
-        overflowY: "scroll",
-        display: "flex",
-        alignItems: "center",
-        flexDirection: "column",
-        mt: "5px",
-      }}
+    <Box className="outer-box"
+      sx={{ display: { xs: "none", sm: "none", md: "none", lg: "flex", xl: "flex" },}}
     >
-      <Box
-        sx={{
-          maxHeight: "100vh",
-          minWidth: "60vw",
-          display: "flex",
-          alignItems: "start",
-          justifyContent: "center",
-          overflow: "scroll",
-        }}
+      <Box className="inner-box"
       >
         <Table size="small">
           {personList.map((value) => (
-            <NestedTable key={value.studyId} value={value} />
+            <NestedTable key={value.id} value={value} />
           ))}
         </Table>
       </Box>

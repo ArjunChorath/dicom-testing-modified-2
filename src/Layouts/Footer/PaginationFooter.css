@@ -1,0 +1,37 @@
+.child-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 65vw;
+  max-height: 5vw;
+}
+.selectbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
+.rightside {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+.rightSidechild {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+@media only screen and (max-width: 1200px) {
+  .child-box {
+    background-color: rgb(104, 192, 230);
+    border-radius: 5px;
+    padding: 5px;
+    color: white;
+    height: 2rem;
+  }
+}

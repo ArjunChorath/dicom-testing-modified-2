@@ -33,22 +33,20 @@ function NestedTable({ value }) {
     borderRight: "1px solid #DDF2FD",
   });
   //Defined variables - end
-
   return (
-    <TableBody
+    <TableBody className="table-body"
       sx={{
         border: open === true ? "1px solid #5acce6" : "none",
-        minHeight: "4vh",
-        minWidth: "60vw",
-        display: "flex",
-        alignItems: "center",
-        bgcolor: "black",
-        justifyContent: "center",
-        flexDirection: "column",
+       
+        
+       
+       
+       
+        
       }}
     >
       <TableRow
-        onClick={() => setOpen(!open)}//this onClick toggle the visibility of nested content when the main table row is clicked
+        onClick={() => setOpen(!open)} //this onClick toggle the visibility of nested content when the main table row is clicked
         className="personlist"
         sx={{
           borderBottom: ".5px solid #DDF2FD",
@@ -56,12 +54,13 @@ function NestedTable({ value }) {
           alignItems: "center",
           justifyContent: "flex-start",
           flexDirection: "row",
-          maxWidth: "65vw",
+          maxWidth: { lg: "65vw", xl: "65vw" },
           maxHeight: "10vh",
           bgcolor: usedColors.table,
+          overflow: "auto",
         }}
       >
-        <TableCell sx={{ border: "none", width: "1rem" }}>
+        <TableCell sx={{ border: "none", width: "1vw" }}>
           <IconButton size="small">
             {open ? (
               <KeyboardArrowDownIcon sx={{ color: "white" }} />
@@ -70,43 +69,40 @@ function NestedTable({ value }) {
             )}
           </IconButton>
         </TableCell>
-        <TableCell sx={{ color: "white", minWidth: "8rem", border: "none" }}>
-          {value.studies.patientName}
+        <TableCell sx={{ color: "white", width: "7vw", border: "none" }}>
+          {value.patientName.givenName}
         </TableCell>
-        <TableCell sx={{ color: "white", minWidth: "9rem", border: "none" }}>
-          {value.studies.patientMrn}
+        <TableCell sx={{ color: "white", width: "7vw", border: "none" }}>
+          {value.patientMrn}
         </TableCell>
-        <TableCell sx={{ color: "white", minWidth: "10rem", border: "none" }}>
-          {value.studies.studyDate}
+        <TableCell sx={{ color: "white", width: "10vw", border: "none" }}>
+          {value.patientBirthDate}
         </TableCell>
         {/* <TableCell sx={{ color: "white", minWidth: "10rem", border: "none" }}>
           {value.studies.studyDate}
         </TableCell> */}
-        <TableCell sx={{ color: "white", minWidth: "10rem", border: "none" }}>
-          {value.studies.description}
+        <TableCell sx={{ color: "white", width: "10vw", border: "none" }}>
+          {value.study.studyDescription}
         </TableCell>
-        <TableCell sx={{ color: "white", minWidth: "10rem", border: "none" }}>
-          {value.studies.modality}
+        <TableCell sx={{ color: "white", width: "8vw", border: "none" }}>
+          {value.study.modality}
         </TableCell>
-        <TableCell sx={{ color: "white", minWidth: "10rem", border: "none" }}>
-          {value.studies.accession}
+        <TableCell sx={{ color: "white", width: "10vw", border: "none" }}>
+          {value.study.accessionNumber}
         </TableCell>
         <TableCell
-          align="right"
+          align="left"
           sx={{
             color: "white",
-            minWidth: "4rem",
+            width: "7vw",
             border: "none",
-            display: "flex",
-            alignItems: "center",
-            flexDirection: "row",
-            justifyContent: "flex-start",
           }}
         >
           <IconButton size="small" sx={{ color: "#9BBEC8" }}>
             <ContentCopyIcon />
           </IconButton>
-          {value.studies.instance}
+          {/* {value.studies.instance} */}
+          345
         </TableCell>
       </TableRow>
 
@@ -145,18 +141,21 @@ function NestedTable({ value }) {
                   <StyledCollapseCell>Viewer</StyledCollapseCell>
                 </TableRow>
               </TableHead>
-              {value.studies.series.map((items) => (
+              {value.study.series.map((items) => (
                 <TableBody key={items}>
                   <TableRow>
-                    <CollapseNestedCell>{items.description}</CollapseNestedCell>
-                    <CollapseNestedCell>{items.series}</CollapseNestedCell>
+                    <CollapseNestedCell>
+                      {/* {items.description} */}
+                      Leg
+                    </CollapseNestedCell>
+                    <CollapseNestedCell>{items.seriesId}</CollapseNestedCell>
                     <CollapseNestedCell>{items.modality}</CollapseNestedCell>
                     <CollapseNestedCell
                       sx={{
                         borderLeft: "none",
                       }}
                     >
-                      {items.instance}
+                      {items.instanceCount}
                     </CollapseNestedCell>
                     <TableCell
                       sx={{

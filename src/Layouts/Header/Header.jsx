@@ -1,8 +1,9 @@
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import { ReactComponent as Settings } from "../../Assets/Images/newsvg.svg";
 import { ReactComponent as Arrow } from "../../Assets/Images/arrow.svg";
 import { ReactComponent as AppLogo } from "../../Assets/Images/appLogo.svg";
 import usedColors from "../../Assets/Colores/Colores";
+import ResponsiveSearch from "../../Components/ResponsiveSearch/ResponsiveSearch";
 import "./Header.css";
 
 function Header() {
@@ -16,33 +17,35 @@ function Header() {
       }}
       className="header-main"
     >
-      <Box
-        sx={{
-          justifyContent: { xs: "center", sm: "space-between" },
-        }}
-        className="header-sub"
-      >
+      <Box className="header-sub">
         <Box className="first-box">
-          <Box sx={{ display: { xs: "none", sm: "flex" } }}>
+          <Box sx={{ display: { xs: "none", lg: "flex" } }}>
             <AppLogo />
           </Box>
-          <Typography sx={{ color: "black" }}>Dicom Image Viewer</Typography>
+          <Box
+            sx={{
+              color: "black",
+            }}
+          >
+            Dicom Image Viewer
+          </Box>
         </Box>
         <Box
           sx={{
-            display: { xs: "none", sm: "flex" },
+            display: { xs: "none", lg: "flex" },
           }}
           className="second-box"
         >
           <Box>
-            <Typography sx={{ color: "black" }}>
-              INVESTIGATIONAL USE ONLY
-            </Typography>
+            <Box sx={{ color: "black" }}>INVESTIGATIONAL USE ONLY</Box>
           </Box>
           <Box className="logos">
             <Settings fill="black" />
             <Arrow />
           </Box>
+        </Box>
+        <Box sx={{ mr: "10px" }}>
+          <ResponsiveSearch />
         </Box>
       </Box>
     </Box>

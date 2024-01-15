@@ -1,0 +1,13 @@
+.searchmain {
+  align-items: center;
+  justify-content: center;
+  width: 55vw;
+  max-height: 2rem;
+}
+.searchinput {
+  height: 2rem;
+  background-color: #fff;
+  width: 55vw;
+  border-radius: 30px;
+}
+

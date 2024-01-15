@@ -1,16 +1,20 @@
 import { Box, Typography } from "@mui/material";
 import React, { useEffect } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
-import "./SavedQuery.css";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteQuery, savedQueryDatas, searchData } from "../../Store/ApiDataSlice";
+import {
+  deleteQuery,
+  savedQueryDatas,
+  searchData,
+} from "../../Store/ApiDataSlice";
+import "./SavedQuery.css";
 
 function SavedQuery() {
   /**
    *SavedQuery used for managing the display od saved queries
    */
   //Defined variables - start
-  const savedQuery = useSelector((state) => state.data.savedQuarys); //used to select save queries from redux store using useSelector
+  const savedQuery = useSelector((state) => state.data.savedQuarys);
   const dispatch = useDispatch();
   //Defined variables - end
 
@@ -23,7 +27,9 @@ function SavedQuery() {
   }, [dispatch]);
   return (
     <Box className="main-div">
-      <Typography sx={{ pl: "5px", fontWeight: "bold", fontSize: "15px" }}>
+      <Typography
+        sx={{ pl: "5px", fontWeight: "bold", fontSize: "15px", mt: "10px" }}
+      >
         Saved Query's
       </Typography>
       <Box className="child-div">
@@ -41,28 +47,20 @@ function SavedQuery() {
                   height: "1.5rem",
                 }}
                 onClick={() => {
-                  dispatch(searchData(value));//when this onclick function is triggered it dispatch the 'searchData' action,passing corresponding query data as an arguement
+                  //when this onclick function is triggered it dispatch the 'searchData' action,passing corresponding query data as an arguement
+                  dispatch(searchData(value));
                 }}
               >
                 {value.queryName}
               </Typography>
-              <Box
-                sx={{
-                  pr: "10px",
-                  display: "flex",
-                  alignItems: "center",
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  maxWidth: "5vw",
-                  height: "5vh",
-                }}
-              >
+              <Box className="icondiv">
                 <Box>
                   <DeleteIcon
                     className="clear"
                     fontSize="medium"
                     onClick={() => {
-                      dispatch(deleteQuery(value.id)); //when this onclick function is triggered it dispatch the 'deleteQuery' action,passing corresponding query ID as an arguement
+                      //when this onclick function is triggered it dispatch the 'deleteQuery' action,passing corresponding query ID as an arguement
+                      dispatch(deleteQuery(value.id));
                     }}
                   />
                 </Box>
