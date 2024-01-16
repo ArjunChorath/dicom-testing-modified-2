@@ -1,0 +1,18 @@
+.studylist_block{
+    width: 65vw;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row; 
+}
+.inner_studylist_block{
+     width: 30vw;
+     height: 5rem;
+     display: flex;
+     align-items: center;
+     font-size: 30px;
+     justify-content: flex-start;
+     color: white;
+     font-weight: bold;
+}

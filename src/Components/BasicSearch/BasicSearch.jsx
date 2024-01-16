@@ -324,7 +324,7 @@ function BasicSearch() {
                   setArrowDownKey({
                     accession: "black",
                   });
-                  dispatch(sortingAscending("accession"));
+                  dispatch(sortingAscending("accessionNumber"));
                 }}
               ></KeyboardArrowUp>
               <KeyboardArrowDown
@@ -341,7 +341,7 @@ function BasicSearch() {
                   setArrowDownKey({
                     accession: "cyan",
                   });
-                  dispatch(sortingDescending("accession"));
+                  dispatch(sortingDescending("accessionNumber"));
                 }}
               ></KeyboardArrowDown>
             </Box>
