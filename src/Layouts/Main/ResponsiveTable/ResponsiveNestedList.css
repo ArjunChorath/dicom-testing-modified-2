@@ -8,3 +8,83 @@
   text-overflow: ellipsis;
   color: whitesmoke;
 }
+.outer_box{
+display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: space-between;
+gap: 1rem;
+padding: 10px;
+}
+.inner_leftside_box{
+  display: flex;
+  flex-direction: column;
+  width: 43vw;
+  align-items: flex-start;
+  justify-content: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.inner-rightside-box{
+   display: flex;
+  flex-direction: column;
+  width: 43vw;
+  align-items: flex-start;
+  justify-content: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.dropdown_view{
+  font-size: 14px;
+  text-decoration: underline;
+  color:black;
+}
+.viewmore_blocks{
+  position: absolute;
+  margin-right: 10px;
+  z-index: 99;
+  overflow: auto;
+}
+.inner_viewmore_block{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  color:white
+}
+.inner_viewmore_leftside_block{
+  display: flex;
+  flex-direction: column;
+  width: "43vw";
+  align-items: flex-start;
+  justify-content: flex-start;
+
+}
+.inner_viewmore_rightside_block{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+  width: 43vw;
+}
+.viewmore_toggle{
+  font-size: 14px;
+  text-decoration: underline;
+  color: skyblue;
+}
+.image_container{
+  min-height: 15vh;
+  background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 3rem;
+  flex-direction: row;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  border: 1px solid #164863;
+  z-index: 999;
+  margin-top: 10px;
+}

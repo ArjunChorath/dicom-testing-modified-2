@@ -1,0 +1,6 @@
+.outer-box{
+    width:100vw;
+    height: 90vh;
+    overflow: auto;
+    margin-top: 10px;
+}

@@ -5,7 +5,7 @@ import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlin
 import React, { useState } from "react";
 import AdvanceSearch from "../../../Components/AdvanceSearch/AdvanceSearch";
 import SavedQuery from "../../../Components/SavedQuery/SavedQuery";
-
+import "./SideMenu.css"
 function SideMenu() {
   /**
    * SideMenu component is for user interface element for side navigation menu
@@ -16,43 +16,9 @@ function SideMenu() {
   const [savedQuery, setSavedQuery] = useState(false);
   //Defined variables - end
   return (
-    <Box
-      sx={{
-        height: "100vh",
-        width: "13vw",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        boxShadow:
-          "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
-        position: "relative",
-        bgcolor: "white",
-      }}
-    >
-      <Box
-        sx={{
-          height: "90vh",
-          width: "13vw",
-          bgcolor: "white",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "flex-start",
-          flexDirection: "column",
-        }}
-      >
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            flexDirection: "column",
-            height: "10vh",
-            width: "13vw",
-            "&:hover": {
-              bgcolor: "#F5F7F8",
-            },
-          }}
-        >
+    <Box className="outer_block">
+      <Box className="inner_block">
+        <Box className="home_icon">
           <HomeOutlinedIcon
             sx={{ fontSize: { xs: "25px", sm: "30px", md: "35px" } }}
             varient="outlined"
@@ -61,18 +27,7 @@ function SideMenu() {
               window.location.reload();
             }}
           />
-          <Box
-            sx={{
-              width: "12vw",
-              height: "1rem",
-              textOverflow: "ellipsis",
-              overflow: "hidden",
-              whiteSpace: "nowrap",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
+          <Box className="home_icon_text">
             <Typography
               sx={{ fontSize: { xs: "8px", sm: "12px", md: "15px" } }}
             >
@@ -81,17 +36,7 @@ function SideMenu() {
           </Box>
         </Box>
         <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            flexDirection: "column",
-            height: "10vh",
-            width: "13vw",
-            "&:hover": {
-              bgcolor: "#F5F7F8",
-            },
-          }}
+          className="advance_search_icon"
           onClick={() => {
             //toggle the visibility of 'advanceSearch' component
             setAdvanceSearch(!advanceSearch);
@@ -102,18 +47,7 @@ function SideMenu() {
             sx={{ fontSize: { xs: "25px", sm: "30px", md: "35px" } }}
             varient="outlined"
           />
-          <Box
-            sx={{
-              width: "12vw",
-              height: "1rem",
-              textOverflow: "ellipsis",
-              overflow: "hidden",
-              whiteSpace: "nowrap",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
+          <Box className="advance_search_icon_text">
             <Typography
               sx={{ fontSize: { xs: "8px", sm: "12px", md: "15px" } }}
             >
@@ -121,35 +55,15 @@ function SideMenu() {
             </Typography>
           </Box>
         </Box>
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            flexDirection: "column",
-            height: "10vh",
-            width: "13vw",
-            "&:hover": {
-              bgcolor: "#F5F7F8",
-            },
-          }}
-        >
+        <Box className="saved_query_icon">
           <BookmarkBorderOutlinedIcon
             sx={{ fontSize: { xs: "25px", sm: "30px", md: "35px" } }}
             varient="outlined"
           />
           <Box
-            sx={{
-              width: "12vw",
-              height: "1rem",
-              textOverflow: "ellipsis",
-              overflow: "hidden",
-              whiteSpace: "nowrap",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-            onClick={() => {//toggles the visibility of the 'savedQuery' component
+            className="saved_query_icon_text"
+            onClick={() => {
+              //toggles the visibility of the 'savedQuery' component
               setSavedQuery(!savedQuery);
               setAdvanceSearch(false);
             }}
@@ -163,28 +77,16 @@ function SideMenu() {
         </Box>
       </Box>
       {advanceSearch === true ? (
-        <Box
-          sx={{
-            position: "absolute",
-            top: "4rem",
-            left: { xs: "5rem", sm: "8rem", md: "12rem" },
-            zIndex: "999",
-          }}
-        >
+        <Box className="adv_search_toggle"
+          sx={{left: { xs: "5rem", sm: "8rem", md: "12rem" }, }}>
           <AdvanceSearch />
         </Box>
       ) : (
         ""
       )}
       {savedQuery === true ? (
-        <Box
-          sx={{
-            position: "absolute",
-            top: "10rem",
-            left: { xs: "5rem", sm: "8rem", md: "12rem" },
-            zIndex: "999",
-          }}
-        >
+        <Box className="saved_query_toggle"
+          sx={{ left: { xs: "5rem", sm: "8rem", md: "12rem" },}}>
           <SavedQuery />
         </Box>
       ) : (

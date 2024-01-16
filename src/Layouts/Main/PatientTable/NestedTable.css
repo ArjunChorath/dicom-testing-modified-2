@@ -1,3 +1,12 @@
+.personlist{
+    border-bottom: 1px solid #DDF2FD;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: row;
+    max-height: 10vh;
+    overflow: auto;
+}
 .table-body{
     min-height: 4vh;
     min-width: 65vw;
@@ -18,4 +27,22 @@
 .imagesize:hover{
     height: 100px;
     width: 100px;
+}
+.inside-tablerow{
+     align-items: center;
+     justify-content:center;
+     flex-direction: column;
+
+}
+.image-viewer-box{
+    display: flex;
+    min-height: 15vh;
+    width: 60vw;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 3rem;
+    flex-direction: row;
+    overflow-x: scroll;
+     overflow-y:hidden;
+    border: 1px solid #164863
 }

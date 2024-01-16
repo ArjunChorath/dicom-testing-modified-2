@@ -34,33 +34,23 @@ function NestedTable({ value }) {
   });
   //Defined variables - end
   return (
-    <TableBody className="table-body"
-      sx={{
-        border: open === true ? "1px solid #5acce6" : "none",
-       
-        
-       
-       
-       
-        
-      }}
+    <TableBody
+      className="table-body"
+      sx={{ border: open === true ? "1px solid #5acce6" : "none" }}
     >
       <TableRow
         onClick={() => setOpen(!open)} //this onClick toggle the visibility of nested content when the main table row is clicked
         className="personlist"
         sx={{
-          borderBottom: ".5px solid #DDF2FD",
           display: "flex",
-          alignItems: "center",
-          justifyContent: "flex-start",
-          flexDirection: "row",
           maxWidth: { lg: "65vw", xl: "65vw" },
-          maxHeight: "10vh",
           bgcolor: usedColors.table,
-          overflow: "auto",
         }}
       >
-        <TableCell sx={{ border: "none", width: "1vw" }}>
+        <TableCell
+          className="index-tablece"
+          sx={{ border: "none", width: "1vw" }}
+        >
           <IconButton size="small">
             {open ? (
               <KeyboardArrowDownIcon sx={{ color: "white" }} />
@@ -69,25 +59,34 @@ function NestedTable({ value }) {
             )}
           </IconButton>
         </TableCell>
-        <TableCell sx={{ color: "white", width: "7vw", border: "none" }}>
+        <TableCell
+       sx={{ color: "white", width: "7vw", border: "none" }}
+        >
           {value.patientName.givenName}
         </TableCell>
-        <TableCell sx={{ color: "white", width: "7vw", border: "none" }}>
+        <TableCell
+       sx={{ color: "white", width: "7vw", border: "none" }}
+        >
           {value.patientMrn}
         </TableCell>
-        <TableCell sx={{ color: "white", width: "10vw", border: "none" }}>
+        <TableCell
+         sx={{ color: "white", width: "10vw", border: "none" }}
+        >
           {value.patientBirthDate}
         </TableCell>
-        {/* <TableCell sx={{ color: "white", minWidth: "10rem", border: "none" }}>
-          {value.studies.studyDate}
-        </TableCell> */}
-        <TableCell sx={{ color: "white", width: "10vw", border: "none" }}>
+        <TableCell
+         sx={{ color: "white", width: "10vw", border: "none" }}
+        >
           {value.study.studyDescription}
         </TableCell>
-        <TableCell sx={{ color: "white", width: "8vw", border: "none" }}>
+        <TableCell
+        sx={{ color: "white", width: "8vw", border: "none" }}
+        >
           {value.study.modality}
         </TableCell>
-        <TableCell sx={{ color: "white", width: "10vw", border: "none" }}>
+        <TableCell
+        sx={{ color: "white", width: "10vw", border: "none" }}
+        >
           {value.study.accessionNumber}
         </TableCell>
         <TableCell
@@ -106,16 +105,7 @@ function NestedTable({ value }) {
         </TableCell>
       </TableRow>
 
-      <TableRow
-        sx={{
-          // height: "10vh",
-          // minWidth: "60vw",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          flexDirection: "column",
-        }}
-      >
+      <TableRow className="inside-tablerow" sx={{display:'flex'}}>
         <TableCell
           sx={{ paddingBottom: 0, paddingTop: 0, border: "none" }}
           colSpan={6}
@@ -177,20 +167,7 @@ function NestedTable({ value }) {
               ))}
             </Table>
             {viewer ? (
-              <Box
-                sx={{
-                  minHeight: "15vh",
-                  width: "60vw",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "flex-start",
-                  gap: "3rem",
-                  flexDirection: "row",
-                  overflowX: "scroll",
-                  overflowY: "hidden",
-                  border: "1px solid #164863",
-                }}
-              >
+              <Box className="image-viewer-box">
                 <Box sx={{ marginLeft: "10px" }}>
                   <img
                     src="https://img.freepik.com/premium-photo/x-ray-human-skull-black-background_521740-1000.jpg"

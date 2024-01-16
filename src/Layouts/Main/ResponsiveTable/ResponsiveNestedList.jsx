@@ -33,28 +33,8 @@ function ResponsiveNestedLlist({ value }) {
           position: "relative",
         }}
       >
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
-            gap: "1rem",
-            padding: "10px",
-          }}
-        >
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              width: "43vw",
-              alignItems: "flex-start",
-              justifyContent: "center",
-              whiteSpace: "nowrap",
-              overflow: "hidden",
-              textOverflow: "ellipsis",
-            }}
-          >
+        <Box className="outer_box">
+          <Box className="inner_leftside_box">
             <StyledText>
               <Box className="textbox">Patientname:</Box>
               <Box className="textbox">{value.patientName.givenName}</Box>
@@ -74,18 +54,7 @@ function ResponsiveNestedLlist({ value }) {
               <Box className="textbox">3455</Box>
             </StyledText>
           </Box>
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              width: "43vw",
-              alignItems: "flex-start",
-              justifyContent: "center",
-              whiteSpace: "nowrap",
-              overflow: "hidden",
-              textOverflow: "ellipsis",
-            }}
-          >
+          <Box className="inner-rightside-box">
             <StyledText>
               <Box className="textbox">PatientMrn:</Box>
               <Box className="textbox"> {value.patientMrn}</Box>
@@ -102,11 +71,7 @@ function ResponsiveNestedLlist({ value }) {
             </StyledText>
 
             <Box
-              sx={{
-                fontSize: "14px",
-                textDecoration: "underline",
-                color: "black",
-              }}
+              className="dropdown_view"
               onClick={() => {
                 //toggle visibility of nested content
                 setNestedBox(!nestedBox);
@@ -117,22 +82,20 @@ function ResponsiveNestedLlist({ value }) {
           </Box>
         </Box>
         <Grid
+          className="viewmore_blocks"
           item
           xs={12}
           sm={6}
           md={4}
           sx={{
-            position: "absolute",
-            mr: "10px",
-            zIndex: "99",
             minWidth: { xs: "81vw", sm: "40vw", md: "27vw" },
-            overflow: "auto",
           }}
         >
           {value.study.series.map((items) => (
             <Box key={items.seriesId}>
               {nestedBox === true ? (
                 <Paper
+                  className="viewmore_inner_block"
                   sx={{
                     minHeight: "5vw",
                     bgcolor: "black",
@@ -144,22 +107,10 @@ function ResponsiveNestedLlist({ value }) {
                   }}
                 >
                   <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "row",
-                      alignItems: "flex-start",
-                      justifyContent: "space-between",
-                      color: "white",
-                    }}
+                    className="inner_viewmore_block"
                   >
                     <Box
-                      sx={{
-                        display: "flex",
-                        flexDirection: "column",
-                        width: "43vw",
-                        alignItems: "flex-start",
-                        justifyContent: "flex-start",
-                      }}
+                      className="inner_viewmore_leftside_block"
                     >
                       <StyledText>
                         <Box className="textbox">Description:</Box>
@@ -176,13 +127,7 @@ function ResponsiveNestedLlist({ value }) {
                       </StyledText>
                     </Box>
                     <Box
-                      sx={{
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "flex-end",
-                        justifyContent: "flex-end",
-                        width: "43vw",
-                      }}
+                      className="inner_viewmore_rightside_block"
                     >
                       <StyledText>
                         <Box className="textbox">modality:</Box>
@@ -192,13 +137,8 @@ function ResponsiveNestedLlist({ value }) {
                         <Box className="textbox">Instance:</Box>
                         <Box className="textbox"> {value.patientMrn}</Box>
                       </StyledText>
-                      <Box
-                        sx={{
-                          fontSize: "14px",
-                          textDecoration: "underline",
-                          color: "skyblue",
-                        }}
-                        onClick={() => {
+                      <Box className="viewmore_toggle"
+                      onClick={() => {
                           //used to toggle images in the viewer
                           setViewer(!viewer);
                         }}
@@ -208,22 +148,8 @@ function ResponsiveNestedLlist({ value }) {
                     </Box>
                   </Box>
                   {viewer ? (
-                    <Box
-                      sx={{
-                        minHeight: "15vh",
-                        bgcolor: "black",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "flex-start",
-                        gap: "3rem",
-                        flexDirection: "row",
-                        overflowX: "scroll",
-                        overflowY: "hidden",
-                        border: "1px solid #164863",
-                        zIndex: "999",
-                        mt: "10px",
-                      }}
-                    >
+                    <Box className="image_container"
+                     >
                       <Box sx={{ marginLeft: "10px" }}>
                         <img
                           src="https://img.freepik.com/premium-photo/x-ray-human-skull-black-background_521740-1000.jpg"
