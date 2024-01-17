@@ -67,9 +67,6 @@ export const getModality = createAsyncThunk("getModality", async () => {
     throw error;
   }
 });
-export const skipData=(()=>{
-  return 0;
-})
 export const searchData = createAsyncThunk("searchData", async (value) => {
   try {
     let searchQuery = "";

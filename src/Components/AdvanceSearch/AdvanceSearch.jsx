@@ -9,6 +9,7 @@ import {
   getModality,
   saveQueryData,
   searchData,
+  getLength
 } from "../../Store/ApiDataSlice";
 import "./AdvanceSearch.css";
 
@@ -285,6 +286,7 @@ function AdvanceSearch() {
             onClick={() => {
               //it triggers the 'searchData'action, passing the current form details as parameters to initialize search
               dispatch(searchData(formDetails));
+                dispatch(getLength());
             }}
           >
             search

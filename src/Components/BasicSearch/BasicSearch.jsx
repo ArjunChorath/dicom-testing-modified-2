@@ -7,13 +7,11 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getLength,
   searchData,
-  skipData,
   sortingAscending,
   sortingDescending,
 } from "../../Store/ApiDataSlice";
 import usedColors from "../../Assets/Colores/Colores";
 import "./BasicSearch.css";
-import PaginationFooter from "../../Layouts/Footer/PaginationFooter";
 
 const arrowArray = [
   {
