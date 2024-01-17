@@ -11,6 +11,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import "./PaginationFooter.css";
 
+
 const calculateTotalPages = (totalItems, limit) => {
   return Math.ceil(totalItems / limit); //function to calculate total number of pages
 };
@@ -85,6 +86,10 @@ function PaginationFooter() {
       }));
     }
   };
+
+  
+
+   
   /**
    * handleBack function is an event handler responsible for navigating to the First page of data
    */
@@ -160,3 +165,5 @@ function PaginationFooter() {
 }
 
 export default PaginationFooter;
+
+

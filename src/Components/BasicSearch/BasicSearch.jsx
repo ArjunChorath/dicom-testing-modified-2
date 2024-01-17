@@ -5,12 +5,15 @@ import Button from "@mui/material/Button";
 import ClearIcon from "@mui/icons-material/Clear";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  getLength,
   searchData,
+  skipData,
   sortingAscending,
   sortingDescending,
 } from "../../Store/ApiDataSlice";
 import usedColors from "../../Assets/Colores/Colores";
 import "./BasicSearch.css";
+import PaginationFooter from "../../Layouts/Footer/PaginationFooter";
 
 const arrowArray = [
   {
@@ -55,7 +58,7 @@ function BasicSearch() {
     setBasicForm((prevValue) => ({
       ...prevValue,
       [event.target.name]: event.target.value,
-      skip: paginationValues.skip,
+      skip: 0,
       limit: paginationValues.limit,
     }));
   };
@@ -408,7 +411,9 @@ function BasicSearch() {
           }}
           onClick={() => {
             //this onClick trigger a search with the current form data on search button click
-            dispatch(searchData(basicForm));
+            dispatch
+            (searchData(basicForm));
+            dispatch(getLength());
           }}
         >
           Search

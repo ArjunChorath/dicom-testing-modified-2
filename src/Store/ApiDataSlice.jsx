@@ -2,6 +2,8 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import apiEndPoints from "../Services/ApiEndPoints/ApiEndPoints";
 import axios from "axios";
 
+
+let newQuery='';
 const initialState = {
   personDetails: [],
   modalityData: [],
@@ -17,9 +19,11 @@ const initialState = {
 };
 
 export const getDetails = createAsyncThunk("getDeatails", async (value) => {
-  try {
+      try {
+      
+    console.log(value);
     const response = await fetch(
-      `${apiEndPoints.dicomApi}?skip=${value.skip}&limit=${value.limit}`
+      `${apiEndPoints.dicomApi}?${newQuery}skip=${value.skip}&limit=${value.limit}`
     )
       .then((data) => data.json())
       .then((results) => results)
@@ -34,7 +38,10 @@ export const getDetails = createAsyncThunk("getDeatails", async (value) => {
 });
 export const getLength = createAsyncThunk("getLength", async () => {
   try {
-    const response = await fetch(`${apiEndPoints.dicomApi}`)
+    
+    const response = await fetch(
+      `http://10.30.2.208:8193/qido/studies?${newQuery}`
+    )
       .then((data) => data.json())
       .then((results) => results)
       .catch((error) => {
@@ -42,7 +49,7 @@ export const getLength = createAsyncThunk("getLength", async () => {
       });
     return response;
   } catch (error) {
-    console.error("Error in getLength:", error);
+    console.error("Error in searchData:", error);
     throw error;
   }
 });
@@ -60,6 +67,9 @@ export const getModality = createAsyncThunk("getModality", async () => {
     throw error;
   }
 });
+export const skipData=(()=>{
+  return 0;
+})
 export const searchData = createAsyncThunk("searchData", async (value) => {
   try {
     let searchQuery = "";
@@ -84,6 +94,7 @@ export const searchData = createAsyncThunk("searchData", async (value) => {
     if (value.instance !== "") {
       searchQuery += `instance=${value.instance}&`;
     }
+    newQuery=searchQuery;
     if (value.skip) {
       searchQuery += `skip=${value.skip}&`;
     }
@@ -104,6 +115,7 @@ export const searchData = createAsyncThunk("searchData", async (value) => {
     console.error("Error in searchData:", error);
     throw error;
   }
+
 });
 export const savedQueryDatas = createAsyncThunk("savedQueryDatas", async () => {
   try {
