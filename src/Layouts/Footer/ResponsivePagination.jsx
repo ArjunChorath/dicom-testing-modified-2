@@ -72,12 +72,13 @@ function ResponsivePagination() {
   /**
    * handleBack function is an event handler responsible for navigating to the First page of data
    */
-  const handleFirstPage = () => {
-    setSelect((prevValue) => ({
-      ...prevValue,
-      skip: 0,
-    }));
-  };
+ const handleFirstPage = () => {
+   setSelect((prevValue) => ({
+     ...prevValue,
+     skip: 0,
+   }));
+   window.location.reload();
+ };
   return (
     <Box>
       <Container

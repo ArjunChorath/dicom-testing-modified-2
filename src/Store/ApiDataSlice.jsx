@@ -1,8 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import apiEndPoints from "../Services/ApiEndPoints/ApiEndPoints";
 import axios from "axios";
-
-
 let newQuery='';
 const initialState = {
   personDetails: [],
@@ -18,7 +16,7 @@ const initialState = {
   error: null,
 };
 
-export const getDetails = createAsyncThunk("getDeatails", async (value) => {
+export const getDetails = createAsyncThunk("getDetails", async (value) => {
       try {
       
     console.log(value);
@@ -81,6 +79,7 @@ export const searchData = createAsyncThunk("searchData", async (value) => {
     }
     if (value.description !== "") {
       searchQuery += `description=${value.description}&`;
+
     }
     if (value.modality !== "") {
       searchQuery += `modality=${value.modality}&`;

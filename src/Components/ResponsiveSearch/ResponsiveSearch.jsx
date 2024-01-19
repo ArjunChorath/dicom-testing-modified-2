@@ -2,7 +2,7 @@ import { Box, Button, Input, InputAdornment } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import { useDispatch, useSelector } from "react-redux";
-import { searchData } from "../../Store/ApiDataSlice";
+import { searchData,getLength } from "../../Store/ApiDataSlice";
 import "./ResponsiveSearch.css";
 
 function ResponsiveSearch() {
@@ -97,6 +97,7 @@ function ResponsiveSearch() {
           onClick={() => {
             //this onClick trigger a search with the current form data on search button click
             dispatch(searchData(basicForm));
+             dispatch(getLength());
           }}
         >
           Search

@@ -85,19 +85,18 @@ function PaginationFooter() {
         skip: prevSkip,
       }));
     }
-  };
-
-  
-
-   
+  }; 
   /**
-   * handleBack function is an event handler responsible for navigating to the First page of data
+   * handleFirstPage function is an event handler responsible for navigating to the First page of data
    */
   const handleFirstPage = () => {
-    setSelect((prevValue) => ({
+    setSelect( 
+    (prevValue) => ({
+     
       ...prevValue,
       skip: 0,
     }));
+    window.location.reload()
   };
   return (
     <Box
