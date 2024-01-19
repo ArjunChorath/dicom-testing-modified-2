@@ -367,7 +367,7 @@ function BasicSearch() {
       </Box>
       {clear === true ? (
         <Box sx={{ position: "absolute", top: "1rem", right: "20rem" }}>
-          <Button 
+          <Button className="filter_button"
             variant="outlined"
             startIcon={<ClearIcon />}
             sx={{

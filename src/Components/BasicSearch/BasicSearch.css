@@ -46,4 +46,10 @@
   border: 1px solid black;
   padding: 10px;
 }
-
+.filter_button{
+  width: 10rem;
+  height: 3rem;
+  border-radius: 25px;
+  color: black;
+  border-color: black;
+}
