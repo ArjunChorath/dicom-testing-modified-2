@@ -78,7 +78,7 @@ function ResponsiveSearch() {
             </InputAdornment>
           }
         />
-        <Button
+        <Button 
           variant="contained"
           sx={{
             width: { xs: "4.5rem", sm: "5.5rem" },
