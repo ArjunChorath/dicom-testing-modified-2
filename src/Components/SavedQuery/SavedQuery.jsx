@@ -1,6 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import React, { useEffect } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 import { useDispatch, useSelector } from "react-redux";
 import {
   deleteQuery,
@@ -64,6 +65,11 @@ function SavedQuery() {
                     }}
                   />
                 </Box>
+                <EditIcon
+                  onClick={() => {
+                   
+                  }}
+                />
               </Box>
             </Box>
           );
