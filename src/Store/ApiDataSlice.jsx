@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import apiEndPoints from "../Services/ApiEndPoints/ApiEndPoints";
 import axios from "axios";
-let newQuery='';
+
 const initialState = {
   personDetails: [],
   modalityData: [],
@@ -21,7 +21,7 @@ export const getDetails = createAsyncThunk("getDetails", async (value) => {
       
     console.log(value);
     const response = await fetch(
-      `${apiEndPoints.dicomApi}?${newQuery}skip=${value.skip}&limit=${value.limit}`
+      `${apiEndPoints.dicomApi}?skip=${value.skip}&limit=${value.limit}`
     )
       .then((data) => data.json())
       .then((results) => results)
@@ -38,7 +38,7 @@ export const getLength = createAsyncThunk("getLength", async () => {
   try {
     
     const response = await fetch(
-      `http://10.30.2.208:8193/qido/studies?${newQuery}`
+      `http://10.30.2.208:8193/qido/studies`
     )
       .then((data) => data.json())
       .then((results) => results)
@@ -90,7 +90,7 @@ export const searchData = createAsyncThunk("searchData", async (value) => {
     if (value.instance !== "") {
       searchQuery += `instance=${value.instance}&`;
     }
-    newQuery=searchQuery;
+    
     if (value.skip) {
       searchQuery += `skip=${value.skip}&`;
     }
