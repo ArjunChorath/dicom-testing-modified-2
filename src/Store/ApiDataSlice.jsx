@@ -10,23 +10,26 @@ const initialState = {
     skip: 0,
     limit: 5,
   },
+
   advanceSearchData: [],
   personDetailsLength: [],
   loading: false,
   error: null,
+  nodata: false,
 };
 
 export const getDetails = createAsyncThunk("getDetails", async (value) => {
-      try {
-      
-    console.log(value);
+  try {
     const response = await fetch(
       `${apiEndPoints.dicomApi}?${newQuery}skip=${value.skip}&limit=${value.limit}`
     )
-      .then((data) => data.json())
-      .then((results) => results)
+      .then((data) => {
+        initialState.nodata = false;
+        return data.json();
+      })
       .catch((error) => {
-        return error;
+        initialState.nodata = true;
+        throw error;
       });
     return response;
   } catch (error) {
@@ -34,6 +37,7 @@ export const getDetails = createAsyncThunk("getDetails", async (value) => {
     throw error;
   }
 });
+
 export const getLength = createAsyncThunk("getLength", async () => {
   try {
     

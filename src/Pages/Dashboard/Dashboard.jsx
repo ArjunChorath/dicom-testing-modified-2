@@ -8,13 +8,17 @@ import PaginationFooter from "../../Layouts/Footer/PaginationFooter";
 import usedColors from "../../Assets/Colores/Colores";
 import ResponsivePersonList from "../../Layouts/Main/ResponsiveTable/ResponsivePersonList";
 import ResponsivePagination from "../../Layouts/Footer/ResponsivePagination";
+import { NoData } from "../../Components/NoData/NoData";
+import { useSelector } from "react-redux";
+
 
 function Dashboard() {
+  const nodata=useSelector(state=>state.data.nodata)
   return (
     <Box className="dashboard" sx={{ bgcolor: usedColors.body }}>
       <Header />
       <SearchBarFilter />
-      <PersonList />
+      {nodata === false ? <PersonList /> : <NoData />}
       <PaginationFooter />
       <ResponsivePagination />
       <Box
