@@ -20,7 +20,7 @@ function AdvanceSearch() {
   //Defined variables - start
 
   const name = useSelector((state) => state.data.modalityData);
-  // const name = ["asd", "asddd"];
+ 
   const paginationValues = useSelector((state) => state.data.skipAndLimit);
   const dispatch = useDispatch();
   const [query, setQuery] = useState(false);

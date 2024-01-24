@@ -14,6 +14,7 @@ const initialState = {
   personDetailsLength: [],
   loading: false,
   error: null,
+  noData:false,
 };
 
 export const getDetails = createAsyncThunk("getDetails", async (value) => {

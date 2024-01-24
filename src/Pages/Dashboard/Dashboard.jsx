@@ -9,7 +9,9 @@ import usedColors from "../../Assets/Colores/Colores";
 import ResponsivePersonList from "../../Layouts/Main/ResponsiveTable/ResponsivePersonList";
 import ResponsivePagination from "../../Layouts/Footer/ResponsivePagination";
 
-function Dashboard() {
+
+function Dashboard() 
+{
   return (
     <Box className="dashboard" sx={{ bgcolor: usedColors.body }}>
       <Header />
