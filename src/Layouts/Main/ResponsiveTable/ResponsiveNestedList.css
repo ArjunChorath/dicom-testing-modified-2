@@ -52,7 +52,10 @@ padding: 10px;
   flex-direction: row;
   align-items: flex-start;
   justify-content: space-between;
-  color:white
+  color:white;
+  border: 0.5px solid violet;
+  border-radius: 5px;
+  padding:3px 10px;
 }
 .inner_viewmore_leftside_block{
   display: flex;

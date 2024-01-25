@@ -37,12 +37,14 @@
 .image-viewer-box{
     display: flex;
     min-height: 15vh;
-    width: 60vw;
+    width: 100%;
     align-items: center;
     justify-content: flex-start;
     gap: 3rem;
     flex-direction: row;
     overflow-x: scroll;
      overflow-y:hidden;
-    border: 1px solid #164863
+    border: 1px solid #164863;
+    border-radius: 5px;
+    margin-top: 10px;
 }

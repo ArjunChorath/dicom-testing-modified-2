@@ -30,10 +30,10 @@ function PaginationFooter() {
   const [select, setSelect] = useState({
     skip: 0,
     limit: 5,
+    current:1,
   });
 
   const [totalPages, setTotalPages] = useState(1);
-
   const MenuProps = {
     PaperProps: {
       style: {
@@ -96,7 +96,6 @@ function PaginationFooter() {
       ...prevValue,
       skip: 0,
     }));
-    window.location.reload()
   };
   return (
     <Box

@@ -10,8 +10,11 @@ function ResponsivePersonList() {
    *ResponsivePersonList Component used for rendering table of person's details in responsive person list
    */
   //Defined variables - start
-  const personList = useSelector((state) => state.data.personDetails);//uses useSelector hook from react redux to extract 'personDetails' from the redux store
+  const personList = useSelector((state) => 
+    state.data.personDetails
+  ); //uses useSelector hook from react redux to extract 'personDetails' from the redux store
   //Defined variables - end
+  console.log(personList);
   return (
     <Box className="outer-box">
       <Grid container spacing={2} sx={{ width: "85vw", ml: "12vw" }}>

@@ -5,6 +5,7 @@ import Grid from "@mui/material/Grid";
 import React, { useState } from "react";
 import usedColors from "../../../Assets/Colores/Colores";
 import "./ResponsiveNestedList.css";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 
 function ResponsiveNestedLlist({ value }) {
   /**
@@ -33,7 +34,13 @@ function ResponsiveNestedLlist({ value }) {
           position: "relative",
         }}
       >
-        <Box className="outer_box">
+        <Box
+          className="outer_box"
+          onClick={() => {
+            //toggle visibility of nested content
+            setNestedBox(!nestedBox);
+          }}
+        >
           <Box className="inner_leftside_box">
             <StyledText>
               <Box className="textbox">Patientname:</Box>
@@ -41,7 +48,7 @@ function ResponsiveNestedLlist({ value }) {
             </StyledText>
             <StyledText>
               <Box className="textbox">StudyDate:</Box>
-              <Box className="textbox">12/6/24 </Box>
+              <Box className="textbox">{value.study.studyDate} </Box>
             </StyledText>
 
             <StyledText>
@@ -62,21 +69,15 @@ function ResponsiveNestedLlist({ value }) {
 
             <StyledText>
               <Box className="textbox">Description:</Box>
-              <Box className="textbox">{value.patientName.givenName}</Box>
+              <Box className="textbox">{value.study.studyDescription}</Box>
             </StyledText>
 
             <StyledText>
               <Box className="textbox">Accession:</Box>
-              <Box className="textbox">{value.patientName.givenName}</Box>
+              <Box className="textbox">{value.study.accessionNumber}</Box>
             </StyledText>
 
-            <Box
-              className="dropdown_view"
-              onClick={() => {
-                //toggle visibility of nested content
-                setNestedBox(!nestedBox);
-              }}
-            >
+            <Box className="dropdown_view">
               {nestedBox === true ? "Viewless" : "Viewmore"}
             </Box>
           </Box>
@@ -91,8 +92,8 @@ function ResponsiveNestedLlist({ value }) {
             minWidth: { xs: "81vw", sm: "40vw", md: "27vw" },
           }}
         >
-          {value.study.series.map((items) => (
-            <Box key={items.seriesId}>
+          {value.study.series.map((series) => (
+            <Box key={series.seriesId}>
               {nestedBox === true ? (
                 <Paper
                   className="viewmore_inner_block"
@@ -106,50 +107,42 @@ function ResponsiveNestedLlist({ value }) {
                     p: "10px",
                   }}
                 >
-                  <Box
-                    className="inner_viewmore_block"
-                  >
-                    <Box
-                      className="inner_viewmore_leftside_block"
-                    >
-                      <StyledText>
-                        <Box className="textbox">Description:</Box>
-                        <Box className="textbox">leg</Box>
-                      </StyledText>
 
-                      <StyledText>
-                        <Box className="textbox">series:</Box>
-                        <Box className="textbox">sefdsdf</Box>
-                      </StyledText>
-                      <StyledText>
-                        <Box className="textbox"></Box>
-                        <Box className="textbox"></Box>
-                      </StyledText>
-                    </Box>
-                    <Box
-                      className="inner_viewmore_rightside_block"
-                    >
-                      <StyledText>
-                        <Box className="textbox">modality:</Box>
-                        <Box className="textbox">{items.modality}</Box>
-                      </StyledText>
-                      <StyledText>
-                        <Box className="textbox">Instance:</Box>
-                        <Box className="textbox"> {value.patientMrn}</Box>
-                      </StyledText>
-                      <Box className="viewmore_toggle"
-                      onClick={() => {
-                          //used to toggle images in the viewer
-                          setViewer(!viewer);
-                        }}
-                      >
-                        {viewer === true ? "Viewless" : "Viewmore"}
+                    <Box className="inner_viewmore_block">
+                      <Box className="inner_viewmore_leftside_block">
+                        <StyledText>
+                          <Box className="textbox">Description :</Box>
+                          <Box className="textbox">{series.description}</Box>
+                        </StyledText>
+
+                        <StyledText>
+                          <Box className="textbox">series :</Box>
+                          <Box className="textbox">{series.seriesNumber}</Box>
+                        </StyledText>
+                        <StyledText>
+                          <Box className="textbox"></Box>
+                          <Box className="textbox"></Box>
+                        </StyledText>
                       </Box>
-                    </Box>
+                      <Box className="inner_viewmore_rightside_block">
+                        <StyledText>
+                          <Box className="textbox">modality :</Box>
+                          <Box className="textbox">{series.modality}</Box>
+                        </StyledText>
+                        <StyledText>
+                          <Box className="textbox">Instance :</Box>
+                          <Box className="textbox"> {series.instanceCount}</Box>
+                        </StyledText>
+                        <VisibilityIcon
+                          onClick={() => {
+                            //used to toggle images in the viewer
+                            setViewer(!viewer);
+                          }}
+                        />
+                      </Box>
                   </Box>
                   {viewer ? (
-                    <Box className="image_container"
-                     >
+                    <Box className="image_container">
                       <Box sx={{ marginLeft: "10px" }}>
                         <img
                           src="https://img.freepik.com/premium-photo/x-ray-human-skull-black-background_521740-1000.jpg"

@@ -12,6 +12,8 @@ import Collapse from "@mui/material/Collapse";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import "./NestedTable.css";
 import usedColors from "../../../Assets/Colores/Colores";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+
 
 function NestedTable({ value }) {
   /**
@@ -59,34 +61,22 @@ function NestedTable({ value }) {
             )}
           </IconButton>
         </TableCell>
-        <TableCell
-       sx={{ color: "white", width: "7vw", border: "none" }}
-        >
+        <TableCell sx={{ color: "white", width: "7vw", border: "none" }}>
           {value.patientName.givenName}
         </TableCell>
-        <TableCell
-       sx={{ color: "white", width: "7vw", border: "none" }}
-        >
+        <TableCell sx={{ color: "white", width: "7vw", border: "none" }}>
           {value.patientMrn}
         </TableCell>
-        <TableCell
-         sx={{ color: "white", width: "10vw", border: "none" }}
-        >
-          {value.patientBirthDate}
+        <TableCell sx={{ color: "white", width: "10vw", border: "none" }}>
+          {value.study.studyDate}
         </TableCell>
-        <TableCell
-         sx={{ color: "white", width: "10vw", border: "none" }}
-        >
+        <TableCell sx={{ color: "white", width: "10vw", border: "none" }}>
           {value.study.studyDescription}
         </TableCell>
-        <TableCell
-        sx={{ color: "white", width: "8vw", border: "none" }}
-        >
+        <TableCell sx={{ color: "white", width: "8vw", border: "none" }}>
           {value.study.modality}
         </TableCell>
-        <TableCell
-        sx={{ color: "white", width: "10vw", border: "none" }}
-        >
+        <TableCell sx={{ color: "white", width: "10vw", border: "none" }}>
           {value.study.accessionNumber}
         </TableCell>
         <TableCell
@@ -105,7 +95,7 @@ function NestedTable({ value }) {
         </TableCell>
       </TableRow>
 
-      <TableRow className="inside-tablerow" sx={{display:'flex'}}>
+      <TableRow className="inside-tablerow" sx={{ display: "flex" }}>
         <TableCell
           sx={{ paddingBottom: 0, paddingTop: 0, border: "none" }}
           colSpan={6}
@@ -135,8 +125,7 @@ function NestedTable({ value }) {
                 <TableBody key={items}>
                   <TableRow>
                     <CollapseNestedCell>
-                      {/* {items.description} */}
-                      Leg
+                      {items.description}
                     </CollapseNestedCell>
                     <CollapseNestedCell>{items.seriesId}</CollapseNestedCell>
                     <CollapseNestedCell>{items.modality}</CollapseNestedCell>
@@ -147,21 +136,14 @@ function NestedTable({ value }) {
                     >
                       {items.instanceCount}
                     </CollapseNestedCell>
-                    <TableCell
-                      sx={{
-                        border: "none",
-                      }}
-                      onClick={() => {
-                        //this onClick toggle the viewer state when the image button in the nested table is clicked
-                        setViewer(!viewer);
-                      }}
-                    >
-                      <Button
-                        sx={{ color: "white", width: "9vw", border: "none" }}
-                      >
-                        image
-                      </Button>
-                    </TableCell>
+                    <StyledCollapseCell>
+                      <VisibilityIcon
+                        onClick={() => {
+                          //this onClick toggle the viewer state when the image button in the nested table is clicked
+                          setViewer(!viewer);
+                        }}
+                      />
+                    </StyledCollapseCell>
                   </TableRow>
                 </TableBody>
               ))}

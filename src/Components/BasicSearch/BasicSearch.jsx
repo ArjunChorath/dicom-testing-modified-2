@@ -191,11 +191,34 @@ function BasicSearch() {
           <Box className="form_children">
             <Typography sx={{ color: "white" }}>Study Date</Typography>
             <Box className="arrow_keys">
+              <KeyboardArrowUp
+                fontSize="xs"
+                sx={{ color: arrowUpKey.studyDate }}
+                onClick={() => {
+                  setArrowUpKey({
+                    studyDate: "cyan",
+                  });
+                  setArrowDownKey({
+                    studyDate: "black",
+                  });
+                  dispatch(sortingAscending("studyDate"));
+                }}
+              ></KeyboardArrowUp>
               <KeyboardArrowDown
                 fontSize="xs"
                 sx={{
-                  mt: "5px",
-                  color: "black",
+                  mt: "-7px",
+                  color: arrowDownKey.studyDate,
+                }}
+                onClick={() => {
+                  //handle ascending sorting for studydate on up arrow click
+                  setArrowUpKey({
+                    studyDate: "black",
+                  });
+                  setArrowDownKey({
+                    studyDate: "cyan",
+                  });
+                  dispatch(sortingDescending("studyDate"));
                 }}
               ></KeyboardArrowDown>
             </Box>
@@ -367,7 +390,8 @@ function BasicSearch() {
       </Box>
       {clear === true ? (
         <Box sx={{ position: "absolute", top: "1rem", right: "20rem" }}>
-          <Button className="filter_button"
+          <Button
+            className="filter_button"
             variant="outlined"
             startIcon={<ClearIcon />}
             sx={{
@@ -409,8 +433,7 @@ function BasicSearch() {
           }}
           onClick={() => {
             //this onClick trigger a search with the current form data on search button click
-            dispatch
-            (searchData(basicForm));
+            dispatch(searchData(basicForm));
             dispatch(getLength());
           }}
         >

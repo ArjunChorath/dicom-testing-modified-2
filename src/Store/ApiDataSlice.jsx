@@ -16,11 +16,18 @@ const initialState = {
   error: null,
 };
 
+// const create=(value,newQuery)=>{
+//   let queryToSearch='';
+//   queryToSearch+=
+// }
+
+
+//GET STUDIES API CALLS
+//fetch the data based on particullar conditions from backend
+//parameter value is the value of skip and limit
 export const getDetails = createAsyncThunk("getDetails", async (value) => {
       try {
-      
-    console.log(value);
-    const response = await fetch(
+      const response = await fetch(
       `${apiEndPoints.dicomApi}?${newQuery}skip=${value.skip}&limit=${value.limit}`
     )
       .then((data) => data.json())
@@ -36,7 +43,6 @@ export const getDetails = createAsyncThunk("getDetails", async (value) => {
 });
 export const getLength = createAsyncThunk("getLength", async () => {
   try {
-    
     const response = await fetch(
       `http://10.30.2.208:8193/qido/studies?${newQuery}`
     )
@@ -91,14 +97,10 @@ export const searchData = createAsyncThunk("searchData", async (value) => {
       searchQuery += `instance=${value.instance}&`;
     }
     newQuery=searchQuery;
-    if (value.skip) {
-      searchQuery += `skip=${value.skip}&`;
-    }
-    if (value.limit) {
-      searchQuery += `limit=${value.limit}&`;
-    }
 
-    const response = await fetch(
+      searchQuery += `skip=${value.skip}&`;
+      searchQuery += `limit=${value.limit}&`;
+      const response = await fetch(
       `http://10.30.2.208:8193/qido/studies?${searchQuery}`
     )
       .then((data) => data.json())
@@ -112,7 +114,13 @@ export const searchData = createAsyncThunk("searchData", async (value) => {
     throw error;
   }
 
+  getDetails()
+
 });
+
+
+//SAVED QUERY API CALLS
+//fetch all saved queries from the backend
 export const savedQueryDatas = createAsyncThunk("savedQueryDatas", async () => {
   try {
     const response = await fetch("http://10.30.2.208:8193/api/v1/query")
@@ -127,6 +135,9 @@ export const savedQueryDatas = createAsyncThunk("savedQueryDatas", async () => {
     throw error;
   }
 });
+
+//save a new savedQuery
+//parameter queryData is the datas in savedQuery to be saved
 export const saveQueryData = createAsyncThunk(
   "saveQueryData",
   async (queryData) => {
@@ -144,6 +155,9 @@ export const saveQueryData = createAsyncThunk(
     }
   }
 );
+
+//delete a savedQuery
+//parameter value is the id of savedQuery
 export const deleteQuery = createAsyncThunk("deleteQuery", async (value) => {
   try {
     const response = await axios
@@ -158,6 +172,8 @@ export const deleteQuery = createAsyncThunk("deleteQuery", async (value) => {
     throw error;
   }
 });
+
+//sorting the data based on various parameters given by the user
 const apiData = createSlice({
   name: "dicom",
   initialState,
@@ -205,7 +221,7 @@ const apiData = createSlice({
     builder.addCase(getDetails.pending, (state) => {
       state.loading = true;
     });
-    builder.addCase(getDetails.fulfilled, (state, action) => {
+    builder.addCase(getDetails.fulfilled, (state, action) => { //set data to personDetails
       state.personDetails = action.payload;
       state.loading = false;
     });
@@ -226,6 +242,8 @@ const apiData = createSlice({
       state.loading = true;
     });
     builder.addCase(searchData.fulfilled, (state, action) => {
+      state.skipAndLimit.skip=0;
+      state.skipAndLimit.limit=5;
       state.personDetails = action.payload;
       state.loading = false;
     });
